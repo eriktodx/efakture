@@ -1,0 +1,17 @@
+<mat-toolbar mat-dialog-title>
+  <mat-toolbar-row>
+    <h2>Izbor sporočila</h2>
+    <div class="fill_remaining_space"></div>
+    <button mat-button color="warn" (click)="onCancelClick()">Prekliči</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div mat-dialog-content>
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <ng-container *ngIf="!loading">
+    <p *ngIf="isEmpty">Nimate shranjenih sporočil. Sporočilo lahko trajno shranite med šifrante pod rubriko "Sporočila".
+    </p>
+    <mat-action-list *ngIf="!isEmpty">
+      <button mat-list-item *ngFor="let data of dataSource" (click)="onSelectClick(data)">{{ data.name }}</button>
+    </mat-action-list>
+  </ng-container>
+</div>

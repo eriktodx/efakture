@@ -1,0 +1,53 @@
+<mat-toolbar mat-dialog-title>
+	<mat-toolbar-row>
+		<h1>Sporočilo</h1>
+		<div class="fill_remaining_space"></div>
+		<button mat-button color="warn" (click)="onCancelClick()">Prekliči</button>
+		<button mat-raised-button color="primary" form="noteForm" cdkFocusInitial>Shrani</button>
+	</mat-toolbar-row>
+</mat-toolbar>
+
+<div mat-dialog-content>
+	<mat-progress-spinner *ngIf="!data"></mat-progress-spinner>
+	<form *ngIf="data" id="noteForm" #form="ngForm" (ngSubmit)="onFormSubmit()">
+		<!-- <div class="app-form-row">
+			<mat-form-field class="narrow">
+				<mat-label>Tip</mat-label>
+				<mat-select [(ngModel)]="data.type" name="type" required #type="ngModel">
+					<mat-option [value]="types.HEADER">Glava</mat-option>
+					<mat-option [value]="types.CONTENT">Vsebina</mat-option>
+					<mat-option [value]="types.FOOTER">Noga</mat-option>
+				</mat-select>
+				<mat-error *ngIf="type.invalid">
+					<div *ngIf="type.errors.required">
+						Polje je obvezno.
+					</div>
+				</mat-error>
+			</mat-form-field>
+		</div> -->
+		<div class="app-form-row">
+			<mat-form-field>
+				<mat-label>Naziv</mat-label>
+				<input matInput [(ngModel)]="data.name" name="name" #name="ngModel" required maxlength="255">
+				<mat-error *ngIf="name.invalid">
+					<div *ngIf="name.errors.required">
+						Polje je obvezno.
+					</div>
+				</mat-error>
+			</mat-form-field>
+		</div>
+		<div class="app-form-row">
+			<mat-form-field>
+				<mat-label>Vsebina</mat-label>
+				<textarea matInput [(ngModel)]="data.description" name="description" #description="ngModel" required
+					maxlength="5120"></textarea>
+				<mat-error *ngIf="description.invalid">
+					<div *ngIf="description.errors.required">
+						Polje je obvezno.
+					</div>
+				</mat-error>
+			</mat-form-field>
+		</div>
+		<p></p>
+	</form>
+</div>

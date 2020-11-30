@@ -1,0 +1,296 @@
+<mat-toolbar mat-dialog-title>
+  <mat-toolbar-row>
+    <h2>Stranka</h2>
+    <div class="fill_remaining_space"></div>
+    <button mat-button color="warn" (click)="onCancelClick()">Prekliči</button>
+    <button mat-raised-button color="primary" form="clientForm" cdkFocusInitial>
+      Shrani
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div mat-dialog-content>
+  <mat-progress-spinner *ngIf="!data"></mat-progress-spinner>
+  <form id="clientForm" #form="ngForm" (ngSubmit)="onFormSubmit()">
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Osnovno</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="app-form-row">
+          <mat-form-field>
+            <mat-label>Tip</mat-label>
+            <mat-select
+              [(ngModel)]="data.type"
+              name="type"
+              #type="ngModel"
+              required
+            >
+              <mat-option [value]="types.PERSON">Fizična oseba</mat-option>
+              <mat-option [value]="types.PERSON_WITH_ACTIVITY"
+                >Fizična oseba z dejavnostjo</mat-option
+              >
+              <mat-option [value]="types.COMPANY">Pravna oseba</mat-option>
+            </mat-select>
+            <mat-error *ngIf="type.invalid">
+              <div *ngIf="type.errors.required">
+                Polje je obvezno.
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="app-form-row">
+          <mat-form-field *ngIf="data.isPerson">
+            <mat-label>Ime</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.firstName"
+              name="firstName"
+              #firstName="ngModel"
+              required
+              maxlength="255"
+            />
+            <mat-error *ngIf="firstName.invalid">
+              <div *ngIf="firstName.errors.required">
+                Polje je obvezno.
+              </div>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field *ngIf="data.isPerson">
+            <mat-label>Priimek</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.lastName"
+              name="lastName"
+              #lastName="ngModel"
+              required
+              maxlength="255"
+            />
+            <mat-error *ngIf="lastName.invalid">
+              <div *ngIf="lastName.errors.required">
+                Polje je obvezno.
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="app-form-row">
+          <mat-form-field *ngIf="data.isCompany">
+            <mat-label>Naziv podjetja</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.name"
+              name="name"
+              #name="ngModel"
+              required
+              maxlength="255"
+            />
+            <mat-error *ngIf="name.invalid">
+              <div *ngIf="name.errors.required">
+                Polje je obvezno.
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="app-form-row">
+          <mat-form-field>
+            <mat-label>Naslov</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.address"
+              name="address"
+              #address="ngModel"
+              required
+              maxlength="255"
+            />
+            <mat-error *ngIf="address.invalid">
+              <div *ngIf="address.errors.required">
+                Polje je obvezno.
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="app-form-row">
+          <mat-form-field style="max-width: 140px;">
+            <mat-label>Poštna številka</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.postalCode"
+              name="postalCode"
+              #postalCode="ngModel"
+              required
+              maxlength="10"
+            />
+            <mat-error *ngIf="postalCode.invalid">
+              <div *ngIf="postalCode.errors.required">
+                Polje je obvezno.
+              </div>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Pošta</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.postalOffice"
+              name="postalOffice"
+              #postalOffice="ngModel"
+              required
+              maxlength="255"
+            />
+            <mat-error *ngIf="postalOffice.invalid">
+              <div *ngIf="postalOffice.errors.required">
+                Polje je obvezno.
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="app-form-row">
+          <mat-form-field>
+            <mat-label>Država</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.country"
+              name="country"
+              name="country"
+              #country="ngModel"
+              required
+              maxlength="60"
+            />
+            <mat-error *ngIf="country.invalid">
+              <div *ngIf="country.errors.required">
+                Polje je obvezno.
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel *ngIf="data.isTaxEligible">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Davčna</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="app-form-row">
+          <mat-checkbox
+            color="primary"
+            class="is-tax-payer"
+            [(ngModel)]="data.isTaxPayer"
+            name="isTaxPayer"
+            >Zavezanec za DDV
+          </mat-checkbox>
+        </div>
+        <div class="app-form-row">
+          <mat-form-field>
+            <mat-label>
+              <span [hidden]="!data.isTaxPayer">ID za DDV</span>
+              <span [hidden]="data.isTaxPayer">Davčna številka</span>
+            </mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.taxId"
+              name="taxId"
+              #taxId="ngModel"
+              required
+              maxlength="20"
+            />
+            <mat-error *ngIf="taxId.invalid">
+              <div *ngIf="taxId.errors.required">
+                Polje je obvezno.
+              </div>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Matična številka</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.regNo"
+              name="regNo"
+              maxlength="50"
+            />
+          </mat-form-field>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Bančni račun</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="app-form-row">
+          <mat-form-field>
+            <mat-label>IBAN</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.bankTRR"
+              name="bankTRR"
+              #iban="ngModel"
+              appIbanValidator
+            />
+            <mat-error *ngIf="iban.invalid">
+              <div *ngIf="iban.errors.iban">IBAN ni veljavne oblike.</div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="app-form-row">
+          <mat-form-field>
+            <mat-label>Naziv banke</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.bankName"
+              name="bankName"
+              maxlength="255"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>BIC</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.bankBIC"
+              name="bankBIC"
+              #bic="ngModel"
+              appBicValidator
+            />
+            <mat-error *ngIf="bic.invalid">
+              <div *ngIf="bic.errors.bic">BIC ni veljavne oblike.</div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Kontakt</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="app-form-row">
+          <mat-form-field>
+            <mat-label>E-poštni naslov</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.email"
+              name="email"
+              maxlength="320"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Spletna stran</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.website"
+              name="website"
+              maxlength="512"
+            />
+          </mat-form-field>
+        </div>
+        <div class="app-form-row">
+          <mat-form-field>
+            <mat-label>Telefonska številka</mat-label>
+            <input
+              matInput
+              [(ngModel)]="data.phone"
+              name="phone"
+              maxlength="20"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Faks</mat-label>
+            <input matInput [(ngModel)]="data.fax" name="fax" maxlength="20" />
+          </mat-form-field>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <p></p>
+  </form>
+</div>

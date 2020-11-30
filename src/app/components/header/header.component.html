@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <button mat-button (click)="sidenav.toggle()">
+    <mat-icon aria-label="Odpri/zapri meni">menu</mat-icon>
+  </button>
+  <button mat-button routerLink="/">
+    <h1>eFakture</h1>
+  </button>
+  <span class="version">{{ version }}</span>
+  <div class="fill_remaining_space"></div>
+  <button [hidden]="!user" mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+    {{ user?.email }}
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/settings">Nastavitve</button>
+    <button mat-menu-item (click)="onSignOutClick()">Odjava</button>
+  </mat-menu>
+</mat-toolbar>

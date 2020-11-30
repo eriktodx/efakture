@@ -1,0 +1,111 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <h2>
+      <ng-container *ngIf="type === types.INVOICE">Računi</ng-container>
+      <ng-container *ngIf="type === types.OFFER">Ponudbe</ng-container>
+      <ng-container *ngIf="type === types.PRE">Predračuni</ng-container>
+    </h2>
+    <div class="fill_remaining_space"></div>
+    <button mat-raised-button color="primary" (click)="onInvoiceClick()" matTooltip="Nov zapis">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="spinner_wrap" *ngIf="loading">
+  <mat-progress-spinner color="primary" mode="indeterminate" diameter="32">
+  </mat-progress-spinner>
+</div>
+
+<ng-container *ngIf="!loading">
+  <table mat-table [dataSource]="dataSource" class="full-width" *ngIf="dataSource.data.length > 0">
+    <ng-container matColumnDef="accountNo">
+      <th mat-header-cell *matHeaderCellDef class="col_shrink">
+        Št.
+      </th>
+      <td mat-cell *matCellDef="let data" class="col_shrink">
+        {{ data.accNo }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="client">
+      <th mat-header-cell *matHeaderCellDef>Stranka</th>
+      <td mat-cell *matCellDef="let data">
+        {{ data.client.fullName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="netAmount">
+      <th mat-header-cell *matHeaderCellDef class="col_shrink right">Neto</th>
+      <td mat-cell *matCellDef="let data" class="col_shrink right">
+        {{ data.netAmount | number: "1.2-2" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="discountAmount">
+      <th mat-header-cell *matHeaderCellDef class="col_shrink right">Rabat</th>
+      <td mat-cell *matCellDef="let data" class="col_shrink right">
+        {{ data.discountAmount | number: "1.2-2" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="taxAmount">
+      <th mat-header-cell *matHeaderCellDef class="col_shrink right">DDV</th>
+      <td mat-cell *matCellDef="let data" class="col_shrink right">
+        {{ data.taxAmount | number: "1.2-2" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="grossAmount">
+      <th mat-header-cell *matHeaderCellDef class="col_shrink right">Bruto</th>
+      <td mat-cell *matCellDef="let data" class="col_shrink right">
+        {{ data.grossAmount | number: "1.2-2" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="btnPdf">
+      <th mat-header-cell *matHeaderCellDef class="col_shrink center"></th>
+      <th mat-cell *matCellDef="let data" class="col_shrink center">
+        <button mat-icon-button (click)="onPdfClick(data)">
+          <ng-container *ngIf="!data._pdfGenerating">PDF</ng-container>
+          <mat-progress-spinner color="primary" mode="indeterminate" diameter="40" *ngIf="data._pdfGenerating">
+          </mat-progress-spinner>
+        </button>
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="btnUpdate">
+      <th mat-header-cell *matHeaderCellDef class="col_shrink"></th>
+      <td mat-cell *matCellDef="let data" class="col_shrink">
+        <button mat-icon-button (click)="onInvoiceClick(data)" matTooltip="Uredi">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="btnDelete">
+      <th mat-header-cell *matHeaderCellDef class="col_shrink"></th>
+      <td mat-cell *matCellDef="let data" class="col_shrink">
+        <button mat-icon-button (click)="onDeleteClick(data)" matTooltip="Izbriši">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <div class="no_data" *ngIf="dataSource.data.length === 0">
+    <mat-icon class="no_data_icon">help</mat-icon>
+    <p *ngIf="type === types.INVOICE">Razvidno je, da še niste vnesli nobenega računa.</p>
+    <p *ngIf="type === types.OFFER">Razvidno je, da še niste vnesli nobene ponudbe.</p>
+    <p *ngIf="type === types.PRE">Razvidno je, da še niste vnesli nobenega predračuna.</p>
+    <button mat-raised-button color="primary" (click)="onInvoiceClick()">
+      <mat-icon>add</mat-icon>
+      <ng-container *ngIf="type === types.INVOICE">Dodaj prvi računi</ng-container>
+      <ng-container *ngIf="type === types.OFFER">Dodaj prvo ponudbo</ng-container>
+      <ng-container *ngIf="type === types.PRE">Dodaj prvi predračun</ng-container>
+    </button>
+  </div>
+</ng-container>

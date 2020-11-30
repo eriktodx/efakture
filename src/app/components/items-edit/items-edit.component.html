@@ -1,0 +1,152 @@
+<mat-toolbar mat-dialog-title>
+  <mat-toolbar-row>
+    <h1>
+      <ng-container *ngIf="data.select">
+        Postavka
+      </ng-container>
+      <ng-container *ngIf="!data.select">
+        <ng-container *ngIf="data.type === types.ITEM">Izdelek</ng-container>
+        <ng-container *ngIf="data.type === types.SERVICE">Storitev</ng-container>
+      </ng-container>
+    </h1>
+    <div class="fill_remaining_space"></div>
+    <button mat-button color="warn" (click)="onCancelClick()">Prekliči</button>
+    <button mat-raised-button color="primary" form="itemForm" cdkFocusInitial>
+      Shrani
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div mat-dialog-content>
+  <mat-progress-spinner *ngIf="!data.item"></mat-progress-spinner>
+  <form *ngIf="data.item" id="itemForm" #form="ngForm" (ngSubmit)="onFormSubmit()">
+    <div class="app-form-row" *ngIf="data.select">
+      <mat-form-field>
+        <mat-label>Izbor iz šifranta</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let selectItem of itemsDataSource" [value]="selectItem"
+            (onSelectionChange)="onItemSelectionChange($event)">
+            {{ selectItem._combinedName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="app-form-row" *ngIf="data.select">
+      <mat-form-field class="narrow">
+        <mat-label>Tip</mat-label>
+        <mat-select [(ngModel)]="data.item.type" name="type">
+          <mat-option [value]="types.ITEM">Izdelek</mat-option>
+          <mat-option [value]="types.SERVICE">Storitev</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="app-form-row">
+      <mat-form-field class="narrow">
+        <mat-label>Oznaka</mat-label>
+        <input matInput [(ngModel)]="data.item.code" name="code" maxlength="20" />
+      </mat-form-field>
+    </div>
+    <div class="app-form-row">
+      <mat-form-field>
+        <mat-label>Naziv</mat-label>
+        <input matInput [(ngModel)]="data.item.name" name="name" required maxlength="255" #name="ngModel" />
+        <mat-error *ngIf="name.invalid">
+          <div *ngIf="name.errors.required">Naziv je obvezen.</div>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="app-form-row">
+      <mat-form-field>
+        <mat-label>Opis</mat-label>
+        <textarea matInput [(ngModel)]="data.item.description" name="description" maxlength="2048" rows="5"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="app-form-row">
+      <mat-form-field class="narrow">
+        <mat-label>Enota merjenja</mat-label>
+        <input matInput [(ngModel)]="data.item.unit" name="unit" required maxlength="20" #unit="ngModel" />
+        <mat-error *ngIf="unit.invalid">
+          <div *ngIf="unit.errors.required">Enota merjenja je obvezna.</div>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="app-form-row">
+      <mat-form-field class="narrow">
+        <mat-label>
+          <ng-container *ngIf="data.select; else defaultQuantity">Količina</ng-container>
+          <ng-template #defaultQuantity>Privzeta količina</ng-template>
+        </mat-label>
+        <input matInput [(ngModel)]="data.item._quantity" name="quantity" required maxlength="20" #quantity="ngModel"
+          appDecimalInputValidator />
+        <mat-error *ngIf="quantity.invalid">
+          <div *ngIf="quantity.errors.required; else quantityError2">
+            Količina je obvezna.
+          </div>
+          <ng-template #quantityError2>
+            <div *ngIf="quantity.errors.decimalInput">
+              Številka ni pravilne oblike.
+            </div>
+          </ng-template>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="app-form-row">
+      <mat-form-field class="narrow">
+        <mat-label>Cena v € brez DDV</mat-label>
+        <input matInput [(ngModel)]="data.item._price" name="price" required maxlength="20" #price="ngModel"
+          appDecimalInputValidator />
+        <mat-error *ngIf="price.invalid">
+          <div *ngIf="price.errors.required; else priceError2">
+            Cena je obvezna.
+          </div>
+          <ng-template #priceError2>
+            <div *ngIf="price.errors.decimalInput">
+              Številka ni pravilne oblike.
+            </div>
+          </ng-template>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="app-form-row">
+      <mat-form-field class="narrow">
+        <mat-label>
+          <ng-container *ngIf="data.select; else defaultTax">Davek v %</ng-container>
+          <ng-template #defaultTax>Privzet davek v %</ng-template>
+        </mat-label>
+        <input matInput [(ngModel)]="data.item._tax" name="tax" required maxlength="5" #tax="ngModel"
+          appDecimalInputValidator />
+        <mat-error *ngIf="tax.invalid">
+          <div *ngIf="tax.errors.required; else taxError2">
+            Davek je obvezen.
+          </div>
+          <ng-template #taxError2>
+            <div *ngIf="tax.errors.decimalInput">
+              Številka ni pravilne oblike.
+            </div>
+          </ng-template>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="app-form-row">
+      <mat-form-field class="narrow">
+        <mat-label>
+          <ng-container *ngIf="data.select; else defaultDiscount">Rabat v %</ng-container>
+          <ng-template #defaultDiscount>Privzet rabat v %</ng-template>
+        </mat-label>
+        <input matInput [(ngModel)]="data.item._discount" name="discount" required maxlength="5" #discount="ngModel"
+          appDecimalInputValidator />
+        <mat-error *ngIf="discount.invalid">
+          <div *ngIf="discount.errors.required; else discountError2">
+            Rabat je obvezen.
+          </div>
+          <ng-template #discountError2>
+            <div *ngIf="discount.errors.decimalInput">
+              Številka ni pravilne oblike.
+            </div>
+          </ng-template>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <p></p>
+  </form>
+</div>

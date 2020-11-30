@@ -1,0 +1,44 @@
+<app-header [sidenav]="sidenav"></app-header>
+<mat-sidenav-container>
+  <mat-sidenav class="sidenav" mode="side" opened #sidenav>
+    <nav>
+      <button mat-button routerLink="/dashboard" routerLinkActive="sidenav-active">
+        Pregled
+      </button>
+      <button mat-button routerLink="/clients" routerLinkActive="sidenav-active">
+        Stranke
+      </button>
+      <button mat-button routerLink="/items" routerLinkActive="sidenav-active">
+        Izdelki
+      </button>
+      <button mat-button routerLink="/services" routerLinkActive="sidenav-active">
+        Storitve
+      </button>
+      <button mat-button routerLink="/notes" routerLinkActive="sidenav-active">
+        Sporočila
+      </button>
+      <button mat-button routerLink="/pre-invoices" routerLinkActive="sidenav-active">
+        Predračuni
+      </button>
+      <button mat-button routerLink="/offer-invoices" routerLinkActive="sidenav-active">
+        Ponudbe
+      </button>
+      <button mat-button routerLink="/invoices" routerLinkActive="sidenav-active">
+        Računi
+      </button>
+      <!--
+      <button mat-button routerLink="/employees" routerLinkActive="sidenav-active">
+        Zaposleni
+      </button>
+      -->
+      <button mat-button routerLink="/settings" routerLinkActive="sidenav-active">
+        Nastavitve
+      </button>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <main class="sidenav-content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,9 @@
+.notes mat-form-field {
+  width: 100%;
+}
+
+.supply {
+  padding-top: 28px;
+  padding-left: 8px;
+  flex: 1;
+}
