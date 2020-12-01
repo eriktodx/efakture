@@ -87,7 +87,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [AngularFireModule, RouterModule.forRoot(routes)],
+  imports: [AngularFireModule, RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }

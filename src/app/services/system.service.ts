@@ -12,7 +12,7 @@ export class SystemService {
   ) { }
 
   private userLoaded = false;
-  getCurrentUser(): Promise<firebase.User> {
+  getCurrentUser(): Promise<any> {
     return new Promise(async (resolve, reject) => {
       if (this.userLoaded) {
         resolve(await this.auth.currentUser);

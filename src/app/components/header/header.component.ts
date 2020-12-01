@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  user: firebase.User;
+  user: any;
   @Input() sidenav: MatSidenav;
 
   get version() {
