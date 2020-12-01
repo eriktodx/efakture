@@ -16,7 +16,7 @@ You can start a development server by running command `npm run start` (in-memory
 
 ### Deployment
 
-Deployments are done automatically with every commit using GitHub automatic builds and deploys.
+First make sure you have selected a firebase project with `firebase use [PROJECT-ID]`. After that you can build and deploy entire project with `npm run deploy`, this will create a production build, deploy rules, indexes and hosting to Firebase.
 
 ## Maintainers
 
@@ -24,7 +24,7 @@ Deployments are done automatically with every commit using GitHub automatic buil
 
 ## Contributing
 
-Feel free to dive in! [Open an issue](https://github.com/erikvimz/fakture/issues/new) or submit PRs.
+Feel free to dive in! [Open an issue](https://github.com/erikvimz/efakture/issues/new) or submit PRs.
 
 Project follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
 
