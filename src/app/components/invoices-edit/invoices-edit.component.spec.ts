@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
-import { InvoicesEditComponent } from './invoices-edit.component';
+import { InvoicesEditComponent } from './invoices-edit.component'
 
 describe('InvoicesEditComponent', () => {
-  let component: InvoicesEditComponent;
-  let fixture: ComponentFixture<InvoicesEditComponent>;
+  let component: InvoicesEditComponent
+  let fixture: ComponentFixture<InvoicesEditComponent>
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ InvoicesEditComponent ]
+      declarations: [InvoicesEditComponent]
     })
-    .compileComponents();
-  }));
+      .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InvoicesEditComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(InvoicesEditComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

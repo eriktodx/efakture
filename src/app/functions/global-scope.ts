@@ -1,6 +1,6 @@
-import { DatePipe, DecimalPipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common'
 
 export const globalScope: {
-  datePipe?: DatePipe;
-  decimalPipe?: DecimalPipe;
-} = {};
+  datePipe?: DatePipe
+  decimalPipe?: DecimalPipe
+} = {}

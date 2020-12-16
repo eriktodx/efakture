@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { SystemService } from './system.service';
+import { SystemService } from './system.service'
 
 describe('SystemService', () => {
-  let service: SystemService;
+  let service: SystemService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(SystemService);
-  });
+    TestBed.configureTestingModule({})
+    service = TestBed.inject(SystemService)
+  })
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+    expect(service).toBeTruthy()
+  })
+})

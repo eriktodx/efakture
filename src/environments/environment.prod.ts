@@ -1,5 +1,5 @@
 export const environment = {
-  version: "0.1.24",
+  version: "0.1.25",
   production: true,
   firebase: {
     apiKey: "AIzaSyA0hYqSsdDSStthl_X1SiFT-p0LVo3hUL0",
@@ -11,4 +11,4 @@ export const environment = {
     appId: "1:190425925400:web:e5bcfb8416d5102c2bc06d",
     measurementId: "G-TE28KEF6WN"
   }
-};
+}

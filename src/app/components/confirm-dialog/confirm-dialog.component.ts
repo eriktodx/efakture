@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ConfirmDialogModel } from 'src/app/models/confirm-dialog-model';
+import { Component, OnInit, Inject } from '@angular/core'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { ConfirmDialogModel } from 'src/app/models/confirm-dialog-model'
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -8,7 +8,7 @@ import { ConfirmDialogModel } from 'src/app/models/confirm-dialog-model';
   styleUrls: ['./confirm-dialog.component.css']
 })
 export class ConfirmDialogComponent implements OnInit {
-  visible = false;
+  visible = false
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,
@@ -19,11 +19,11 @@ export class ConfirmDialogComponent implements OnInit {
   }
 
   onDismissClick() {
-    this.dialogRef.close(false);
+    this.dialogRef.close(false)
   }
 
   onConfirmClick() {
-    this.dialogRef.close(true);
+    this.dialogRef.close(true)
   }
 
 }

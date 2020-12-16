@@ -1,14 +1,14 @@
-import { parseFirestoreDate } from '../functions/parse-firestore-date';
+import { parseFirestoreDate } from '../functions/parse-firestore-date'
 
 export class PaymentModel {
-  amount = 0;
-  day: Date = null;
+  amount = 0
+  day: Date = null
 
   constructor(o?: any) {
     if (o != null) {
       if (typeof o === 'object') {
-        if (o.amount != null) this.amount = o.amount;
-        if (o.day != null) this.day = parseFirestoreDate(o.day);
+        if (o.amount != null) this.amount = o.amount
+        if (o.day != null) this.day = parseFirestoreDate(o.day)
       }
     }
   }

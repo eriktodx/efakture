@@ -142,3 +142,32 @@ td.mat-footer-cell.col_shrink.center {
   justify-content: center;
   align-items: center;
 }
+
+.centerbox {
+  margin: auto;
+  max-width: 400px;
+  padding: 50px 0;
+}
+
+.centerbox > h1 {
+  text-align: center;
+}
+
+.centerbox > footer {
+  text-align: center;
+}
+
+.centerbox > .card {
+  padding: 15px;
+  background-color: white;
+  margin: 50px 0;
+}
+
+.centerbox > .card > .options > button {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.centerbox > .card > .options > button:last-child {
+  margin-bottom: 0;
+}

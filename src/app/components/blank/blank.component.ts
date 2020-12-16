@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
+import { SettingsService } from 'src/app/services/settings.service'
+import { SystemService } from 'src/app/services/system.service'
 
 @Component({
   selector: 'app-blank',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlankComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+  ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+
   }
 
 }

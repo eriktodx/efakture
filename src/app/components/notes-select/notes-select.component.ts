@@ -1,12 +1,12 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
-import { NoteType } from 'src/app/enums/note-type.enum';
-import { NoteModel } from 'src/app/models/note-model';
-import { NotesService } from 'src/app/services/notes.service';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { Subscription } from 'rxjs'
+import { NoteType } from 'src/app/enums/note-type.enum'
+import { NoteModel } from 'src/app/models/note-model'
+import { NotesService } from 'src/app/services/notes.service'
 
 interface NotesSelectDialogDataInterface {
-  type: NoteType;
+  type: NoteType
 }
 
 @Component({
@@ -15,12 +15,12 @@ interface NotesSelectDialogDataInterface {
   styleUrls: ['./notes-select.component.css']
 })
 export class NotesSelectComponent implements OnInit, OnDestroy {
-  dataSource$: Subscription;
-  dataSource: NoteModel[] = [];
-  loading = true;
+  dataSource$: Subscription
+  dataSource: NoteModel[] = []
+  loading = true
 
   get isEmpty() {
-    return this.dataSource == null || this.dataSource.length === 0;
+    return this.dataSource == null || this.dataSource.length === 0
   }
 
   constructor(
@@ -37,22 +37,22 @@ export class NotesSelectComponent implements OnInit, OnDestroy {
         .orderBy('dateCreated', 'asc')
     ).then((dataSource$) => {
       this.dataSource$ = dataSource$.subscribe((data) => {
-        this.dataSource = data;
-        this.loading = false;
-      });
-    });
+        this.dataSource = data
+        this.loading = false
+      })
+    })
   }
 
   ngOnDestroy() {
-    this.dataSource$?.unsubscribe();
+    this.dataSource$?.unsubscribe()
   }
 
   onCancelClick(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close(false)
   }
 
   onSelectClick(note: NoteModel): void {
-    this.dialogRef.close(note);
+    this.dialogRef.close(note)
   }
 
 }

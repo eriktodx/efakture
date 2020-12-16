@@ -1,6 +1,6 @@
-import { Directive } from '@angular/core';
-import { AbstractControl, NG_VALIDATORS, Validator } from '@angular/forms';
-import { bicValidator } from '../functions/bic-validator';
+import { Directive } from '@angular/core'
+import { AbstractControl, NG_VALIDATORS, Validator } from '@angular/forms'
+import { bicValidator } from '../functions/bic-validator'
 
 @Directive({
   selector: '[appBicValidator]',
@@ -8,7 +8,7 @@ import { bicValidator } from '../functions/bic-validator';
 })
 export class BicValidatorDirective implements Validator {
   validate(control: AbstractControl): { [key: string]: any } | null {
-    if (control.value === '') return null;
-    return bicValidator()(control);
+    if (control.value === '') return null
+    return bicValidator()(control)
   }
 }

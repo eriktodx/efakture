@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import firebase from 'firebase/app';
-import { LogService } from 'src/app/services/log.service';
-import { SystemService } from 'src/app/services/system.service';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit } from '@angular/core'
+import { SystemService } from 'src/app/services/system.service'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-landing-page',
@@ -11,38 +8,26 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./landing-page.component.css'],
 })
 export class LandingPageComponent implements OnInit {
-  loading = true;
-  user: any;
+  loading = true
+  continueUrl = '/sign-in'
 
   get version() {
-    return environment.version;
+    return environment.version
   }
 
   constructor(
-    private system: SystemService,
-    private log: LogService,
-    private router: Router
+    private system: SystemService
   ) { }
 
   async ngOnInit() {
+    let user: any = null
     try {
-      this.user = await this.system.getCurrentUser();
+      user = await this.system.getCurrentUser()
     } catch (error) {
-      console.error(error);
+      console.error(error)
     } finally {
-      this.loading = false;
-    }
-  }
-
-  async onContinueClick() {
-    try {
-      if (this.user == null) {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        await this.system.auth.signInWithPopup(provider);
-      }
-      this.router.navigateByUrl('/dashboard');
-    } catch (error) {
-      this.log.error(error);
+      this.loading = false
+      this.continueUrl = user != null ? '/dashboard' : '/sign-in'
     }
   }
 }

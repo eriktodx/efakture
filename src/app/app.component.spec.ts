@@ -1,6 +1,6 @@
-import { TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+import { TestBed, waitForAsync } from '@angular/core/testing'
+import { RouterTestingModule } from '@angular/router/testing'
+import { AppComponent } from './app.component'
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
@@ -11,25 +11,25 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-    }).compileComponents();
-  }));
+    }).compileComponents()
+  }))
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+    const fixture = TestBed.createComponent(AppComponent)
+    const app = fixture.componentInstance
+    expect(app).toBeTruthy()
+  })
 
   it(`should have as title 'efakture'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('efakture');
-  });
+    const fixture = TestBed.createComponent(AppComponent)
+    const app = fixture.componentInstance
+    expect(app.title).toEqual('efakture')
+  })
 
   it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('efakture app is running!');
-  });
-});
+    const fixture = TestBed.createComponent(AppComponent)
+    fixture.detectChanges()
+    const compiled = fixture.nativeElement
+    expect(compiled.querySelector('.content span').textContent).toContain('efakture app is running!')
+  })
+})

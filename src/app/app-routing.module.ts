@@ -1,20 +1,27 @@
-import { NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
-import { RouterModule, Routes } from '@angular/router';
-import { BlankComponent } from './components/blank/blank.component';
-import { ClientsComponent } from './components/clients/clients.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { EmployeesComponent } from './components/employees/employees.component';
-import { InvoicesComponent } from './components/invoices/invoices.component';
-import { ItemsComponent } from './components/items/items.component';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { MembersComponent } from './components/members/members.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { NotesComponent } from './components/notes/notes.component';
-import { SettingsComponent } from './components/settings/settings.component';
-import { InvoiceType } from './enums/invoice-type.enum';
-import { SettingsRequiredGuard } from './guards/settings-required.guard';
+import { NgModule } from '@angular/core'
+import { AngularFireModule } from '@angular/fire'
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard'
+import { RouterModule, Routes } from '@angular/router'
+import { AuthComponent } from 'src/app/components/auth/auth.component'
+import { BlankComponent } from 'src/app/components/blank/blank.component'
+import { ClientsComponent } from 'src/app/components/clients/clients.component'
+import { DashboardComponent } from 'src/app/components/dashboard/dashboard.component'
+import { EmployeesComponent } from 'src/app/components/employees/employees.component'
+import { ForgotPasswordComponent } from 'src/app/components/forgot-password/forgot-password.component'
+import { InvoicesComponent } from 'src/app/components/invoices/invoices.component'
+import { ItemsComponent } from 'src/app/components/items/items.component'
+import { LandingPageComponent } from 'src/app/components/landing-page/landing-page.component'
+import { MembersComponent } from 'src/app/components/members/members.component'
+import { MissingSettingsComponent } from 'src/app/components/missing-settings/missing-settings.component'
+import { NotFoundComponent } from 'src/app/components/not-found/not-found.component'
+import { NotesComponent } from 'src/app/components/notes/notes.component'
+import { SettingsComponent } from 'src/app/components/settings/settings.component'
+import { SignInWithEmailVerifyComponent } from 'src/app/components/sign-in-with-email-verify/sign-in-with-email-verify.component'
+import { SignInWithEmailComponent } from 'src/app/components/sign-in-with-email/sign-in-with-email.component'
+import { SignInComponent } from 'src/app/components/sign-in/sign-in.component'
+import { TermsComponent } from 'src/app/components/terms/terms.component'
+import { InvoiceType } from 'src/app/enums/invoice-type.enum'
+import { SettingsRequiredGuard } from 'src/app/guards/settings-required.guard'
 
 const routes: Routes = [
   {
@@ -24,6 +31,46 @@ const routes: Routes = [
   {
     path: 'blank',
     component: BlankComponent,
+  },
+  {
+    path: '',
+    component: AuthComponent,
+    children: [
+      {
+        path: 'sign-in',
+        component: SignInComponent
+      },
+      {
+        path: 'sign-in/email',
+        component: SignInWithEmailComponent
+      },
+      {
+        path: 'sign-up',
+        component: SignInComponent,
+        data: { signUp: true }
+      },
+      {
+        path: 'sign-up/email',
+        component: SignInWithEmailComponent,
+        data: { signUp: true }
+      },
+      {
+        path: 'sign-up/email/verify',
+        component: SignInWithEmailVerifyComponent
+      },
+      {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent
+      },
+      {
+        path: 'terms',
+        component: TermsComponent
+      }
+    ]
+  },
+  {
+    path: 'missing-settings',
+    component: MissingSettingsComponent
   },
   {
     path: '',
@@ -84,7 +131,7 @@ const routes: Routes = [
     path: '**',
     component: NotFoundComponent
   }
-];
+]
 
 @NgModule({
   imports: [AngularFireModule, RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],

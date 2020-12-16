@@ -1,9 +1,9 @@
-import { ItemType } from '../enums/item-type.enum';
-import { globalScope } from '../functions/global-scope';
-import { parseFirestoreDate } from '../functions/parse-firestore-date';
-import { parseLocalFloat } from '../functions/parse-local-float';
-import { removePrivateFields } from '../functions/remove-private-fields';
-import { FireDataInterface } from '../interfaces/fire-data-interface';
+import { ItemType } from '../enums/item-type.enum'
+import { globalScope } from '../functions/global-scope'
+import { parseFirestoreDate } from '../functions/parse-firestore-date'
+import { parseLocalFloat } from '../functions/parse-local-float'
+import { removePrivateFields } from '../functions/remove-private-fields'
+import { FireDataInterface } from '../interfaces/fire-data-interface'
 
 export class ItemModel implements FireDataInterface<ItemModel> {
   userId: string

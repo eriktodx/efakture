@@ -1,39 +1,39 @@
-import { DatePipe, DecimalPipe } from '@angular/common';
-import { InvoiceType } from '../enums/invoice-type.enum';
-import { PdfMakeInterface } from '../interfaces/pdf-make-interface';
-import { InvoiceModel } from '../models/invoice-model';
-import { ItemModel } from '../models/item-model';
-import { SettingsModel } from '../models/settings-model';
+import { DatePipe, DecimalPipe } from '@angular/common'
+import { InvoiceType } from '../enums/invoice-type.enum'
+import { PdfMakeInterface } from '../interfaces/pdf-make-interface'
+import { InvoiceModel } from '../models/invoice-model'
+import { ItemModel } from '../models/item-model'
+import { SettingsModel } from '../models/settings-model'
 
-declare var pdfMake: any;
+declare var pdfMake: any
 
 interface TaxLevel {
-  tax: number;
-  totalNetAmount: number;
-  totalTaxAmount: number;
+  tax: number
+  totalNetAmount: number
+  totalTaxAmount: number
 }
 
 export function createPdfInvoice(data: {
-  settings: SettingsModel;
-  invoice: InvoiceModel;
-  datePipe: DatePipe;
-  dateFormat?: string;
-  decimalPipe: DecimalPipe;
-  decimalFormat?: string;
+  settings: SettingsModel
+  invoice: InvoiceModel
+  datePipe: DatePipe
+  dateFormat?: string
+  decimalPipe: DecimalPipe
+  decimalFormat?: string
 }): PdfMakeInterface {
   if (data.dateFormat == null) {
-    data.dateFormat = 'dd.MM.yyyy';
+    data.dateFormat = 'dd.MM.yyyy'
   }
   if (data.decimalFormat == null) {
-    data.decimalFormat = '1.2-2';
+    data.decimalFormat = '1.2-2'
   }
 
   const invoiceName =
     data.invoice.type === InvoiceType.OFFER
       ? 'Ponudba'
       : data.invoice.type === InvoiceType.PRE
-      ? 'Predračun'
-      : 'Račun';
+        ? 'Predračun'
+        : 'Račun'
 
   const itemToPdfDefinition = (item: ItemModel) => [
     { text: item.code, style: 'td' },
@@ -62,7 +62,7 @@ export function createPdfInvoice(data: {
       text: data.decimalPipe.transform(item.netAmount, data.decimalFormat),
       style: 'tdRight',
     },
-  ];
+  ]
 
   const taxPdfDefinition = (taxLevel: TaxLevel) => [
     {},
@@ -87,25 +87,25 @@ export function createPdfInvoice(data: {
       colSpan: 2,
     },
     {},
-  ];
+  ]
 
-  const itemPdfDefinitions = [];
-  const taxLevels: TaxLevel[] = [];
+  const itemPdfDefinitions = []
+  const taxLevels: TaxLevel[] = []
 
   for (const item of data.invoice.items) {
-    itemPdfDefinitions.push(itemToPdfDefinition(item));
+    itemPdfDefinitions.push(itemToPdfDefinition(item))
     if (item.tax > 0) {
-      let taxLevel = taxLevels.find((x) => x.tax === item.tax);
+      let taxLevel = taxLevels.find((x) => x.tax === item.tax)
       if (taxLevel == null) {
-        taxLevel = { tax: item.tax, totalNetAmount: 0, totalTaxAmount: 0 };
-        taxLevels.push(taxLevel);
+        taxLevel = { tax: item.tax, totalNetAmount: 0, totalTaxAmount: 0 }
+        taxLevels.push(taxLevel)
       }
-      taxLevel.totalNetAmount += item.netAmount - item.discountAmount;
-      taxLevel.totalTaxAmount += item.taxAmount;
+      taxLevel.totalNetAmount += item.netAmount - item.discountAmount
+      taxLevel.totalTaxAmount += item.taxAmount
     }
   }
 
-  const taxPdfDefinitions = taxLevels.map(taxPdfDefinition);
+  const taxPdfDefinitions = taxLevels.map(taxPdfDefinition)
 
   const dd = {
     // header: {
@@ -128,8 +128,8 @@ export function createPdfInvoice(data: {
               data.invoice.client.fullName,
               data.invoice.client.address,
               data.invoice.client.postalCode +
-                ' ' +
-                data.invoice.client.postalOffice,
+              ' ' +
+              data.invoice.client.postalOffice,
             ],
             fontSize: 18,
             bold: true,
@@ -143,8 +143,8 @@ export function createPdfInvoice(data: {
                   data.invoice.company.fullName,
                   data.invoice.company.address,
                   data.invoice.company.postalCode +
-                    ' ' +
-                    data.invoice.company.postalOffice,
+                  ' ' +
+                  data.invoice.company.postalOffice,
                 ],
                 fontSize: 18,
               },
@@ -180,8 +180,8 @@ export function createPdfInvoice(data: {
                 : '',
               data.invoice.client.isTaxEligible
                 ? 'Kupec ' +
-                  (data.invoice.client.isTaxPayer ? 'JE' : 'NI') +
-                  ' davčni zavezanec'
+                (data.invoice.client.isTaxPayer ? 'JE' : 'NI') +
+                ' davčni zavezanec'
                 : '',
             ],
           },
@@ -223,10 +223,10 @@ export function createPdfInvoice(data: {
       {
         text: data.invoice.supply
           ? 'Rok dobave oz izvršitve: ' +
-            data.datePipe.transform(data.invoice.supplyFrom, data.dateFormat) +
-            '-' +
-            data.datePipe.transform(data.invoice.supplyTo, data.dateFormat) +
-            '\n'
+          data.datePipe.transform(data.invoice.supplyFrom, data.dateFormat) +
+          '-' +
+          data.datePipe.transform(data.invoice.supplyTo, data.dateFormat) +
+          '\n'
           : '',
       },
       {
@@ -351,6 +351,6 @@ export function createPdfInvoice(data: {
     defaultStyle: {
       columnGap: 20,
     },
-  };
-  return pdfMake.createPdf(dd);
+  }
+  return pdfMake.createPdf(dd)
 }
