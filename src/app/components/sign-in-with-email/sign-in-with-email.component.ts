@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
-import { AngularFireAuth } from '@angular/fire/auth'
-import { NgForm } from '@angular/forms'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { ActivatedRoute, Router } from '@angular/router'
-import { LogService } from 'src/app/services/log.service'
+import {Component, OnInit, ViewChild} from '@angular/core'
+import {AngularFireAuth} from '@angular/fire/auth'
+import {NgForm} from '@angular/forms'
+import {MatSnackBar} from '@angular/material/snack-bar'
+import {ActivatedRoute, Router} from '@angular/router'
+import {LogService} from 'src/app/services/log.service'
 
 @Component({
   selector: 'app-sign-in-with-email',
@@ -52,13 +52,13 @@ export class SignInWithEmailComponent implements OnInit {
       if (this.signUp) {
         const result = await this.auth.createUserWithEmailAndPassword(this.emailVal, this.passwordVal)
         await result.user.sendEmailVerification()
-        this.router.navigateByUrl('/sign-up/email/verify')
+        await this.router.navigateByUrl('/sign-up/email/verify')
       } else {
         const result = await this.auth.signInWithEmailAndPassword(this.emailVal, this.passwordVal)
         if (!result.user.emailVerified) {
-          this.router.navigateByUrl('/sign-up/email/verify')
+          await this.router.navigateByUrl('/sign-up/email/verify')
         } else {
-          this.router.navigateByUrl('/dashboard')
+          await this.router.navigateByUrl('/dashboard')
         }
       }
 

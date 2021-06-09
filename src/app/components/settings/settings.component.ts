@@ -1,10 +1,10 @@
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core'
-import { NgForm } from '@angular/forms'
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { Router } from '@angular/router'
-import { SettingsModel } from 'src/app/models/settings-model'
-import { SettingsService } from 'src/app/services/settings.service'
+import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core'
+import {NgForm} from '@angular/forms'
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'
+import {MatSnackBar} from '@angular/material/snack-bar'
+import {Router} from '@angular/router'
+import {SettingsModel} from 'src/app/models/settings-model'
+import {SettingsService} from 'src/app/services/settings.service'
 
 @Component({
   selector: 'app-settings',
@@ -43,12 +43,14 @@ export class SettingsComponent implements OnInit {
     }
 
     try {
-      if (this.saving) return
+      if (this.saving) {
+        return
+      }
       this.saving = true
       await this.settingsService.update(this.data)
       this.snackBar.open('Shranjeno')
       if (this.forced) {
-        this.router.navigateByUrl('/dashboard')
+        await this.router.navigateByUrl('/dashboard')
         this.dialogRef.close()
       }
     } catch (error) {

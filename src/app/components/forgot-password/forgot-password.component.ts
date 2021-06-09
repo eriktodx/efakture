@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { NgForm } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { LogService } from 'src/app/services/log.service';
+import {Component, OnInit, ViewChild} from '@angular/core'
+import {AngularFireAuth} from '@angular/fire/auth'
+import {NgForm} from '@angular/forms'
+import {MatSnackBar} from '@angular/material/snack-bar'
+import {LogService} from 'src/app/services/log.service'
 
 @Component({
   selector: 'app-forgot-password',
@@ -18,7 +18,8 @@ export class ForgotPasswordComponent implements OnInit {
     private snackBar: MatSnackBar,
     private log: LogService,
     private auth: AngularFireAuth
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }

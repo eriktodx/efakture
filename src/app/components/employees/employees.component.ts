@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { MatTableDataSource } from '@angular/material/table'
-import { Subscription } from 'rxjs'
-import { EmployeeModel } from 'src/app/models/employee-model'
-import { ConfirmDialogService } from 'src/app/services/confirm-dialog.service'
-import { EmployeesService } from 'src/app/services/employees.service'
-import { LogService } from 'src/app/services/log.service'
-import { EmployeesEditComponent } from '../employees-edit/employees-edit.component'
+import {Component, OnDestroy, OnInit} from '@angular/core'
+import {MatDialog} from '@angular/material/dialog'
+import {MatSnackBar} from '@angular/material/snack-bar'
+import {MatTableDataSource} from '@angular/material/table'
+import {Subscription} from 'rxjs'
+import {EmployeeModel} from 'src/app/models/employee-model'
+import {ConfirmDialogService} from 'src/app/services/confirm-dialog.service'
+import {EmployeesService} from 'src/app/services/employees.service'
+import {LogService} from 'src/app/services/log.service'
+import {EmployeesEditComponent} from '../employees-edit/employees-edit.component'
 
 @Component({
   selector: 'app-employees',
@@ -26,7 +26,8 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     private confirmDialog: ConfirmDialogService,
     private snackBar: MatSnackBar,
     private log: LogService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.employees
@@ -46,7 +47,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   onEmployeeClick(employee?: EmployeeModel): void {
     this.dialog.open(EmployeesEditComponent, {
       width: '480px',
-      data: { employee },
+      data: {employee},
     })
   }
 

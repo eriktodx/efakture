@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core'
-import { NgForm } from '@angular/forms'
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { NoteType } from 'src/app/enums/note-type.enum'
-import { NoteModel } from 'src/app/models/note-model'
-import { LogService } from 'src/app/services/log.service'
-import { NotesService } from 'src/app/services/notes.service'
+import {Component, Inject, OnInit, ViewChild} from '@angular/core'
+import {NgForm} from '@angular/forms'
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'
+import {MatSnackBar} from '@angular/material/snack-bar'
+import {NoteType} from 'src/app/enums/note-type.enum'
+import {NoteModel} from 'src/app/models/note-model'
+import {LogService} from 'src/app/services/log.service'
+import {NotesService} from 'src/app/services/notes.service'
 
 @Component({
   selector: 'app-notes-edit',
@@ -24,12 +24,14 @@ export class NotesEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data: NoteModel,
     private snackBar: MatSnackBar
   ) {
-    if (data == null) this.data = new NoteModel()
-    else this.data = new NoteModel(data)
+    if (data == null) {
+      this.data = new NoteModel()
+    } else {
+      this.data = new NoteModel(data)
+    }
   }
 
   ngOnInit() {
-    //
   }
 
   onCancelClick() {

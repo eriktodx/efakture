@@ -1,8 +1,8 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core'
+import {ActivatedRoute, Router} from '@angular/router'
 import firebase from 'firebase/app'
-import { LogService } from 'src/app/services/log.service'
-import { SystemService } from 'src/app/services/system.service'
+import {LogService} from 'src/app/services/log.service'
+import {SystemService} from 'src/app/services/system.service'
 
 @Component({
   selector: 'app-sign-in',
@@ -42,7 +42,7 @@ export class SignInComponent implements OnInit {
     try {
       const provider = new firebase.auth.GoogleAuthProvider()
       await this.systemService.auth.signInWithPopup(provider)
-      this.router.navigateByUrl('/dashboard')
+      await this.router.navigateByUrl('/dashboard')
     } catch (error) {
       this.logService.error(error)
       this.dialogTitle = 'Napaka'

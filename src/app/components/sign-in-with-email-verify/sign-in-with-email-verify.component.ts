@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core'
-import { AngularFireAuth } from '@angular/fire/auth'
-import { Router } from '@angular/router'
-import { LogService } from 'src/app/services/log.service'
+import {Component, OnInit} from '@angular/core'
+import {AngularFireAuth} from '@angular/fire/auth'
+import {Router} from '@angular/router'
+import {LogService} from 'src/app/services/log.service'
 
 @Component({
   selector: 'app-sign-in-with-email-verify',
@@ -15,18 +15,19 @@ export class SignInWithEmailVerifyComponent implements OnInit {
     private log: LogService,
     private router: Router,
     private auth: AngularFireAuth
-  ) { }
+  ) {
+  }
 
   async ngOnInit(): Promise<void> {
 
     try {
       const user = await this.auth.currentUser
       if (user.emailVerified) {
-        this.router.navigateByUrl('/dashboard')
+        await this.router.navigateByUrl('/dashboard')
       }
     } catch (error) {
       this.log.error(error)
-      this.router.navigateByUrl('/')
+      await this.router.navigateByUrl('/')
     } finally {
       this.loading = false
     }
@@ -35,7 +36,7 @@ export class SignInWithEmailVerifyComponent implements OnInit {
   async resend(): Promise<void> {
     const user = await this.auth.currentUser
     if (!user.emailVerified) {
-      user.sendEmailVerification()
+      await user.sendEmailVerification()
     }
   }
 }

@@ -1,4 +1,4 @@
-import { InvoiceModel } from '../models/invoice-model'
+import {InvoiceModel} from '../models/invoice-model'
 
 export function calculateInvoiceSums(invoice: InvoiceModel): InvoiceModel {
   invoice.netAmount = 0

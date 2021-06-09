@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { MatTableDataSource } from '@angular/material/table'
-import { Subscription } from 'rxjs'
-import { EntityType } from 'src/app/enums/entity-type.enum'
-import { EntityModel } from 'src/app/models/entity-model'
-import { ClientsService } from 'src/app/services/clients.service'
-import { ConfirmDialogService } from 'src/app/services/confirm-dialog.service'
-import { LogService } from 'src/app/services/log.service'
-import { ClientsEditComponent } from '../clients-edit/clients-edit.component'
+import {Component, OnDestroy, OnInit} from '@angular/core'
+import {MatDialog} from '@angular/material/dialog'
+import {MatSnackBar} from '@angular/material/snack-bar'
+import {MatTableDataSource} from '@angular/material/table'
+import {Subscription} from 'rxjs'
+import {EntityType} from 'src/app/enums/entity-type.enum'
+import {EntityModel} from 'src/app/models/entity-model'
+import {ClientsService} from 'src/app/services/clients.service'
+import {ConfirmDialogService} from 'src/app/services/confirm-dialog.service'
+import {LogService} from 'src/app/services/log.service'
+import {ClientsEditComponent} from '../clients-edit/clients-edit.component'
 
 @Component({
   selector: 'app-clients',
@@ -28,7 +28,8 @@ export class ClientsComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private confirmDialog: ConfirmDialogService,
     private snackBar: MatSnackBar
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.clientsService

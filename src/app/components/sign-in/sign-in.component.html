@@ -1,31 +1,31 @@
 <div class="centerbox">
-    <h1>Dobrodošli v aplikaciji eFakture</h1>
+  <h1>Dobrodošli v aplikaciji eFakture</h1>
 
-    <div class="card mat-elevation-z2">
-        <p>{{ signInText2 }} se z eno od naštetih možnosti:</p>
-        <div class="options">
-            <button mat-raised-button color="primary" (click)="signInWithGoogle()" class="google">
-                {{ signInText }} z Google
-            </button>
-            <button mat-raised-button color="primary" [routerLink]="signInWithEmailUrl" class="email">
-                {{ signInText }} z Email
-            </button>
-        </div>
+  <div class="card mat-elevation-z2">
+    <p>{{ signInText2 }} se z eno od naštetih možnosti:</p>
+    <div class="options">
+      <button mat-raised-button color="primary" (click)="signInWithGoogle()" class="google">
+        {{ signInText }} z Google
+      </button>
+      <button mat-raised-button color="primary" [routerLink]="signInWithEmailUrl" class="email">
+        {{ signInText }} z Email
+      </button>
     </div>
+  </div>
 
-    <footer>
-        Ob {{ signInText3 }} v aplikacijo eFakture se strinjate s <a routerLink="/terms">pogoji uporabe</a>.
-    </footer>
+  <footer>
+    Ob {{ signInText3 }} v aplikacijo eFakture se strinjate s <a routerLink="/terms">pogoji uporabe</a>.
+  </footer>
 
-    <ng-template #errorDialog>
-        <h2 matDialogTitle>
-            {{ dialogTitle }}
-        </h2>
-        <p matDialogContent>
-            {{ dialogContent }}
-        </p>
-        <mat-dialog-actions align="end">
-            <button mat-button matDialogClose>Dismiss</button>
-        </mat-dialog-actions>
-    </ng-template>
+  <ng-template #errorDialog>
+    <h2 matDialogTitle>
+      {{ dialogTitle }}
+    </h2>
+    <p matDialogContent>
+      {{ dialogContent }}
+    </p>
+    <mat-dialog-actions>
+      <button mat-button matDialogClose>Dismiss</button>
+    </mat-dialog-actions>
+  </ng-template>
 </div>

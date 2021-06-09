@@ -1,32 +1,32 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { NgForm } from '@angular/forms'
-import { MatDatepickerInputEvent } from '@angular/material/datepicker'
+import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core'
+import {NgForm} from '@angular/forms'
+import {MatDatepickerInputEvent} from '@angular/material/datepicker'
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA
 } from '@angular/material/dialog'
-import { MatSelect } from '@angular/material/select'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { MatTableDataSource } from '@angular/material/table'
-import { Subscription } from 'rxjs'
-import { EntityType } from 'src/app/enums/entity-type.enum'
-import { InvoiceType } from 'src/app/enums/invoice-type.enum'
-import { ItemType } from 'src/app/enums/item-type.enum'
-import { NoteType } from 'src/app/enums/note-type.enum'
-import { calculateInvoiceSums } from 'src/app/functions/calculate-invoice-sums'
-import { nextAccountNumber } from 'src/app/functions/next-account-number'
-import { EntityModel } from 'src/app/models/entity-model'
-import { InvoiceModel } from 'src/app/models/invoice-model'
-import { ItemModel } from 'src/app/models/item-model'
-import { NoteModel } from 'src/app/models/note-model'
-import { ClientsService } from 'src/app/services/clients.service'
-import { ConfirmDialogService } from 'src/app/services/confirm-dialog.service'
-import { InvoicesService } from 'src/app/services/invoices.service'
-import { LogService } from 'src/app/services/log.service'
-import { SettingsService } from 'src/app/services/settings.service'
-import { ItemsEditComponent } from '../items-edit/items-edit.component'
-import { NotesSelectComponent } from '../notes-select/notes-select.component'
+import {MatSelect} from '@angular/material/select'
+import {MatSnackBar} from '@angular/material/snack-bar'
+import {MatTableDataSource} from '@angular/material/table'
+import {Subscription} from 'rxjs'
+import {EntityType} from 'src/app/enums/entity-type.enum'
+import {InvoiceType} from 'src/app/enums/invoice-type.enum'
+import {ItemType} from 'src/app/enums/item-type.enum'
+import {NoteType} from 'src/app/enums/note-type.enum'
+import {calculateInvoiceSums} from 'src/app/functions/calculate-invoice-sums'
+import {nextAccountNumber} from 'src/app/functions/next-account-number'
+import {EntityModel} from 'src/app/models/entity-model'
+import {InvoiceModel} from 'src/app/models/invoice-model'
+import {ItemModel} from 'src/app/models/item-model'
+import {NoteModel} from 'src/app/models/note-model'
+import {ClientsService} from 'src/app/services/clients.service'
+import {ConfirmDialogService} from 'src/app/services/confirm-dialog.service'
+import {InvoicesService} from 'src/app/services/invoices.service'
+import {LogService} from 'src/app/services/log.service'
+import {SettingsService} from 'src/app/services/settings.service'
+import {ItemsEditComponent} from '../items-edit/items-edit.component'
+import {NotesSelectComponent} from '../notes-select/notes-select.component'
 
 export interface DialogData {
   invoice: InvoiceModel
@@ -74,8 +74,11 @@ export class InvoicesEditComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar
   ) {
     const type = dialogData.type
-    if (type != null) this.type = type
-    else this.type = InvoiceType.INVOICE
+    if (type != null) {
+      this.type = type
+    } else {
+      this.type = InvoiceType.INVOICE
+    }
   }
 
   ngOnInit() {
@@ -147,8 +150,8 @@ export class InvoicesEditComponent implements OnInit, OnDestroy {
     this.openItemDialog()
   }
 
-  onValidFromChanged(ev: MatDatepickerInputEvent<Date>) {
-    const date = new Date(ev.value)
+  onValidFromChanged(ev: MatDatepickerInputEvent<unknown>) {
+    const date = new Date(ev.value as Date)
     date.setDate(date.getDate() + 8)
     this.data.validTo = date
   }
@@ -169,7 +172,7 @@ export class InvoicesEditComponent implements OnInit, OnDestroy {
     ev.preventDefault()
     const ref = this.dialog.open(NotesSelectComponent, {
       width: '320px',
-      data: { type },
+      data: {type},
     })
     ref.afterClosed().subscribe((note: NoteModel) => {
       if (note) {

@@ -1,16 +1,16 @@
 <div style="text-align:right">
-    <a href="#" (click)="logout()">Odjava</a>
+  <a href="#" (click)="logout()">Odjava</a>
 </div>
 
 <div class="centerbox" *ngIf="ready">
-    <h1>Nastavitve</h1>
+  <h1>Nastavitve</h1>
 
-    <div class="card mat-elevation-z2">
-        <p style="margin-top: 0;">
-            Preden lahko nadaljujete morate izpolniti podatke o vašem podjetju, saj
-            brez teh izdaja faktur ni mogoča.
-        </p>
+  <div class="card mat-elevation-z2">
+    <p style="margin-top: 0;">
+      Preden lahko nadaljujete morate izpolniti podatke o vašem podjetju, saj
+      brez teh izdaja faktur ni mogoča.
+    </p>
 
-        <app-settings [forced]="true"></app-settings>
-    </div>
+    <app-settings [forced]="true"></app-settings>
+  </div>
 </div>

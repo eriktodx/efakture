@@ -1,10 +1,10 @@
-import { DatePipe, DecimalPipe } from '@angular/common'
-import { Component, OnInit } from '@angular/core'
-import { FirebaseApp } from '@angular/fire'
-import { AngularFireAuth } from '@angular/fire/auth'
-import { environment } from 'src/environments/environment'
-import { globalScope } from './functions/global-scope'
-import { LogService } from './services/log.service'
+import {DatePipe, DecimalPipe} from '@angular/common'
+import {Component, OnInit} from '@angular/core'
+import {FirebaseApp} from '@angular/fire'
+import {AngularFireAuth} from '@angular/fire/auth'
+import {environment} from 'src/environments/environment'
+import {globalScope} from './functions/global-scope'
+import {LogService} from './services/log.service'
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.log.info("App Init")
+    this.log.info('App Init')
 
     // When in development mode
     if (!environment.production) {

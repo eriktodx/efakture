@@ -1,10 +1,11 @@
-import { QueryFn } from '@angular/fire/firestore'
-import { map } from 'rxjs/operators'
-import { FireDataInterface } from '../interfaces/fire-data-interface'
-import { SystemService } from '../services/system.service'
+import {QueryFn} from '@angular/fire/firestore'
+import {map} from 'rxjs/operators'
+import {FireDataInterface} from '../interfaces/fire-data-interface'
+import {SystemService} from '../services/system.service'
 
 export class BasicFireService<T extends FireDataInterface<T>> {
-  constructor(private system: SystemService, private collectionName: string) { }
+  constructor(private system: SystemService, private collectionName: string) {
+  }
 
   async create(data: T) {
     const user = await this.system.getCurrentUser()
@@ -15,13 +16,12 @@ export class BasicFireService<T extends FireDataInterface<T>> {
     })
   }
 
-  async read(c: { new(o: any): T }, fn?: QueryFn) {
+  async read(c: new(o: any) => T, fn?: QueryFn) {
     const user = await this.system.getCurrentUser()
     const onlyActive: QueryFn = (ref) => {
-      let query = (fn != null ? fn(ref) : ref)
+      return (fn != null ? fn(ref) : ref)
         .where(`userId`, `==`, user.uid)
         .where(`deleted`, `==`, false)
-      return query
     }
     return this.system.store
       .collection<T>(this.collectionName, onlyActive)
@@ -31,7 +31,7 @@ export class BasicFireService<T extends FireDataInterface<T>> {
           return items.map((item) => {
             const data = item.payload.doc.data()
             const id = item.payload.doc.id
-            return new c({ id, ...data })
+            return new c({id, ...data})
           })
         })
       )

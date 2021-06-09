@@ -1,9 +1,9 @@
-import { ItemType } from '../enums/item-type.enum'
-import { globalScope } from '../functions/global-scope'
-import { parseFirestoreDate } from '../functions/parse-firestore-date'
-import { parseLocalFloat } from '../functions/parse-local-float'
-import { removePrivateFields } from '../functions/remove-private-fields'
-import { FireDataInterface } from '../interfaces/fire-data-interface'
+import {ItemType} from '../enums/item-type.enum'
+import {globalScope} from '../functions/global-scope'
+import {parseFirestoreDate} from '../functions/parse-firestore-date'
+import {parseLocalFloat} from '../functions/parse-local-float'
+import {removePrivateFields} from '../functions/remove-private-fields'
+import {FireDataInterface} from '../interfaces/fire-data-interface'
 
 export class ItemModel implements FireDataInterface<ItemModel> {
   userId: string
@@ -28,11 +28,11 @@ export class ItemModel implements FireDataInterface<ItemModel> {
   dateUpdated: Date = null
   dateDeleted: Date = null
 
-  _quantity = '0'
-  _price = '0'
-  _tax = '0'
-  _discount = '0'
-  _combinedName = ''
+  quantityModel = '0'
+  priceModel = '0'
+  taxModel = '0'
+  discountModel = '0'
+  combinedNameModel = ''
 
   constructor(o?: any) {
     if (o != null) {
@@ -94,19 +94,19 @@ export class ItemModel implements FireDataInterface<ItemModel> {
         if (o.dateDeleted) {
           this.dateDeleted = parseFirestoreDate(o.dateDeleted)
         }
-        this._quantity = o._quantity != null
+        this.quantityModel = o._quantity != null
           ? o._quantity
           : globalScope.decimalPipe.transform(this.quantity, '1.2-2')
-        this._price = o._price != null
+        this.priceModel = o._price != null
           ? o._price
           : globalScope.decimalPipe.transform(this.price, '1.2-2')
-        this._tax = o._tax != null
+        this.taxModel = o._tax != null
           ? o._tax
           : globalScope.decimalPipe.transform(this.tax, '1.2-2')
-        this._discount = o._discount != null
+        this.discountModel = o._discount != null
           ? o._discount
           : globalScope.decimalPipe.transform(this.discount, '1.2-2')
-        this._combinedName =
+        this.combinedNameModel =
           (this.code != null && this.code.length > 0 ? `${this.code} - ` : ``) +
           `${this.name}` +
           ` - ${globalScope.decimalPipe.transform(this.price, '1.2-2')}`
@@ -116,22 +116,22 @@ export class ItemModel implements FireDataInterface<ItemModel> {
 
   prepare() {
     const clone = new ItemModel(this)
-    clone.quantity = clone._quantity != null
-      ? parseLocalFloat(clone._quantity)
+    clone.quantity = clone.quantityModel != null
+      ? parseLocalFloat(clone.quantityModel)
       : clone.quantity
-    delete clone._quantity
-    clone.price = clone._price != null
-      ? parseLocalFloat(clone._price)
+    delete clone.quantityModel
+    clone.price = clone.priceModel != null
+      ? parseLocalFloat(clone.priceModel)
       : clone.price
-    delete clone._price
-    clone.tax = clone._tax != null
-      ? parseLocalFloat(clone._tax)
+    delete clone.priceModel
+    clone.tax = clone.taxModel != null
+      ? parseLocalFloat(clone.taxModel)
       : clone.tax
-    delete clone._tax
-    clone.discount = clone._discount != null
-      ? parseLocalFloat(clone._discount)
+    delete clone.taxModel
+    clone.discount = clone.discountModel != null
+      ? parseLocalFloat(clone.discountModel)
       : clone.discount
-    delete clone._discount
+    delete clone.discountModel
     delete clone.id
     return removePrivateFields<ItemModel>(clone)
   }

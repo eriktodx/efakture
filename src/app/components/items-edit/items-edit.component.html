@@ -11,7 +11,7 @@
     </h1>
     <div class="fill_remaining_space"></div>
     <button mat-button color="warn" (click)="onCancelClick()">Prekliči</button>
-    <button mat-raised-button color="primary" form="itemForm" cdkFocusInitial>
+    <button mat-raised-button color="primary" form="itemForm">
       Shrani
     </button>
   </mat-toolbar-row>
@@ -25,8 +25,8 @@
         <mat-label>Izbor iz šifranta</mat-label>
         <mat-select>
           <mat-option *ngFor="let selectItem of itemsDataSource" [value]="selectItem"
-            (onSelectionChange)="onItemSelectionChange($event)">
-            {{ selectItem._combinedName }}
+                      (onSelectionChange)="onItemSelectionChange($event)">
+            {{ selectItem.combinedNameModel }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -43,13 +43,13 @@
     <div class="app-form-row">
       <mat-form-field class="narrow">
         <mat-label>Oznaka</mat-label>
-        <input matInput [(ngModel)]="data.item.code" name="code" maxlength="20" />
+        <input matInput [(ngModel)]="data.item.code" name="code" maxlength="20"/>
       </mat-form-field>
     </div>
     <div class="app-form-row">
       <mat-form-field>
         <mat-label>Naziv</mat-label>
-        <input matInput [(ngModel)]="data.item.name" name="name" required maxlength="255" #name="ngModel" />
+        <input matInput [(ngModel)]="data.item.name" name="name" required maxlength="255" #name="ngModel"/>
         <mat-error *ngIf="name.invalid">
           <div *ngIf="name.errors.required">Naziv je obvezen.</div>
         </mat-error>
@@ -64,7 +64,7 @@
     <div class="app-form-row">
       <mat-form-field class="narrow">
         <mat-label>Enota merjenja</mat-label>
-        <input matInput [(ngModel)]="data.item.unit" name="unit" required maxlength="20" #unit="ngModel" />
+        <input matInput [(ngModel)]="data.item.unit" name="unit" required maxlength="20" #unit="ngModel"/>
         <mat-error *ngIf="unit.invalid">
           <div *ngIf="unit.errors.required">Enota merjenja je obvezna.</div>
         </mat-error>
@@ -76,8 +76,8 @@
           <ng-container *ngIf="data.select; else defaultQuantity">Količina</ng-container>
           <ng-template #defaultQuantity>Privzeta količina</ng-template>
         </mat-label>
-        <input matInput [(ngModel)]="data.item._quantity" name="quantity" required maxlength="20" #quantity="ngModel"
-          appDecimalInputValidator />
+        <input matInput [(ngModel)]="data.item.quantityModel" name="quantity" required maxlength="20" #quantity="ngModel"
+               appDecimalInputValidator/>
         <mat-error *ngIf="quantity.invalid">
           <div *ngIf="quantity.errors.required; else quantityError2">
             Količina je obvezna.
@@ -93,8 +93,8 @@
     <div class="app-form-row">
       <mat-form-field class="narrow">
         <mat-label>Cena v € brez DDV</mat-label>
-        <input matInput [(ngModel)]="data.item._price" name="price" required maxlength="20" #price="ngModel"
-          appDecimalInputValidator />
+        <input matInput [(ngModel)]="data.item.priceModel" name="price" required maxlength="20" #price="ngModel"
+               appDecimalInputValidator/>
         <mat-error *ngIf="price.invalid">
           <div *ngIf="price.errors.required; else priceError2">
             Cena je obvezna.
@@ -113,8 +113,8 @@
           <ng-container *ngIf="data.select; else defaultTax">Davek v %</ng-container>
           <ng-template #defaultTax>Privzet davek v %</ng-template>
         </mat-label>
-        <input matInput [(ngModel)]="data.item._tax" name="tax" required maxlength="5" #tax="ngModel"
-          appDecimalInputValidator />
+        <input matInput [(ngModel)]="data.item.taxModel" name="tax" required maxlength="5" #tax="ngModel"
+               appDecimalInputValidator/>
         <mat-error *ngIf="tax.invalid">
           <div *ngIf="tax.errors.required; else taxError2">
             Davek je obvezen.
@@ -133,8 +133,8 @@
           <ng-container *ngIf="data.select; else defaultDiscount">Rabat v %</ng-container>
           <ng-template #defaultDiscount>Privzet rabat v %</ng-template>
         </mat-label>
-        <input matInput [(ngModel)]="data.item._discount" name="discount" required maxlength="5" #discount="ngModel"
-          appDecimalInputValidator />
+        <input matInput [(ngModel)]="data.item.discountModel" name="discount" required maxlength="5" #discount="ngModel"
+               appDecimalInputValidator/>
         <mat-error *ngIf="discount.invalid">
           <div *ngIf="discount.errors.required; else discountError2">
             Rabat je obvezen.

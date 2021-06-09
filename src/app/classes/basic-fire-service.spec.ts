@@ -1,7 +1,7 @@
-import { BasicFireService } from './basic-fire-service'
+import {BasicFireService} from './basic-fire-service'
 
 describe('BasicFireService', () => {
   it('should create an instance', () => {
-    expect(new BasicFireService()).toBeTruthy()
+    expect(new BasicFireService(null, null)).toBeTruthy()
   })
 })

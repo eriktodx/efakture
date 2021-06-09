@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { MatTableDataSource } from '@angular/material/table'
-import { Subscription } from 'rxjs'
-import { NoteType } from 'src/app/enums/note-type.enum'
-import { NoteModel } from 'src/app/models/note-model'
-import { ConfirmDialogService } from 'src/app/services/confirm-dialog.service'
-import { LogService } from 'src/app/services/log.service'
-import { NotesService } from 'src/app/services/notes.service'
-import { NotesEditComponent } from '../notes-edit/notes-edit.component'
+import {Component, OnDestroy, OnInit} from '@angular/core'
+import {MatDialog} from '@angular/material/dialog'
+import {MatSnackBar} from '@angular/material/snack-bar'
+import {MatTableDataSource} from '@angular/material/table'
+import {Subscription} from 'rxjs'
+import {NoteType} from 'src/app/enums/note-type.enum'
+import {NoteModel} from 'src/app/models/note-model'
+import {ConfirmDialogService} from 'src/app/services/confirm-dialog.service'
+import {LogService} from 'src/app/services/log.service'
+import {NotesService} from 'src/app/services/notes.service'
+import {NotesEditComponent} from '../notes-edit/notes-edit.component'
 
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.css'],
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['name', 'btnUpdate', 'btnDelete']
   dataSource = new MatTableDataSource<NoteModel>([])
   dataSource$: Subscription
@@ -28,7 +28,8 @@ export class NotesComponent implements OnInit {
     private dialog: MatDialog,
     private confirmDialog: ConfirmDialogService,
     private snackBar: MatSnackBar
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.notesService

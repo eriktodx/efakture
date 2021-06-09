@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { MatSidenav } from '@angular/material/sidenav'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { Router } from '@angular/router'
-import { SystemService } from 'src/app/services/system.service'
-import { environment } from 'src/environments/environment'
+import {Component, Input, OnInit} from '@angular/core'
+import {MatSidenav} from '@angular/material/sidenav'
+import {MatSnackBar} from '@angular/material/snack-bar'
+import {Router} from '@angular/router'
+import {SystemService} from 'src/app/services/system.service'
+import {environment} from 'src/environments/environment'
+import firebase from 'firebase'
+import User = firebase.User
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,7 @@ import { environment } from 'src/environments/environment'
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  user: any
+  user: User
   @Input() sidenav: MatSidenav
 
   get version() {
@@ -22,7 +24,8 @@ export class HeaderComponent implements OnInit {
     private system: SystemService,
     private router: Router,
     private snackBar: MatSnackBar
-  ) { }
+  ) {
+  }
 
   async ngOnInit() {
     this.user = await this.system.getCurrentUser()

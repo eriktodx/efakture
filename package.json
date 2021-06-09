@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "fire": "firebase emulators:start --import=./data --export-on-exit=./data"
+    "fire": "firebase --project=fakture-79519 emulators:start --import=./data --export-on-exit=./data",
+    "fire-login": "firebase login"
   },
   "private": true,
   "dependencies": {

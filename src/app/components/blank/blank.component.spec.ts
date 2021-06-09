@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-
-import { BlankComponent } from './blank.component'
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing'
+import {BlankComponent} from './blank.component'
 
 describe('BlankComponent', () => {
   let component: BlankComponent
@@ -8,9 +7,9 @@ describe('BlankComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ BlankComponent ]
+      declarations: [BlankComponent]
     })
-    .compileComponents()
+      .compileComponents()
   }))
 
   beforeEach(() => {

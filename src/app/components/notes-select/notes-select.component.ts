@@ -1,9 +1,9 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { Subscription } from 'rxjs'
-import { NoteType } from 'src/app/enums/note-type.enum'
-import { NoteModel } from 'src/app/models/note-model'
-import { NotesService } from 'src/app/services/notes.service'
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core'
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'
+import {Subscription} from 'rxjs'
+import {NoteType} from 'src/app/enums/note-type.enum'
+import {NoteModel} from 'src/app/models/note-model'
+import {NotesService} from 'src/app/services/notes.service'
 
 interface NotesSelectDialogDataInterface {
   type: NoteType
@@ -27,7 +27,8 @@ export class NotesSelectComponent implements OnInit, OnDestroy {
     private notesService: NotesService,
     private dialogRef: MatDialogRef<NotesSelectComponent>,
     @Inject(MAT_DIALOG_DATA) private data: NotesSelectDialogDataInterface,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.notesService.read(

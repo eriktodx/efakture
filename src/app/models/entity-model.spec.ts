@@ -1,4 +1,4 @@
-import { EntityModel } from './entity-model'
+import {EntityModel} from './entity-model'
 
 describe('ClientModel', () => {
   it('should create an instance', () => {

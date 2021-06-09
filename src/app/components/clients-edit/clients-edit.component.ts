@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core'
-import { NgForm } from '@angular/forms'
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { EntityType } from 'src/app/enums/client-type.enum'
-import { EntityModel } from 'src/app/models/entity-model'
-import { ClientsService } from 'src/app/services/clients.service'
-import { LogService } from 'src/app/services/log.service'
+import {Component, Inject, OnInit, ViewChild} from '@angular/core'
+import {NgForm} from '@angular/forms'
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'
+import {MatSnackBar} from '@angular/material/snack-bar'
+import {EntityType} from 'src/app/enums/client-type.enum'
+import {EntityModel} from 'src/app/models/entity-model'
+import {ClientsService} from 'src/app/services/clients.service'
+import {LogService} from 'src/app/services/log.service'
 
 @Component({
   selector: 'app-clients-edit',
@@ -23,8 +23,11 @@ export class ClientsEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: EntityModel,
     private snackBar: MatSnackBar
   ) {
-    if (data == null) this.data = new EntityModel()
-    else this.data = new EntityModel(this.data)
+    if (data == null) {
+      this.data = new EntityModel()
+    } else {
+      this.data = new EntityModel(this.data)
+    }
   }
 
   ngOnInit() {
@@ -42,8 +45,11 @@ export class ClientsEditComponent implements OnInit {
     }
 
     try {
-      if (!this.data.id) await this.clientsService.create(this.data)
-      else await this.clientsService.update(this.data)
+      if (!this.data.id) {
+        await this.clientsService.create(this.data)
+      } else {
+        await this.clientsService.update(this.data)
+      }
       this.snackBar.open(`Shranjeno`)
       this.dialogRef.close(true)
     } catch (error) {

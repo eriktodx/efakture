@@ -1,4 +1,4 @@
-import { IbanValidatorDirective } from './iban-validator.directive'
+import {IbanValidatorDirective} from './iban-validator.directive'
 
 describe('IbanValidatorDirective', () => {
   it('should create an instance', () => {

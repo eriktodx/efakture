@@ -1,4 +1,4 @@
-import { BicValidatorDirective } from './bic-validator.directive'
+import {BicValidatorDirective} from './bic-validator.directive'
 
 describe('BicValidatorDirective', () => {
   it('should create an instance', () => {

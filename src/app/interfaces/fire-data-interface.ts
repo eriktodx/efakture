@@ -5,5 +5,6 @@ export interface FireDataInterface<T> {
   dateCreated: Date
   dateUpdated: Date
   dateDeleted: Date
+
   prepare(): T
 }

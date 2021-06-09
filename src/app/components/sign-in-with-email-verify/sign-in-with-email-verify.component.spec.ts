@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SignInWithEmailVerifyComponent } from './sign-in-with-email-verify.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing'
+import {SignInWithEmailVerifyComponent} from './sign-in-with-email-verify.component'
 
 describe('SignInWithEmailVerifyComponent', () => {
-  let component: SignInWithEmailVerifyComponent;
-  let fixture: ComponentFixture<SignInWithEmailVerifyComponent>;
+  let component: SignInWithEmailVerifyComponent
+  let fixture: ComponentFixture<SignInWithEmailVerifyComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SignInWithEmailVerifyComponent ]
+      declarations: [SignInWithEmailVerifyComponent]
     })
-    .compileComponents();
-  });
+      .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignInWithEmailVerifyComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(SignInWithEmailVerifyComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

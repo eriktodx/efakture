@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core'
-import { AngularFireAnalytics } from '@angular/fire/analytics'
+import {Injectable} from '@angular/core'
+import {AngularFireAnalytics} from '@angular/fire/analytics'
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +7,8 @@ import { AngularFireAnalytics } from '@angular/fire/analytics'
 export class LogService {
   constructor(
     private analytics: AngularFireAnalytics
-  ) { }
+  ) {
+  }
 
   private logEvent(message?: any) {
     try {
@@ -22,7 +23,7 @@ export class LogService {
 
   info(message?: any, ...optionalParams: any[]): void {
     this.logEvent(message)
-    console.info(message, ...optionalParams)
+    console.log(message, ...optionalParams)
   }
 
   error(message?: any, ...optionalParams: any[]): void {

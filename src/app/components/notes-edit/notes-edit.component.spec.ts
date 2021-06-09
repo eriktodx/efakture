@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-
-import { NotesEditComponent } from './notes-edit.component'
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing'
+import {NotesEditComponent} from './notes-edit.component'
 
 describe('NotesEditComponent', () => {
   let component: NotesEditComponent

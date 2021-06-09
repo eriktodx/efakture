@@ -3,7 +3,7 @@
     <h2>Stranka</h2>
     <div class="fill_remaining_space"></div>
     <button mat-button color="warn" (click)="onCancelClick()">Prekliči</button>
-    <button mat-raised-button color="primary" form="clientForm" cdkFocusInitial>
+    <button mat-raised-button color="primary" form="clientForm">
       Shrani
     </button>
   </mat-toolbar-row>
@@ -27,7 +27,8 @@
             >
               <mat-option [value]="types.PERSON">Fizična oseba</mat-option>
               <mat-option [value]="types.PERSON_WITH_ACTIVITY"
-                >Fizična oseba z dejavnostjo</mat-option
+              >Fizična oseba z dejavnostjo
+              </mat-option
               >
               <mat-option [value]="types.COMPANY">Pravna oseba</mat-option>
             </mat-select>
@@ -149,7 +150,6 @@
               matInput
               [(ngModel)]="data.country"
               name="country"
-              name="country"
               #country="ngModel"
               required
               maxlength="60"
@@ -172,7 +172,7 @@
             class="is-tax-payer"
             [(ngModel)]="data.isTaxPayer"
             name="isTaxPayer"
-            >Zavezanec za DDV
+          >Zavezanec za DDV
           </mat-checkbox>
         </div>
         <div class="app-form-row">
@@ -286,7 +286,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Faks</mat-label>
-            <input matInput [(ngModel)]="data.fax" name="fax" maxlength="20" />
+            <input matInput [(ngModel)]="data.fax" name="fax" maxlength="20"/>
           </mat-form-field>
         </div>
       </mat-expansion-panel>

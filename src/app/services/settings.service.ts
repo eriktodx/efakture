@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core'
-import { SettingsModel } from '../models/settings-model'
-import { SystemService } from './system.service'
+import {Injectable} from '@angular/core'
+import {SettingsModel} from '../models/settings-model'
+import {SystemService} from './system.service'
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,8 @@ import { SystemService } from './system.service'
 export class SettingsService {
   private collectionName = `settings`
 
-  constructor(private system: SystemService) { }
+  constructor(private system: SystemService) {
+  }
 
   async read() {
     const user = await this.system.getCurrentUser()
@@ -23,9 +24,12 @@ export class SettingsService {
   }
 
   async update(data: SettingsModel) {
-    const clone = { ...data.prepare() }
-    if (clone.dateCreated == null) clone.dateCreated = new Date()
-    else clone.dateUpdated = new Date()
+    const clone = {...data.prepare()}
+    if (clone.dateCreated == null) {
+      clone.dateCreated = new Date()
+    } else {
+      clone.dateUpdated = new Date()
+    }
     const user = await this.system.getCurrentUser()
     return this.system.store
       .doc(`${this.collectionName}/${user.uid}`)
@@ -34,9 +38,6 @@ export class SettingsService {
 
   async exist() {
     const settings = await this.read()
-    if (settings != null && settings.dateCreated != null) {
-      return true
-    }
-    return false
+    return settings != null && settings.dateCreated != null
   }
 }

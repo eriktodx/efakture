@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-
-import { SettingsComponent } from './settings.component'
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing'
+import {SettingsComponent} from './settings.component'
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent

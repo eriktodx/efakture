@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms'
+import {AbstractControl, ValidatorFn} from '@angular/forms'
 
 export function bicValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
@@ -8,6 +8,6 @@ export function bicValidator(): ValidatorFn {
       const regex = /^([A-Z]{6}[A-Z2-9][A-NP-Z1-9])(X{3}|[A-WY-Z0-9][A-Z0-9]{2})?$/
       valid = regex.test(value.toUpperCase())
     }
-    return !valid ? { 'bic': { value: control.value } } : null
+    return !valid ? {bic: {value: control.value}} : null
   }
 }

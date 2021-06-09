@@ -1,9 +1,9 @@
-import { DatePipe, DecimalPipe } from '@angular/common'
-import { InvoiceType } from '../enums/invoice-type.enum'
-import { PdfMakeInterface } from '../interfaces/pdf-make-interface'
-import { InvoiceModel } from '../models/invoice-model'
-import { ItemModel } from '../models/item-model'
-import { SettingsModel } from '../models/settings-model'
+import {DatePipe, DecimalPipe} from '@angular/common'
+import {InvoiceType} from '../enums/invoice-type.enum'
+import {PdfMakeInterface} from '../interfaces/pdf-make-interface'
+import {InvoiceModel} from '../models/invoice-model'
+import {ItemModel} from '../models/item-model'
+import {SettingsModel} from '../models/settings-model'
 
 declare var pdfMake: any
 
@@ -32,11 +32,11 @@ export function createPdfInvoice(data: {
     data.invoice.type === InvoiceType.OFFER
       ? 'Ponudba'
       : data.invoice.type === InvoiceType.PRE
-        ? 'Predračun'
-        : 'Račun'
+      ? 'Predračun'
+      : 'Račun'
 
   const itemToPdfDefinition = (item: ItemModel) => [
-    { text: item.code, style: 'td' },
+    {text: item.code, style: 'td'},
     {
       text: item.name + (item.description ? '\n' + item.description : ''),
       style: 'td',
@@ -45,7 +45,7 @@ export function createPdfInvoice(data: {
       text: data.decimalPipe.transform(item.quantity, data.decimalFormat),
       style: 'tdRight',
     },
-    { text: item.unit, style: 'td' },
+    {text: item.unit, style: 'td'},
     {
       text: data.decimalPipe.transform(item.price, data.decimalFormat),
       style: 'tdRight',
@@ -97,7 +97,7 @@ export function createPdfInvoice(data: {
     if (item.tax > 0) {
       let taxLevel = taxLevels.find((x) => x.tax === item.tax)
       if (taxLevel == null) {
-        taxLevel = { tax: item.tax, totalNetAmount: 0, totalTaxAmount: 0 }
+        taxLevel = {tax: item.tax, totalNetAmount: 0, totalTaxAmount: 0}
         taxLevels.push(taxLevel)
       }
       taxLevel.totalNetAmount += item.netAmount - item.discountAmount
@@ -175,8 +175,8 @@ export function createPdfInvoice(data: {
             stack: [
               data.invoice.client.isTaxEligible
                 ? data.invoice.client.isTaxPayer
-                  ? 'ID za DDV kupca: SI' + data.invoice.client.taxId
-                  : 'Davčna številka kupca: ' + data.invoice.client.taxId
+                ? 'ID za DDV kupca: SI' + data.invoice.client.taxId
+                : 'Davčna številka kupca: ' + data.invoice.client.taxId
                 : '',
               data.invoice.client.isTaxEligible
                 ? 'Kupec ' +
@@ -192,8 +192,8 @@ export function createPdfInvoice(data: {
               widths: ['*', '*'],
               body: [
                 [
-                  { text: invoiceName, bold: true, fontSize: 14 },
-                  { text: data.invoice.accNo, bold: true, fontSize: 14 },
+                  {text: invoiceName, bold: true, fontSize: 14},
+                  {text: data.invoice.accNo, bold: true, fontSize: 14},
                 ],
                 [
                   data.invoice.authorLocation + ', dne',
@@ -238,19 +238,19 @@ export function createPdfInvoice(data: {
           widths: [30, '*', 40, 40, 40, 35, 35, 50],
           body: [
             [
-              { text: 'Šifra', style: 'th' },
-              { text: 'Naziv', style: 'th' },
-              { text: 'Količina', style: 'thRight' },
-              { text: 'Enota', style: 'th' },
-              { text: 'Cena', style: 'thRight' },
-              { text: 'Rabat%', style: 'thRight' },
-              { text: 'DDV%', style: 'thRight' },
-              { text: 'Vrednost', style: 'thRight' },
+              {text: 'Šifra', style: 'th'},
+              {text: 'Naziv', style: 'th'},
+              {text: 'Količina', style: 'thRight'},
+              {text: 'Enota', style: 'th'},
+              {text: 'Cena', style: 'thRight'},
+              {text: 'Rabat%', style: 'thRight'},
+              {text: 'DDV%', style: 'thRight'},
+              {text: 'Vrednost', style: 'thRight'},
             ],
             ...itemPdfDefinitions,
             [
               {},
-              { text: 'SKUPAJ brez DDV', colSpan: 5 },
+              {text: 'SKUPAJ brez DDV', colSpan: 5},
               {},
               {},
               {},

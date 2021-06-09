@@ -1,6 +1,5 @@
-import { TestBed } from '@angular/core/testing'
-
-import { SettingsRequiredGuard } from './settings-required.guard'
+import {TestBed} from '@angular/core/testing'
+import {SettingsRequiredGuard} from './settings-required.guard'
 
 describe('SettingsRequiredGuard', () => {
   let guard: SettingsRequiredGuard

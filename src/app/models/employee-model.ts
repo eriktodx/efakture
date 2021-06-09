@@ -1,5 +1,5 @@
-import { parseFirestoreDate } from '../functions/parse-firestore-date'
-import { FireDataInterface } from '../interfaces/fire-data-interface'
+import {parseFirestoreDate} from '../functions/parse-firestore-date'
+import {FireDataInterface} from '../interfaces/fire-data-interface'
 
 export class EmployeeModel implements FireDataInterface<EmployeeModel> {
   userId: string

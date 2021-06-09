@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-
-import { InvoicesComponent } from './invoices.component'
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing'
+import {InvoicesComponent} from './invoices.component'
 
 describe('InvoicesComponent', () => {
   let component: InvoicesComponent

@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { MissingSettingsComponent } from './missing-settings.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing'
+import {MissingSettingsComponent} from './missing-settings.component'
 
 describe('MissingSettingsComponent', () => {
-  let component: MissingSettingsComponent;
-  let fixture: ComponentFixture<MissingSettingsComponent>;
+  let component: MissingSettingsComponent
+  let fixture: ComponentFixture<MissingSettingsComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MissingSettingsComponent ]
+      declarations: [MissingSettingsComponent]
     })
-    .compileComponents();
-  });
+      .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MissingSettingsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(MissingSettingsComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
-import { SettingsService } from 'src/app/services/settings.service';
-import { SystemService } from 'src/app/services/system.service';
+import {Component, OnInit} from '@angular/core'
+import {AngularFireAuth} from '@angular/fire/auth'
+import {Router} from '@angular/router'
+import {SettingsService} from 'src/app/services/settings.service'
+import {SystemService} from 'src/app/services/system.service'
 
 @Component({
   selector: 'app-missing-settings',
@@ -17,7 +17,8 @@ export class MissingSettingsComponent implements OnInit {
     private settings: SettingsService,
     private router: Router,
     private auth: AngularFireAuth
-  ) { }
+  ) {
+  }
 
   async ngOnInit(): Promise<void> {
     try {

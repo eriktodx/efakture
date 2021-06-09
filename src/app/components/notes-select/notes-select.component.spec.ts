@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-
-import { NotesSelectComponent } from './notes-select.component'
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing'
+import {NotesSelectComponent} from './notes-select.component'
 
 describe('NotesSelectComponent', () => {
   let component: NotesSelectComponent
