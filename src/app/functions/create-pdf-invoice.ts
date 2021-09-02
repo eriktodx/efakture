@@ -13,14 +13,16 @@ interface TaxLevel {
   totalTaxAmount: number
 }
 
-export function createPdfInvoice(data: {
+interface CreateData {
   settings: SettingsModel
   invoice: InvoiceModel
   datePipe: DatePipe
   dateFormat?: string
   decimalPipe: DecimalPipe
   decimalFormat?: string
-}): PdfMakeInterface {
+}
+
+export function createPdfInvoice(data: CreateData): PdfMakeInterface {
   if (data.dateFormat == null) {
     data.dateFormat = 'dd.MM.yyyy'
   }
