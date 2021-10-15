@@ -56,7 +56,6 @@ google-services.json
 GoogleService-Info.plist
 
 # Firebase Hosting
-.firebaserc
 firebase-debug.log
 
 # Firebase data
