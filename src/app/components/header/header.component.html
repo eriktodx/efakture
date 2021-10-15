@@ -2,7 +2,7 @@
   <button mat-button (click)="sidenav.toggle()">
     <mat-icon aria-label="Odpri/zapri meni">menu</mat-icon>
   </button>
-  <h1><a routerLink="/">eFakture</a></h1>
+  <h1 routerLink="/">eFakture</h1>
   <span class="version">{{ version }}</span>
   <div class="fill_remaining_space"></div>
   <button [hidden]="!user" mat-button [matMenuTriggerFor]="menu">
