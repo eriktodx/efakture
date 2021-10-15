@@ -1,5 +1,7 @@
+import {version} from '../../package.json'
+
 export const environment = {
-  version: '0.1.26',
+  version,
   production: true,
   firebase: {
     apiKey: 'AIzaSyA0hYqSsdDSStthl_X1SiFT-p0LVo3hUL0',
