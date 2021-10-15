@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core'
-import {SystemService} from 'src/app/services/system.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -8,13 +7,10 @@ import {SystemService} from 'src/app/services/system.service'
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(
-    private system: SystemService
-  ) {
+  constructor() {
   }
 
   async ngOnInit() {
-    console.log(await this.system.getCurrentUser())
   }
 
 }
