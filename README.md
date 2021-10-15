@@ -1,6 +1,6 @@
 # fakture
 
-Simple invoicing app made in Angular and powered by Firebase. You can see it in action [here](https://fakture-79519.web.app/).
+Simple invoicing app made in Angular and powered by Firebase. You can see it in action [here](https://fakture.kralj.dev/).
 
 ## Install
 
@@ -16,7 +16,7 @@ You can start a development server by running command `npm run start` (in-memory
 
 ### Deployment
 
-First make sure you have selected a firebase project with `firebase use [PROJECT-ID]`. After that you can build and deploy entire project with `npm run deploy`, this will create a production build, deploy rules, indexes and hosting to Firebase.
+Is done by GitHub actions. As soon as there is a push to main branch a build, test and deploy workflow is ran.
 
 ## Maintainers
 
