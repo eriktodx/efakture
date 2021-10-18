@@ -58,7 +58,7 @@
         },
         {
           "fieldPath": "validFrom",
-          "order": "ASCENDING"
+          "order": "DESCENDING"
         },
         {
           "fieldPath": "accNo",
