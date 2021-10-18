@@ -35,6 +35,10 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "validFrom",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "accNo",
           "order": "DESCENDING"
         }

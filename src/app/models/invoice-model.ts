@@ -157,6 +157,7 @@ export class InvoiceModel implements FireDataInterface<InvoiceModel> {
     clone.revisions = clone.revisions.slice().map((x) => {
       return {...x.prepare()} as any
     })
+    delete clone.pdfGenerating
     return removePrivateFields(clone)
   }
 }

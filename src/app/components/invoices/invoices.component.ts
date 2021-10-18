@@ -14,6 +14,7 @@ import {InvoicesService} from 'src/app/services/invoices.service'
 import {LogService} from 'src/app/services/log.service'
 import {SettingsService} from 'src/app/services/settings.service'
 import {InvoicesEditComponent} from '../invoices-edit/invoices-edit.component'
+import {MatRadioChange} from '@angular/material/radio'
 
 @Component({
   selector: 'app-invoices',
@@ -38,6 +39,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   loading = true
   type = InvoiceType.INVOICE
   types = InvoiceType
+  sum = this.createEmptySum()
   @ViewChild('outlet') outlet: RouterOutlet
 
   constructor(
@@ -60,20 +62,66 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.refresh()
+  }
+
+  ngOnDestroy() {
+    this.dataSource$?.unsubscribe()
+  }
+
+  refresh(filter?: string) {
+    this.dataSource$?.unsubscribe()
     this.invoicesService
-      .read(InvoiceModel, (ref) =>
-        ref.where('type', '==', this.type).orderBy('accNo', 'desc')
-      )
+      .read(InvoiceModel, (ref) => {
+        let query = ref.where('type', '==', this.type)
+        query = this.applyFilter(query, filter)
+        return query.orderBy('accNo', 'desc')
+      })
       .then((dataSource$) => {
         this.dataSource$ = dataSource$.subscribe((data) => {
+          this.sum = this.calcSums(data)
           this.dataSource.data = data
           this.loading = false
         })
       })
   }
 
-  ngOnDestroy() {
-    this.dataSource$?.unsubscribe()
+  applyFilter(query, filter?: string) {
+    if (filter) {
+      const span = filter === '3_MONTHS'
+        ? 3
+        : filter === '6_MONTHS'
+          ? 6
+          : 12
+      const past = new Date()
+      past.setMonth(past.getMonth() - span)
+      query = query.where('validFrom', '>=', past)
+        .orderBy('validFrom', 'asc')
+    }
+    return query
+  }
+
+  createEmptySum() {
+    return {
+      netAmount: 0,
+      discountAmount: 0,
+      taxAmount: 0,
+      grossAmount: 0
+    }
+  }
+
+  calcSums(invoices: InvoiceModel[]) {
+    return invoices.reduce((a, b) => {
+      a.netAmount += b.netAmount
+      a.discountAmount += b.discountAmount
+      a.taxAmount = b.taxAmount
+      a.grossAmount = b.grossAmount
+      return a
+    }, this.createEmptySum())
+  }
+
+  onFilterChange(change: MatRadioChange) {
+    this.refresh(change.value)
   }
 
   onInvoiceClick(invoice?: EntityModel): void {

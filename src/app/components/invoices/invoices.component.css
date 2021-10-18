@@ -1,0 +1,20 @@
+.cdk-footer-cell {
+  color: rgba(0, 0, 0, .54);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.pdf_generating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter {
+  padding: 15px;
+}
+
+.filter mat-radio-group,
+.filter mat-radio-button {
+  padding: 0 5px;
+}
