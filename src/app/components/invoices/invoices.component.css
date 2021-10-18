@@ -3,3 +3,9 @@
   font-size: 12px;
   font-weight: bold;
 }
+
+.pdf_generating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
