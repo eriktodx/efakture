@@ -63,7 +63,6 @@ import {SignInWithEmailComponent} from './components/sign-in-with-email/sign-in-
 import {SignInComponent} from './components/sign-in/sign-in.component'
 import {TermsComponent} from './components/terms/terms.component'
 import {BicValidatorDirective} from './directives/bic-validator.directive'
-import {DecimalInputValidatorDirective} from './directives/decimal-input-validator.directive'
 import {IbanValidatorDirective} from './directives/iban-validator.directive'
 import {SignInWithEmailVerifyComponent} from './components/sign-in-with-email-verify/sign-in-with-email-verify.component'
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component'
@@ -86,7 +85,6 @@ import {MissingSettingsComponent} from './components/missing-settings/missing-se
     LandingPageComponent,
     HeaderComponent,
     ConfirmDialogComponent,
-    DecimalInputValidatorDirective,
     IbanValidatorDirective,
     BicValidatorDirective,
     BlankComponent,

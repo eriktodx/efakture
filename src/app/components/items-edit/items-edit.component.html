@@ -76,34 +76,24 @@
           <ng-container *ngIf="data.select; else defaultQuantity">Količina</ng-container>
           <ng-template #defaultQuantity>Privzeta količina</ng-template>
         </mat-label>
-        <input matInput [(ngModel)]="data.item.quantityModel" name="quantity" required maxlength="20" #quantity="ngModel"
-               appDecimalInputValidator/>
+        <input matInput type="number" [(ngModel)]="data.item.quantity" name="quantity" required maxlength="20"
+               #quantity="ngModel"/>
         <mat-error *ngIf="quantity.invalid">
-          <div *ngIf="quantity.errors.required; else quantityError2">
+          <div *ngIf="quantity.errors.required">
             Količina je obvezna.
           </div>
-          <ng-template #quantityError2>
-            <div *ngIf="quantity.errors.decimalInput">
-              Številka ni pravilne oblike.
-            </div>
-          </ng-template>
         </mat-error>
       </mat-form-field>
     </div>
     <div class="app-form-row">
       <mat-form-field class="narrow">
         <mat-label>Cena v € brez DDV</mat-label>
-        <input matInput [(ngModel)]="data.item.priceModel" name="price" required maxlength="20" #price="ngModel"
-               appDecimalInputValidator/>
+        <input matInput type="number" [(ngModel)]="data.item.price" name="price" required maxlength="20"
+               #price="ngModel"/>
         <mat-error *ngIf="price.invalid">
-          <div *ngIf="price.errors.required; else priceError2">
+          <div *ngIf="price.errors.required">
             Cena je obvezna.
           </div>
-          <ng-template #priceError2>
-            <div *ngIf="price.errors.decimalInput">
-              Številka ni pravilne oblike.
-            </div>
-          </ng-template>
         </mat-error>
       </mat-form-field>
     </div>
@@ -113,17 +103,11 @@
           <ng-container *ngIf="data.select; else defaultTax">Davek v %</ng-container>
           <ng-template #defaultTax>Privzet davek v %</ng-template>
         </mat-label>
-        <input matInput [(ngModel)]="data.item.taxModel" name="tax" required maxlength="5" #tax="ngModel"
-               appDecimalInputValidator/>
+        <input matInput type="number" [(ngModel)]="data.item.tax" name="tax" required maxlength="5" #tax="ngModel"/>
         <mat-error *ngIf="tax.invalid">
-          <div *ngIf="tax.errors.required; else taxError2">
+          <div *ngIf="tax.errors.required">
             Davek je obvezen.
           </div>
-          <ng-template #taxError2>
-            <div *ngIf="tax.errors.decimalInput">
-              Številka ni pravilne oblike.
-            </div>
-          </ng-template>
         </mat-error>
       </mat-form-field>
     </div>
@@ -133,17 +117,11 @@
           <ng-container *ngIf="data.select; else defaultDiscount">Rabat v %</ng-container>
           <ng-template #defaultDiscount>Privzet rabat v %</ng-template>
         </mat-label>
-        <input matInput [(ngModel)]="data.item.discountModel" name="discount" required maxlength="5" #discount="ngModel"
-               appDecimalInputValidator/>
+        <input matInput [(ngModel)]="data.item.discount" name="discount" required maxlength="5" #discount="ngModel"/>
         <mat-error *ngIf="discount.invalid">
-          <div *ngIf="discount.errors.required; else discountError2">
+          <div *ngIf="discount.errors.required">
             Rabat je obvezen.
           </div>
-          <ng-template #discountError2>
-            <div *ngIf="discount.errors.decimalInput">
-              Številka ni pravilne oblike.
-            </div>
-          </ng-template>
         </mat-error>
       </mat-form-field>
     </div>
