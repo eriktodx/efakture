@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core'
 import {AngularFireModule} from '@angular/fire'
-import {AngularFireAuthGuard} from '@angular/fire/auth-guard'
 import {RouterModule, Routes} from '@angular/router'
 import {AuthComponent} from 'src/app/components/auth/auth.component'
 import {BlankComponent} from 'src/app/components/blank/blank.component'
@@ -22,114 +21,122 @@ import {SignInComponent} from 'src/app/components/sign-in/sign-in.component'
 import {TermsComponent} from 'src/app/components/terms/terms.component'
 import {InvoiceType} from 'src/app/enums/invoice-type.enum'
 import {SettingsRequiredGuard} from 'src/app/guards/settings-required.guard'
+import {AppInitGuard} from './guards/app-init.guard'
+import {UserRequiredGuard} from './guards/user-required.guard'
 
 const routes: Routes = [
   {
     path: '',
-    component: LandingPageComponent,
-  },
-  {
-    path: 'blank',
-    component: BlankComponent,
-  },
-  {
-    path: '',
-    component: AuthComponent,
-    children: [
-      {
-        path: 'sign-in',
-        component: SignInComponent
-      },
-      {
-        path: 'sign-in/email',
-        component: SignInWithEmailComponent
-      },
-      {
-        path: 'sign-up',
-        component: SignInComponent,
-        data: {signUp: true}
-      },
-      {
-        path: 'sign-up/email',
-        component: SignInWithEmailComponent,
-        data: {signUp: true}
-      },
-      {
-        path: 'sign-up/email/verify',
-        component: SignInWithEmailVerifyComponent
-      },
-      {
-        path: 'forgot-password',
-        component: ForgotPasswordComponent
-      },
-      {
-        path: 'terms',
-        component: TermsComponent
-      }
-    ]
-  },
-  {
-    path: 'missing-settings',
-    component: MissingSettingsComponent
-  },
-  {
-    path: '',
-    component: MembersComponent,
-    canActivate: [AngularFireAuthGuard, SettingsRequiredGuard],
+    canActivate: [AppInitGuard],
     children: [
       {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'dashboard',
+        component: LandingPageComponent,
       },
       {
-        path: 'dashboard',
-        component: DashboardComponent,
+        path: 'blank',
+        component: BlankComponent,
       },
       {
-        path: 'clients',
-        component: ClientsComponent,
+        path: '',
+        component: AuthComponent,
+        children: [
+          {
+            path: 'sign-in',
+            component: SignInComponent
+          },
+          {
+            path: 'sign-in/email',
+            component: SignInWithEmailComponent
+          },
+          {
+            path: 'sign-up',
+            component: SignInComponent,
+            data: {signUp: true}
+          },
+          {
+            path: 'sign-up/email',
+            component: SignInWithEmailComponent,
+            data: {signUp: true}
+          },
+          {
+            path: 'sign-up/email/verify',
+            component: SignInWithEmailVerifyComponent
+          },
+          {
+            path: 'forgot-password',
+            component: ForgotPasswordComponent
+          },
+          {
+            path: 'terms',
+            component: TermsComponent
+          }
+        ]
       },
       {
-        path: 'items',
-        component: ItemsComponent,
+        path: 'missing-settings',
+        component: MissingSettingsComponent
       },
       {
-        path: 'services',
-        component: ItemsComponent,
-        data: {services: true},
+        path: '',
+        component: MembersComponent,
+        canActivate: [UserRequiredGuard, SettingsRequiredGuard],
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'dashboard',
+          },
+          {
+            path: 'dashboard',
+            component: DashboardComponent,
+          },
+          {
+            path: 'clients',
+            component: ClientsComponent,
+          },
+          {
+            path: 'items',
+            component: ItemsComponent,
+          },
+          {
+            path: 'services',
+            component: ItemsComponent,
+            data: {services: true},
+          },
+          {
+            path: 'notes',
+            component: NotesComponent,
+          },
+          {
+            path: 'invoices',
+            component: InvoicesComponent,
+          },
+          {
+            path: 'offer-invoices',
+            component: InvoicesComponent,
+            data: {type: InvoiceType.OFFER},
+          },
+          {
+            path: 'pre-invoices',
+            component: InvoicesComponent,
+            data: {type: InvoiceType.PRE},
+          },
+          {
+            path: 'employees',
+            component: EmployeesComponent,
+          },
+          {
+            path: 'settings',
+            component: SettingsComponent,
+          },
+        ],
       },
       {
-        path: 'notes',
-        component: NotesComponent,
-      },
-      {
-        path: 'invoices',
-        component: InvoicesComponent,
-      },
-      {
-        path: 'offer-invoices',
-        component: InvoicesComponent,
-        data: {type: InvoiceType.OFFER},
-      },
-      {
-        path: 'pre-invoices',
-        component: InvoicesComponent,
-        data: {type: InvoiceType.PRE},
-      },
-      {
-        path: 'employees',
-        component: EmployeesComponent,
-      },
-      {
-        path: 'settings',
-        component: SettingsComponent,
-      },
-    ],
-  },
-  {
-    path: '**',
-    component: NotFoundComponent
+        path: '**',
+        component: NotFoundComponent
+      }
+    ]
   }
 ]
 

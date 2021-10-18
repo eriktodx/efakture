@@ -7,6 +7,10 @@ import {Component, OnInit} from '@angular/core'
 })
 export class TermsComponent implements OnInit {
 
+  website = 'fakture.kralj.dev'
+  company = 'ERIK KRALJ, RAČUNALNIŠKO PROGRAMIRANJE, S.P.'
+  post = 'Jesenicah'
+
   constructor() {
   }
 

@@ -1,5 +1,11 @@
 <div style="text-align:right">
-  <a href="#" (click)="logout()">Odjava</a>
+  <button [hidden]="!user" mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+    {{ user?.email }}
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onSignOutClick()">Odjava</button>
+  </mat-menu>
 </div>
 
 <div class="centerbox" *ngIf="ready">

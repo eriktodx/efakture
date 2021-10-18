@@ -3,6 +3,8 @@ import {AngularFireAuth} from '@angular/fire/auth'
 import {Router} from '@angular/router'
 import {SettingsService} from 'src/app/services/settings.service'
 import {SystemService} from 'src/app/services/system.service'
+import firebase from 'firebase'
+import User = firebase.User
 
 @Component({
   selector: 'app-missing-settings',
@@ -10,6 +12,7 @@ import {SystemService} from 'src/app/services/system.service'
   styleUrls: ['./missing-settings.component.css']
 })
 export class MissingSettingsComponent implements OnInit {
+  user: User
   ready = false
 
   constructor(
@@ -22,7 +25,7 @@ export class MissingSettingsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      const user = await this.system.getCurrentUser()
+      const user = this.user = await this.system.getCurrentUser()
       if (user != null) {
         const settingsExist = await this.settings.exist()
         if (!settingsExist) {
@@ -38,7 +41,7 @@ export class MissingSettingsComponent implements OnInit {
     }
   }
 
-  async logout() {
+  async onSignOutClick() {
     try {
       await this.auth.signOut()
     } finally {

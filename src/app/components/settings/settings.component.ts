@@ -51,9 +51,12 @@ export class SettingsComponent implements OnInit {
       this.snackBar.open('Shranjeno')
       if (this.forced) {
         await this.router.navigateByUrl('/dashboard')
-        this.dialogRef.close()
+        if (typeof this.dialogRef.close === 'function') {
+          this.dialogRef.close()
+        }
       }
     } catch (error) {
+      console.log(error)
       this.snackBar.open('Sistemska napaka')
     } finally {
       this.saving = false
