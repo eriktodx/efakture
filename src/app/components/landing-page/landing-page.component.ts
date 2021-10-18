@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
-import { SystemService } from 'src/app/services/system.service'
-import { environment } from 'src/environments/environment'
+import {Component, OnInit} from '@angular/core'
+import {SystemService} from 'src/app/services/system.service'
+import {environment} from 'src/environments/environment'
 
 @Component({
   selector: 'app-landing-page',
@@ -17,7 +17,8 @@ export class LandingPageComponent implements OnInit {
 
   constructor(
     private system: SystemService
-  ) { }
+  ) {
+  }
 
   async ngOnInit() {
     let user: any = null
@@ -27,7 +28,9 @@ export class LandingPageComponent implements OnInit {
       console.error(error)
     } finally {
       this.loading = false
-      this.continueUrl = user != null ? '/dashboard' : '/sign-in'
+      this.continueUrl = user != null
+        ? '/dashboard'
+        : '/sign-in'
     }
   }
 }
