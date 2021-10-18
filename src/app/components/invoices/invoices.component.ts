@@ -96,7 +96,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       const past = new Date()
       past.setMonth(past.getMonth() - span)
       query = query.where('validFrom', '>=', past)
-        .orderBy('validFrom', 'asc')
+        .orderBy('validFrom', 'desc')
     }
     return query
   }
