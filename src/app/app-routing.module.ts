@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core'
 import {AngularFireModule} from '@angular/fire'
-import {AngularFireAuthGuard} from '@angular/fire/auth-guard'
 import {RouterModule, Routes} from '@angular/router'
 import {AuthComponent} from 'src/app/components/auth/auth.component'
 import {BlankComponent} from 'src/app/components/blank/blank.component'
@@ -23,6 +22,7 @@ import {TermsComponent} from 'src/app/components/terms/terms.component'
 import {InvoiceType} from 'src/app/enums/invoice-type.enum'
 import {SettingsRequiredGuard} from 'src/app/guards/settings-required.guard'
 import {AppInitGuard} from './guards/app-init.guard'
+import {UserRequiredGuard} from './guards/user-required.guard'
 
 const routes: Routes = [
   {
@@ -80,7 +80,7 @@ const routes: Routes = [
       {
         path: '',
         component: MembersComponent,
-        canActivate: [AngularFireAuthGuard, SettingsRequiredGuard],
+        canActivate: [UserRequiredGuard, SettingsRequiredGuard],
         children: [
           {
             path: '',
