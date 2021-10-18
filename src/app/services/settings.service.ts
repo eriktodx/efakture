@@ -13,6 +13,9 @@ export class SettingsService {
 
   async read() {
     const user = await this.system.getCurrentUser()
+    if (!user) {
+      return new SettingsModel()
+    }
     const settings = await this.system.store
       .doc<SettingsModel>(`${this.collectionName}/${user.uid}`)
       .get()
