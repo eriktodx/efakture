@@ -67,6 +67,7 @@ import {IbanValidatorDirective} from './directives/iban-validator.directive'
 import {SignInWithEmailVerifyComponent} from './components/sign-in-with-email-verify/sign-in-with-email-verify.component'
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component'
 import {MissingSettingsComponent} from './components/missing-settings/missing-settings.component'
+import {SettingsService} from './services/settings.service'
 
 @NgModule({
   declarations: [
@@ -152,4 +153,28 @@ import {MissingSettingsComponent} from './components/missing-settings/missing-se
   bootstrap: [AppComponent],
 })
 export class AppModule {
+  constructor(
+    settingsService: SettingsService
+  ) {
+    if (!environment.production) {
+      (window as any).createDummyUser = async () => {
+        const settings = await settingsService.read()
+        if (!settings.id) {
+          settings.firstName = 'John'
+          settings.lastName = 'Smith'
+          settings.company.name = 'Hohn Smith s.p.'
+          settings.company.address = 'Grey Street 9'
+          settings.company.postalCode = '4000'
+          settings.company.postalOffice = 'Mini'
+          settings.company.country = 'Venus'
+          settings.company.taxId = '00112233'
+          settings.company.bankTRR = 'DE33 0000 0000 0000 0000 11'
+          settings.company.bankName = 'The First Bank'
+          settings.company.bankBIC = 'ABC'
+          await settingsService.update(settings)
+        }
+      }
+    }
+
+  }
 }
