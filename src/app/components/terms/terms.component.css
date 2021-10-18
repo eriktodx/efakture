@@ -1,0 +1,16 @@
+.centerbox {
+  max-width: 1024px;
+}
+
+@media screen and (max-width: 1039px) {
+  .centerbox {
+    max-width: initial;
+    margin: 0 15px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .centerbox {
+    margin: 0;
+  }
+}
