@@ -10,4 +10,5 @@ mat-toolbar.mat-toolbar {
 .version {
   font-size: 12px;
   padding-top: 6px;
+  padding-left: 5px;
 }
