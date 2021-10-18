@@ -38,6 +38,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   loading = true
   type = InvoiceType.INVOICE
   types = InvoiceType
+  sum = this.createEmptySum()
   @ViewChild('outlet') outlet: RouterOutlet
 
   constructor(
@@ -66,10 +67,30 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       )
       .then((dataSource$) => {
         this.dataSource$ = dataSource$.subscribe((data) => {
+          this.sum = this.calcSums(data)
           this.dataSource.data = data
           this.loading = false
         })
       })
+  }
+
+  createEmptySum() {
+    return {
+      netAmount: 0,
+      discountAmount: 0,
+      taxAmount: 0,
+      grossAmount: 0
+    }
+  }
+
+  calcSums(invoices: InvoiceModel[]) {
+    return invoices.reduce((a, b) => {
+      a.netAmount += b.netAmount
+      a.discountAmount += b.discountAmount
+      a.taxAmount = b.taxAmount
+      a.grossAmount = b.grossAmount
+      return a
+    }, this.createEmptySum())
   }
 
   ngOnDestroy() {
