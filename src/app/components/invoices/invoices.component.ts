@@ -114,8 +114,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     return invoices.reduce((a, b) => {
       a.netAmount += b.netAmount
       a.discountAmount += b.discountAmount
-      a.taxAmount = b.taxAmount
-      a.grossAmount = b.grossAmount
+      a.taxAmount += b.taxAmount
+      a.grossAmount += b.grossAmount
       return a
     }, this.createEmptySum())
   }
