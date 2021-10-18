@@ -68,6 +68,7 @@ import {SignInWithEmailVerifyComponent} from './components/sign-in-with-email-ve
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component'
 import {MissingSettingsComponent} from './components/missing-settings/missing-settings.component'
 import {SettingsService} from './services/settings.service'
+import {MatRadioModule} from '@angular/material/radio'
 
 @NgModule({
   declarations: [
@@ -129,7 +130,8 @@ import {SettingsService} from './services/settings.service'
     MatMenuModule,
     MatExpansionModule,
     MatTooltipModule,
-    MatListModule
+    MatListModule,
+    MatRadioModule
   ],
   providers: [
     DatePipe,

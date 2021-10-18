@@ -18,6 +18,16 @@
 </div>
 
 <ng-container *ngIf="!loading">
+  <div class="filter">
+    <span>Prikaz:</span>
+    <mat-radio-group (change)="onFilterChange($event)">
+      <mat-radio-button value="ALL" checked>Vse</mat-radio-button>
+      <mat-radio-button value="3_MONTHS">Zadnje 3 mesece</mat-radio-button>
+      <mat-radio-button value="6_MONTHS">Zadnjih 6 mesecev</mat-radio-button>
+      <mat-radio-button value="12_MONTHS">Zadnjih 12 mesecev</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
   <table mat-table [dataSource]="dataSource" class="full-width" *ngIf="dataSource.data.length > 0">
     <ng-container matColumnDef="accountNo">
       <th mat-header-cell *matHeaderCellDef class="col_shrink">
@@ -82,7 +92,8 @@
     <ng-container matColumnDef="btnPdf">
       <th mat-header-cell *matHeaderCellDef class="col_shrink center"></th>
       <td mat-cell *matCellDef="let data" class="col_shrink center">
-        <button mat-icon-button (click)="onPdfClick(data)" class="pdf_generating" matTooltip="Prenesi račun v PDF obliki">
+        <button mat-icon-button (click)="onPdfClick(data)" class="pdf_generating"
+                matTooltip="Prenesi račun v PDF obliki">
           <mat-icon *ngIf="!data.pdfGenerating">cloud_download</mat-icon>
           <mat-progress-spinner color="primary" mode="indeterminate" diameter="24" *ngIf="data.pdfGenerating">
           </mat-progress-spinner>

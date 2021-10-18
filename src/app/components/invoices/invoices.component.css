@@ -9,3 +9,12 @@
   justify-content: center;
   align-items: center;
 }
+
+.filter {
+  padding: 15px;
+}
+
+.filter mat-radio-group,
+.filter mat-radio-button {
+  padding: 0 5px;
+}
