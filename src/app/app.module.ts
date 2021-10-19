@@ -9,16 +9,9 @@ import {MatButtonModule} from '@angular/material/button'
 import {MatCheckboxModule} from '@angular/material/checkbox'
 import {MatNativeDateModule} from '@angular/material/core'
 import {MatDatepickerModule} from '@angular/material/datepicker'
-import {
-  MatDialogModule,
-  MatDialogRef,
-  MAT_DIALOG_DATA
-} from '@angular/material/dialog'
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog'
 import {MatExpansionModule} from '@angular/material/expansion'
-import {
-  MatFormFieldModule,
-  MAT_FORM_FIELD_DEFAULT_OPTIONS
-} from '@angular/material/form-field'
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field'
 import {MatIconModule} from '@angular/material/icon'
 import {MatInputModule} from '@angular/material/input'
 import {MatListModule} from '@angular/material/list'
@@ -26,10 +19,7 @@ import {MatMenuModule} from '@angular/material/menu'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import {MatSelectModule} from '@angular/material/select'
 import {MatSidenavModule} from '@angular/material/sidenav'
-import {
-  MatSnackBarModule,
-  MAT_SNACK_BAR_DEFAULT_OPTIONS
-} from '@angular/material/snack-bar'
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar'
 import {MatStepperModule} from '@angular/material/stepper'
 import {MatTableModule} from '@angular/material/table'
 import {MatToolbarModule} from '@angular/material/toolbar'
@@ -69,6 +59,8 @@ import {ForgotPasswordComponent} from './components/forgot-password/forgot-passw
 import {MissingSettingsComponent} from './components/missing-settings/missing-settings.component'
 import {SettingsService} from './services/settings.service'
 import {MatRadioModule} from '@angular/material/radio'
+import {PaymentsComponent} from './components/payments/payments.component'
+import {PaymentsEditComponent} from './components/payments-edit/payments-edit.component'
 
 @NgModule({
   declarations: [
@@ -101,6 +93,8 @@ import {MatRadioModule} from '@angular/material/radio'
     SignInWithEmailVerifyComponent,
     ForgotPasswordComponent,
     MissingSettingsComponent,
+    PaymentsComponent,
+    PaymentsEditComponent,
   ],
   imports: [
     BrowserModule,

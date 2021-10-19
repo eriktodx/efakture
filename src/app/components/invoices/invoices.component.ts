@@ -1,9 +1,9 @@
 import {DatePipe, DecimalPipe} from '@angular/common'
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core'
+import {Component, OnDestroy, OnInit} from '@angular/core'
 import {MatDialog} from '@angular/material/dialog'
 import {MatSnackBar} from '@angular/material/snack-bar'
 import {MatTableDataSource} from '@angular/material/table'
-import {ActivatedRoute, RouterOutlet} from '@angular/router'
+import {ActivatedRoute} from '@angular/router'
 import {Subscription} from 'rxjs'
 import {InvoiceType} from 'src/app/enums/invoice-type.enum'
 import {createPdfInvoice} from 'src/app/functions/create-pdf-invoice'
@@ -15,6 +15,7 @@ import {LogService} from 'src/app/services/log.service'
 import {SettingsService} from 'src/app/services/settings.service'
 import {InvoicesEditComponent} from '../invoices-edit/invoices-edit.component'
 import {MatRadioChange} from '@angular/material/radio'
+import {PaymentsComponent} from '../payments/payments.component'
 
 @Component({
   selector: 'app-invoices',
@@ -29,18 +30,17 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     'discountAmount',
     'taxAmount',
     'grossAmount',
+    'btnPayments',
     'btnPdf',
     'btnUpdate',
     'btnDelete',
   ]
   dataSource = new MatTableDataSource<InvoiceModel>()
   dataSource$: Subscription
-  invoiceId: string
   loading = true
   type = InvoiceType.INVOICE
   types = InvoiceType
   sum = this.createEmptySum()
-  @ViewChild('outlet') outlet: RouterOutlet
 
   constructor(
     private invoicesService: InvoicesService,
@@ -131,6 +131,16 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       data: {
         invoice,
         type: this.type,
+      },
+    })
+  }
+
+  async onPaymentsClick(invoice: InvoiceModel) {
+    this.dialog.open(PaymentsComponent, {
+      width: '800px',
+      disableClose: true,
+      data: {
+        invoice
       },
     })
   }
