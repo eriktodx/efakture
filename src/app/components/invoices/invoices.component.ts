@@ -64,6 +64,15 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (this.type !== InvoiceType.INVOICE) {
+      [
+        'totalPaid',
+        'btnPayments'
+      ].forEach(x => {
+        this.displayedColumns.splice(this.displayedColumns.indexOf(x), 1)
+      })
+    }
+
     this.refresh()
   }
 
