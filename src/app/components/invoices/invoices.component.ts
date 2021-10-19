@@ -72,8 +72,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
         this.displayedColumns.splice(this.displayedColumns.indexOf(x), 1)
       })
     }
-
-    this.refresh()
+    this.refresh('12_MONTHS')
   }
 
   ngOnDestroy() {
