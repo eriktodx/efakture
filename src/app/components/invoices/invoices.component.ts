@@ -16,6 +16,7 @@ import {SettingsService} from 'src/app/services/settings.service'
 import {InvoicesEditComponent} from '../invoices-edit/invoices-edit.component'
 import {MatRadioChange} from '@angular/material/radio'
 import {PaymentsComponent} from '../payments/payments.component'
+import {calculateInvoiceTotalPaid} from '../../functions/calculate-invoice-total-paid'
 
 @Component({
   selector: 'app-invoices',
@@ -30,6 +31,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     'discountAmount',
     'taxAmount',
     'grossAmount',
+    'totalPaid',
     'btnPayments',
     'btnPdf',
     'btnUpdate',
@@ -79,6 +81,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       })
       .then((dataSource$) => {
         this.dataSource$ = dataSource$.subscribe((data) => {
+          data.forEach(x => calculateInvoiceTotalPaid(x))
           this.sum = this.calcSums(data)
           this.dataSource.data = data
           this.loading = false
@@ -106,7 +109,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       netAmount: 0,
       discountAmount: 0,
       taxAmount: 0,
-      grossAmount: 0
+      grossAmount: 0,
+      totalPaid: 0
     }
   }
 
@@ -116,6 +120,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       a.discountAmount += b.discountAmount
       a.taxAmount += b.taxAmount
       a.grossAmount += b.grossAmount
+      a.totalPaid += b.totalPaid
       return a
     }, this.createEmptySum())
   }
@@ -137,7 +142,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 
   async onPaymentsClick(invoice: InvoiceModel) {
     this.dialog.open(PaymentsComponent, {
-      width: '800px',
+      width: '600px',
       disableClose: true,
       data: {
         invoice

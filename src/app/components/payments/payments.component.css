@@ -3,3 +3,8 @@
   font-size: 12px;
   font-weight: bold;
 }
+
+.note-empty {
+  font-style: italic;
+  font-size: 12px;
+}

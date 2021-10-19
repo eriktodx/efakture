@@ -40,6 +40,7 @@ export class InvoiceModel implements FireDataInterface<InvoiceModel> {
   dateUpdated: Date = null
   dateDeleted: Date = null
 
+  totalPaid?: number
   pdfGenerating?: boolean
 
   constructor(obj?: any) {
@@ -157,6 +158,7 @@ export class InvoiceModel implements FireDataInterface<InvoiceModel> {
     clone.revisions = clone.revisions.slice().map((x) => {
       return {...x.prepare()} as any
     })
+    delete clone.totalPaid
     delete clone.pdfGenerating
     return removePrivateFields(clone)
   }
