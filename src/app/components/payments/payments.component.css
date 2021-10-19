@@ -1,0 +1,10 @@
+.cdk-footer-cell {
+  color: rgba(0, 0, 0, .54);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.note-empty {
+  font-style: italic;
+  font-size: 12px;
+}

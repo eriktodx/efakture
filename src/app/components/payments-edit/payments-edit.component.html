@@ -1,0 +1,45 @@
+<mat-toolbar mat-dialog-title>
+  <mat-toolbar-row>
+    <h1>Plačilo</h1>
+    <div class="fill_remaining_space"></div>
+    <button mat-button color="warn" (click)="onCancelClick()">Prekliči</button>
+    <button mat-raised-button color="primary" form="invoiceForm">
+      Shrani
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div mat-dialog-content>
+  <div class="center-contents">
+    <mat-progress-spinner color="primary" mode="indeterminate" *ngIf="!data" diameter="32"></mat-progress-spinner>
+  </div>
+  <form *ngIf="data" id="invoiceForm" #form="ngForm" (ngSubmit)="onFormSubmit()">
+    <mat-form-field>
+      <mat-label>Datum</mat-label>
+      <input matInput [(ngModel)]="data.day" name="day" #day="ngModel" [matDatepicker]="picker" required
+             maxlength="12"/>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="day.invalid">
+        <div *ngIf="day.errors.required">
+          Polje je obvezno
+        </div>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Znesek</mat-label>
+      <input matInput [(ngModel)]="data.amount" name="amount" #amount="ngModel" required type="number"/>
+      <mat-error *ngIf="amount.invalid">
+        <div *ngIf="amount.errors.required">
+          Polje je obvezno
+        </div>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Opomba</mat-label>
+      <textarea matInput [(ngModel)]="data.note" name="note"></textarea>
+    </mat-form-field>
+  </form>
+</div>

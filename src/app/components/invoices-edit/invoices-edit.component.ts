@@ -1,11 +1,7 @@
 import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core'
 import {NgForm} from '@angular/forms'
 import {MatDatepickerInputEvent} from '@angular/material/datepicker'
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA
-} from '@angular/material/dialog'
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog'
 import {MatSelect} from '@angular/material/select'
 import {MatSnackBar} from '@angular/material/snack-bar'
 import {MatTableDataSource} from '@angular/material/table'

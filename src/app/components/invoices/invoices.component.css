@@ -18,3 +18,21 @@
 .filter mat-radio-button {
   padding: 0 5px;
 }
+
+.not_paid {
+  color: red;
+}
+
+.paid {
+  color: green;
+}
+
+.over_paid {
+  color: darkgreen;
+}
+
+.total_paid > mat-icon {
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+}

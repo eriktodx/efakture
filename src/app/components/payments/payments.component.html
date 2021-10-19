@@ -1,0 +1,83 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <h2>Evidenca plačil</h2>
+    <div class="fill_remaining_space"></div>
+    <button mat-button color="warn" (click)="onCancelClick()">Zapri</button>
+    <button mat-raised-button color="primary" (click)="onPaymentClick()" matTooltip="Nov zapis">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="spinner_wrap" *ngIf="loading">
+  <mat-progress-spinner color="primary" mode="indeterminate" diameter="32">
+  </mat-progress-spinner>
+</div>
+
+<ng-container *ngIf="!loading">
+  <table mat-table [dataSource]="dataSource" class="full-width" *ngIf="dataSource.data.length > 0">
+    <ng-container matColumnDef="day">
+      <th mat-header-cell *matHeaderCellDef class="col_shrink">
+        Datum
+      </th>
+      <td mat-cell *matCellDef="let data" class="col_shrink">
+        {{ data.day | date }}
+      </td>
+      <td mat-footer-cell *matFooterCellDef class="col_shrink"></td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef class="col_shrink right">Znesek</th>
+      <td mat-cell *matCellDef="let data" class="col_shrink right">
+        {{ data.amount | number: "1.2-2" }}
+      </td>
+      <td mat-footer-cell *matFooterCellDef class="col_shrink right">
+        {{ sumAmount | number: "1.2-2" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="note">
+      <th mat-header-cell *matHeaderCellDef>Opomba</th>
+      <td mat-cell *matCellDef="let data">
+        <span *ngIf="data.note; else noteEmpty">{{ data.note }}</span>
+        <ng-template #noteEmpty>
+          <span class="note-empty">-</span>
+        </ng-template>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="btnUpdate">
+      <th mat-header-cell *matHeaderCellDef class="col_shrink"></th>
+      <td mat-cell *matCellDef="let data" class="col_shrink">
+        <button mat-icon-button (click)="onPaymentClick(data)" matTooltip="Uredi">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+      <td mat-footer-cell *matFooterCellDef class="col_shrink"></td>
+    </ng-container>
+
+    <ng-container matColumnDef="btnDelete">
+      <th mat-header-cell *matHeaderCellDef class="col_shrink"></th>
+      <td mat-cell *matCellDef="let data" class="col_shrink">
+        <button mat-icon-button (click)="onDeleteClick(data)" matTooltip="Izbriši">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+      <td mat-footer-cell *matFooterCellDef class="col_shrink"></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+
+  <div class="no_data" *ngIf="dataSource.data.length === 0">
+    <mat-icon class="no_data_icon">help</mat-icon>
+    <p>Evidenca plačil je prazna.</p>
+    <button mat-raised-button color="primary" (click)="onPaymentClick()">
+      <mat-icon>add</mat-icon>
+      <ng-container>Zabeleži plačilo</ng-container>
+    </button>
+  </div>
+</ng-container>
