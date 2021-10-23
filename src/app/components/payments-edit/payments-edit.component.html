@@ -29,7 +29,8 @@
 
     <mat-form-field>
       <mat-label>Znesek</mat-label>
-      <input matInput [(ngModel)]="data.amount" name="amount" #amount="ngModel" required type="number"/>
+      <input matInput [(ngModel)]="data.amount" name="amount" #amount="ngModel" required type="number" step="0.01"
+             lang="sl-SI"/>
       <mat-error *ngIf="amount.invalid">
         <div *ngIf="amount.errors.required">
           Polje je obvezno

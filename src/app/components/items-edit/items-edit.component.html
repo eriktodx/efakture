@@ -76,7 +76,7 @@
           <ng-container *ngIf="data.select; else defaultQuantity">Količina</ng-container>
           <ng-template #defaultQuantity>Privzeta količina</ng-template>
         </mat-label>
-        <input matInput type="number" [(ngModel)]="data.item.quantity" name="quantity" required maxlength="20"
+        <input matInput type="number" step="0.01" lang="sl-SI" [(ngModel)]="data.item.quantity" name="quantity" required
                #quantity="ngModel"/>
         <mat-error *ngIf="quantity.invalid">
           <div *ngIf="quantity.errors.required">
@@ -88,7 +88,7 @@
     <div class="app-form-row">
       <mat-form-field class="narrow">
         <mat-label>Cena v € brez DDV</mat-label>
-        <input matInput type="number" [(ngModel)]="data.item.price" name="price" required maxlength="20"
+        <input matInput type="number" step="0.01" lang="sl-SI" [(ngModel)]="data.item.price" name="price" required
                #price="ngModel"/>
         <mat-error *ngIf="price.invalid">
           <div *ngIf="price.errors.required">
@@ -103,7 +103,8 @@
           <ng-container *ngIf="data.select; else defaultTax">Davek v %</ng-container>
           <ng-template #defaultTax>Privzet davek v %</ng-template>
         </mat-label>
-        <input matInput type="number" [(ngModel)]="data.item.tax" name="tax" required maxlength="5" #tax="ngModel"/>
+        <input matInput type="number" step="0.01" lang="sl-SI" [(ngModel)]="data.item.tax" name="tax" required
+               #tax="ngModel"/>
         <mat-error *ngIf="tax.invalid">
           <div *ngIf="tax.errors.required">
             Davek je obvezen.
@@ -117,7 +118,8 @@
           <ng-container *ngIf="data.select; else defaultDiscount">Rabat v %</ng-container>
           <ng-template #defaultDiscount>Privzet rabat v %</ng-template>
         </mat-label>
-        <input matInput [(ngModel)]="data.item.discount" name="discount" required maxlength="5" #discount="ngModel"/>
+        <input matInput type="number" step="0.01" lang="sl-SI" [(ngModel)]="data.item.discount" name="discount" required
+               #discount="ngModel"/>
         <mat-error *ngIf="discount.invalid">
           <div *ngIf="discount.errors.required">
             Rabat je obvezen.
