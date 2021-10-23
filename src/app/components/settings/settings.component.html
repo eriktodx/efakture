@@ -190,7 +190,7 @@
       <div class="app-form-row">
         <mat-form-field>
           <mat-label>Obračunsko leto</mat-label>
-          <input matInput type="number" [(ngModel)]="data.accounting.year" name="accountingYear"
+          <input matInput type="number" step="1" [(ngModel)]="data.accounting.year" name="accountingYear"
                  #accountingYear="ngModel" required/>
           <mat-error *ngIf="accountingYear.invalid">
             <div *ngIf="accountingYear.errors.required">
@@ -200,7 +200,7 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Dolžina številke računa</mat-label>
-          <input matInput type="number" [(ngModel)]="data.accounting.seqLength" name="accountingLen"
+          <input matInput type="number" step="1" [(ngModel)]="data.accounting.seqLength" name="accountingLen"
                  #accountingLen="ngModel" required/>
           <mat-error *ngIf="accountingLen.invalid">
             <div *ngIf="accountingLen.errors.required">
@@ -210,7 +210,7 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Naslednja številka računa</mat-label>
-          <input matInput type="number" [(ngModel)]="data.accounting.seq" name="seq" required/>
+          <input matInput type="number" step="1" [(ngModel)]="data.accounting.seq" name="seq" required/>
           <mat-error *ngIf="accountingLen.invalid">
             <div *ngIf="accountingLen.errors.required">
               Polje je obvezno.
