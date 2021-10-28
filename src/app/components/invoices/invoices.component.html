@@ -30,9 +30,7 @@
 
   <table mat-table [dataSource]="dataSource" class="full-width" *ngIf="dataSource.data.length > 0">
     <ng-container matColumnDef="accountNo">
-      <th mat-header-cell *matHeaderCellDef class="col_shrink">
-        Št.
-      </th>
+      <th mat-header-cell *matHeaderCellDef class="col_shrink">Št.</th>
       <td mat-cell *matCellDef="let data" class="col_shrink">
         {{ data.accNo }}
       </td>
@@ -44,9 +42,7 @@
       <td mat-cell *matCellDef="let data">
         {{ data.client.fullName }}
       </td>
-      <td mat-footer-cell *matFooterCellDef>
-        Skupaj
-      </td>
+      <td mat-footer-cell *matFooterCellDef>Skupaj</td>
     </ng-container>
 
     <ng-container matColumnDef="netAmount">
@@ -90,18 +86,22 @@
     </ng-container>
 
     <ng-container matColumnDef="totalPaid">
-      <th mat-header-cell *matHeaderCellDef class="col_shrink right total_paid">Plačano</th>
+      <th mat-header-cell *matHeaderCellDef class="col_shrink right total_paid">
+        Plačano
+      </th>
       <td mat-cell *matCellDef="let data" class="col_shrink right total_paid"
-          [class.not_paid]="data.totalPaid < data.grossAmount"
-          [class.paid]="data.totalPaid === data.grossAmount"
-          [class.over_paid]="data.totalPaid > data.grossAmount">
-        <mat-icon *ngIf="data.totalPaid < data.grossAmount || data.totalPaid > data.grossAmount">priority_high
+        [class.not_paid]="data.totalPaid < data.grossAmount" [class.paid]="data.totalPaid === data.grossAmount"
+        [class.over_paid]="data.totalPaid > data.grossAmount">
+        <mat-icon *ngIf="
+            data.totalPaid < data.grossAmount ||
+            data.totalPaid > data.grossAmount
+          ">priority_high
         </mat-icon>
         <mat-icon *ngIf="data.totalPaid === data.grossAmount">check</mat-icon>
-        {{ data.totalPaid | number:'1.2-2' }}
+        {{ data.totalPaid | number: "1.2-2" }}
       </td>
       <td mat-footer-cell *matFooterCellDef class="col_shrink right total_paid">
-        {{ sum.totalPaid | number:'1.2-2' }}
+        {{ sum.totalPaid | number: "1.2-2" }}
       </td>
     </ng-container>
 
@@ -119,7 +119,7 @@
       <th mat-header-cell *matHeaderCellDef class="col_shrink center"></th>
       <td mat-cell *matCellDef="let data" class="col_shrink center">
         <button mat-icon-button (click)="onPdfClick(data)" class="pdf_generating"
-                matTooltip="Prenesi račun v PDF obliki">
+          matTooltip="Prenesi račun v PDF obliki">
           <mat-icon *ngIf="!data.pdfGenerating">cloud_download</mat-icon>
           <mat-progress-spinner color="primary" mode="indeterminate" diameter="24" *ngIf="data.pdfGenerating">
           </mat-progress-spinner>
@@ -155,9 +155,15 @@
 
   <div class="no_data" *ngIf="dataSource.data.length === 0">
     <mat-icon class="no_data_icon">help</mat-icon>
-    <p *ngIf="type === types.INVOICE">Razvidno je, da še niste vnesli nobenega računa.</p>
-    <p *ngIf="type === types.OFFER">Razvidno je, da še niste vnesli nobene ponudbe.</p>
-    <p *ngIf="type === types.PRE">Razvidno je, da še niste vnesli nobenega predračuna.</p>
+    <p *ngIf="type === types.INVOICE">
+      Razvidno je, da še niste vnesli nobenega računa.
+    </p>
+    <p *ngIf="type === types.OFFER">
+      Razvidno je, da še niste vnesli nobene ponudbe.
+    </p>
+    <p *ngIf="type === types.PRE">
+      Razvidno je, da še niste vnesli nobenega predračuna.
+    </p>
     <button mat-raised-button color="primary" (click)="onInvoiceClick()">
       <mat-icon>add</mat-icon>
       <ng-container *ngIf="type === types.INVOICE">Dodaj prvi računi</ng-container>

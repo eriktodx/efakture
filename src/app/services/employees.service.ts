@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core'
-import {BasicFireService} from '../classes/basic-fire-service'
-import {EmployeeModel} from '../models/employee-model'
-import {SystemService} from './system.service'
+import { Injectable } from "@angular/core";
+import { BasicFireService } from "../classes/basic-fire-service";
+import { EmployeeModel } from "../models/employee-model";
+import { SystemService } from "./system.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class EmployeesService extends BasicFireService<EmployeeModel> {
   constructor(system: SystemService) {
-    super(system, `employees`)
+    super(system, "employees");
   }
 }

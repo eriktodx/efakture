@@ -1,42 +1,49 @@
-import {Component, OnInit} from '@angular/core'
-import {AngularFireAuth} from '@angular/fire/auth'
-import {Router} from '@angular/router'
-import {LogService} from 'src/app/services/log.service'
+import { Component, OnInit } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
+import { SystemService } from "src/app/services/system.service";
 
 @Component({
-  selector: 'app-sign-in-with-email-verify',
-  templateUrl: './sign-in-with-email-verify.component.html',
-  styleUrls: ['./sign-in-with-email-verify.component.css']
+  selector: "app-sign-in-with-email-verify",
+  templateUrl: "./sign-in-with-email-verify.component.html",
+  styleUrls: ["./sign-in-with-email-verify.component.css"]
 })
 export class SignInWithEmailVerifyComponent implements OnInit {
   loading = true
 
   constructor(
-    private log: LogService,
     private router: Router,
-    private auth: AngularFireAuth
-  ) {
-  }
+    private snackBar: MatSnackBar,
+    private system: SystemService
+  ) { }
 
   async ngOnInit(): Promise<void> {
 
     try {
-      const user = await this.auth.currentUser
-      if (user.emailVerified) {
-        await this.router.navigateByUrl('/dashboard')
+      const user = await this.system.getCurrentUser();
+      if (user) {
+        if (user.emailVerified) {
+          await this.router.navigateByUrl("/dashboard");
+        }
+      } else {
+        this.snackBar.open("Uporabnik ni prijavljen.");
       }
     } catch (error) {
-      this.log.error(error)
-      await this.router.navigateByUrl('/')
+      this.snackBar.open(`Sistemska napaka. ${error}`);
+      await this.router.navigateByUrl("/");
     } finally {
-      this.loading = false
+      this.loading = false;
     }
   }
 
   async resend(): Promise<void> {
-    const user = await this.auth.currentUser
-    if (!user.emailVerified) {
-      await user.sendEmailVerification()
+    const user = await this.system.getCurrentUser();
+    if (user) {
+      if (!user.emailVerified) {
+        await user.sendEmailVerification();
+      }
+    } else {
+      this.snackBar.open("Uporabnik ni prijavljen.");
     }
   }
 }

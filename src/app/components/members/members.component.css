@@ -6,7 +6,7 @@ mat-sidenav.mat-sidenav.sidenav {
   padding: 0;
   min-width: 260px;
   background-color: #fff;
-  box-shadow: 6px 0 6px rgba(0, 0, 0, .1);
+  box-shadow: 6px 0 6px rgba(0, 0, 0, 0.1);
 }
 
 .sidenav nav {

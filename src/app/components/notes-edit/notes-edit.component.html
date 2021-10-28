@@ -30,7 +30,7 @@
         <mat-label>Naziv</mat-label>
         <input matInput [(ngModel)]="data.name" name="name" #name="ngModel" required maxlength="255">
         <mat-error *ngIf="name.invalid">
-          <div *ngIf="name.errors.required">
+          <div *ngIf="name.errors?.required">
             Polje je obvezno.
           </div>
         </mat-error>
@@ -40,9 +40,9 @@
       <mat-form-field>
         <mat-label>Vsebina</mat-label>
         <textarea matInput [(ngModel)]="data.description" name="description" #description="ngModel" required
-                  maxlength="5120"></textarea>
+          maxlength="5120"></textarea>
         <mat-error *ngIf="description.invalid">
-          <div *ngIf="description.errors.required">
+          <div *ngIf="description.errors?.required">
             Polje je obvezno.
           </div>
         </mat-error>
