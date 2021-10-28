@@ -1,51 +1,50 @@
-import {Injectable} from '@angular/core'
-import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router'
-import {environment} from '../../environments/environment'
-import {FirebaseApp} from '@angular/fire'
-import {AngularFireAuth} from '@angular/fire/auth'
-import {LogService} from '../services/log.service'
-import {DatePipe, DecimalPipe} from '@angular/common'
-import {globalScope} from '../functions/global-scope'
+import { DatePipe, DecimalPipe } from '@angular/common';
+import { Injectable } from '@angular/core';
+import { FirebaseApp } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { environment } from '../../environments/environment';
+import { globalScope } from '../functions/global-scope';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppInitGuard implements CanActivate {
-
   constructor(
     private firebaseApp: FirebaseApp,
     private auth: AngularFireAuth,
-    private log: LogService,
     datePipe: DatePipe,
-    decimalPipe: DecimalPipe
+    decimalPipe: DecimalPipe,
+    private snackBar: MatSnackBar
   ) {
-    globalScope.datePipe = datePipe
-    globalScope.decimalPipe = decimalPipe
+    globalScope.datePipe = datePipe;
+    globalScope.decimalPipe = decimalPipe;
   }
 
-  async canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot) {
+  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     try {
-      // When in development mode
       if (!environment.production) {
         // Connect to firestore emulator
         this.firebaseApp.firestore().settings({
           host: 'localhost:8088',
           ssl: false,
-        })
+        });
+
         // Connect to authentication emulator
-        await this.auth.useEmulator('http://localhost:9099/')
+        await this.auth.useEmulator('http://localhost:9099/');
       }
 
-      await this.auth.setPersistence('local')
+      await this.auth.setPersistence('local');
 
-      return true
+      return true;
     } catch (error) {
-      console.log('Unable to initialize app')
-      console.error(error)
-      return false
+      this.snackBar.open(`Med inicializacijo je prišlo do napake. ${error}`);
+      return false;
     }
   }
-
 }
