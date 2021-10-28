@@ -61,6 +61,7 @@ import {SettingsService} from './services/settings.service'
 import {MatRadioModule} from '@angular/material/radio'
 import {PaymentsComponent} from './components/payments/payments.component'
 import {PaymentsEditComponent} from './components/payments-edit/payments-edit.component'
+import { ServiceWorkerModule } from '@angular/service-worker'
 
 @NgModule({
   declarations: [
@@ -125,7 +126,13 @@ import {PaymentsEditComponent} from './components/payments-edit/payments-edit.co
     MatExpansionModule,
     MatTooltipModule,
     MatListModule,
-    MatRadioModule
+    MatRadioModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     DatePipe,

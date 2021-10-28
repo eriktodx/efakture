@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "fire": "firebase emulators:start --import=./data --export-on-exit=./data",
-    "fire-login": "firebase login"
+    "fire-login": "firebase login --no-localhost"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +26,7 @@
     "@angular/platform-browser": "~11.0.2",
     "@angular/platform-browser-dynamic": "~11.0.2",
     "@angular/router": "~11.0.2",
+    "@angular/service-worker": "~11.0.2",
     "firebase": "^8.1.1",
     "iban": "^0.0.14",
     "rxjs": "^6.6.3",
