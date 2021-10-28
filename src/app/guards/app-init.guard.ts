@@ -1,17 +1,15 @@
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { FirebaseApp } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
   RouterStateSnapshot,
 } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { FirebaseApp } from '@angular/fire';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { LogService } from '../services/log.service';
-import { DatePipe, DecimalPipe } from '@angular/common';
 import { globalScope } from '../functions/global-scope';
-import { SwUpdate } from '@angular/service-worker';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
