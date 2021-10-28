@@ -2,7 +2,7 @@
   "targets": {
     "fakture-79519": {
       "hosting": {
-        "efakture2": [
+        "efakture": [
           "fakture-79519"
         ]
       }

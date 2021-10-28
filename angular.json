@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "efakture2": {
+    "efakture": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/efakture2",
+            "outputPath": "dist/efakture",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -76,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "efakture2:build:production"
+              "browserTarget": "efakture:build:production"
             },
             "development": {
-              "browserTarget": "efakture2:build:development"
+              "browserTarget": "efakture:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "efakture2:build"
+            "browserTarget": "efakture:build"
           }
         },
         "test": {
@@ -115,7 +115,7 @@
           "options": {
             "prerender": false,
             "ssr": false,
-            "browserTarget": "efakture2:build:production",
+            "browserTarget": "efakture:build:production",
             "firebaseProject": "fakture-79519",
             "firebaseHostingSite": "fakture-79519"
           }
@@ -132,7 +132,7 @@
       }
     }
   },
-  "defaultProject": "efakture2",
+  "defaultProject": "efakture",
   "cli": {
     "defaultCollection": "@angular-eslint/schematics"
   }

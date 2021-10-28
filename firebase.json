@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "target": "efakture2",
-    "public": "dist/efakture2",
+    "target": "efakture",
+    "public": "dist/efakture",
     "ignore": [
       "**/.*"
     ],
