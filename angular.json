@@ -17,7 +17,7 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": "sl-SI"
+        "sourceLocale": "sl"
       },
       "architect": {
         "build": {
