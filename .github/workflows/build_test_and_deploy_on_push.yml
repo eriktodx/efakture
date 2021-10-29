@@ -21,7 +21,7 @@ jobs:
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
-          name: dist/efakture
+          name: efakture
           path: dist/efakture
   deploy:
     name: Deploy
@@ -33,7 +33,7 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@master
         with:
-          name: dist/efakture
+          name: efakture
           path: dist/efakture
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
