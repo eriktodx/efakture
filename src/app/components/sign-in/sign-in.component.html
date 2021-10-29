@@ -2,30 +2,27 @@
   <h1>Dobrodošli v aplikaciji eFakture</h1>
 
   <div class="card mat-elevation-z2">
-    <p>{{ signInText2 }} se z eno od naštetih možnosti:</p>
-    <div class="options">
-      <button mat-raised-button color="primary" (click)="signInWithGoogle()" class="google">
-        {{ signInText }} z Google
-      </button>
-      <button mat-raised-button color="primary" [routerLink]="signInWithEmailUrl" class="email">
-        {{ signInText }} z Email
-      </button>
-    </div>
+    <ng-container *ngIf="!signingIn; else signinInTemplate">
+      <p>{{ signInText2 }} se z eno od naštetih možnosti:</p>
+      <div class="options">
+        <button mat-raised-button color="primary" (click)="signInWithGoogle()" class="google">
+          {{ signInText }} z Google
+        </button>
+        <button mat-raised-button color="primary" [routerLink]="signInWithEmailUrl" class="email">
+          {{ signInText }} z Email
+        </button>
+      </div>
+    </ng-container>
+    <ng-template #signinInTemplate>
+      <div class="flex-center-content">
+        <p>V kratkem se bo odprlo okno kjer se lahko prijavite z vašim Google računom.</p>
+        <p>Prosimo prijavite se ali zaprite okno...</p>
+        <mat-progress-spinner color="primary" mode="indeterminate" diameter="32"></mat-progress-spinner>
+      </div>
+    </ng-template>
   </div>
 
   <footer>
     Ob {{ signInText3 }} v aplikacijo eFakture se strinjate s <a routerLink="/terms">pravnim obvestilom</a>.
   </footer>
-
-  <ng-template #errorDialog>
-    <h2 matDialogTitle>
-      {{ dialogTitle }}
-    </h2>
-    <p matDialogContent>
-      {{ dialogContent }}
-    </p>
-    <mat-dialog-actions>
-      <button mat-button matDialogClose>Dismiss</button>
-    </mat-dialog-actions>
-  </ng-template>
 </div>

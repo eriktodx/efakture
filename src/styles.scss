@@ -172,3 +172,11 @@ td.mat-footer-cell.col_shrink.center {
 .centerbox > .card > .options > button:last-child {
   margin-bottom: 0;
 }
+
+.flex-center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
