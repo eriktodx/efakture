@@ -1,19 +1,19 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core'
-import {NgForm} from '@angular/forms'
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'
-import {MatSnackBar} from '@angular/material/snack-bar'
-import {Router} from '@angular/router'
-import {SettingsModel} from 'src/app/models/settings-model'
-import {SettingsService} from 'src/app/services/settings.service'
+import { Component, Inject, Input, OnInit, ViewChild } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
+import { SettingsModel } from "src/app/models/settings-model";
+import { SettingsService } from "src/app/services/settings.service";
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css'],
+  selector: "app-settings",
+  templateUrl: "./settings.component.html",
+  styleUrls: ["./settings.component.css"],
 })
 export class SettingsComponent implements OnInit {
-  @ViewChild('form') form: NgForm
-  data: SettingsModel = null
+  @ViewChild("form") form!: NgForm
+  data!: SettingsModel
   loading = true
   private saving = false
   @Input() forced = false
@@ -25,41 +25,41 @@ export class SettingsComponent implements OnInit {
     private router: Router,
     private dialogRef: MatDialogRef<SettingsComponent>
   ) {
-    this.forced = dialogData.forced
+    this.forced = dialogData.forced;
   }
 
   async ngOnInit() {
     try {
-      this.data = await this.settingsService.read()
+      this.data = await this.settingsService.read();
     } finally {
-      this.loading = false
+      this.loading = false;
     }
   }
 
   async onFormSubmit() {
     if (this.form.invalid) {
-      this.snackBar.open(`Obrazec vsebuje napake`)
-      return
+      this.snackBar.open("Obrazec vsebuje napake");
+      return;
     }
 
     try {
       if (this.saving) {
-        return
+        return;
       }
-      this.saving = true
-      await this.settingsService.update(this.data)
-      this.snackBar.open('Shranjeno')
+      this.saving = true;
+      await this.settingsService.update(this.data);
+      this.snackBar.open("Shranjeno");
       if (this.forced) {
-        await this.router.navigateByUrl('/dashboard')
-        if (typeof this.dialogRef.close === 'function') {
-          this.dialogRef.close()
+        await this.router.navigateByUrl("/dashboard");
+        if (typeof this.dialogRef.close === "function") {
+          this.dialogRef.close();
         }
       }
     } catch (error) {
-      console.log(error)
-      this.snackBar.open('Sistemska napaka')
+      console.log(error);
+      this.snackBar.open("Sistemska napaka");
     } finally {
-      this.saving = false
+      this.saving = false;
     }
   }
 }

@@ -1,4 +1,13 @@
 {
+  "targets": {
+    "fakture-79519": {
+      "hosting": {
+        "efakture": [
+          "fakture-79519"
+        ]
+      }
+    }
+  },
   "projects": {
     "default": "fakture-79519"
   }

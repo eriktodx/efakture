@@ -1,18 +1,14 @@
-import { DatePipe, DecimalPipe } from '@angular/common';
-import { Injectable } from '@angular/core';
-import { FirebaseApp } from '@angular/fire';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  RouterStateSnapshot,
-} from '@angular/router';
-import { environment } from '../../environments/environment';
-import { globalScope } from '../functions/global-scope';
+import { DatePipe, DecimalPipe } from "@angular/common";
+import { Injectable } from "@angular/core";
+import { FirebaseApp } from "@angular/fire/compat";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from "@angular/router";
+import { environment } from "../../environments/environment";
+import { globalScope } from "../functions/global-scope";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AppInitGuard implements CanActivate {
   constructor(
@@ -31,15 +27,15 @@ export class AppInitGuard implements CanActivate {
       if (!environment.production) {
         // Connect to firestore emulator
         this.firebaseApp.firestore().settings({
-          host: 'localhost:8088',
+          host: "localhost:8088",
           ssl: false,
         });
 
         // Connect to authentication emulator
-        await this.auth.useEmulator('http://localhost:9099/');
+        await this.auth.useEmulator("http://localhost:9099/");
       }
 
-      await this.auth.setPersistence('local');
+      await this.auth.setPersistence("local");
 
       return true;
     } catch (error) {

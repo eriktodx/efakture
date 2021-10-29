@@ -1,46 +1,51 @@
-import {Injectable} from '@angular/core'
-import {SettingsModel} from '../models/settings-model'
-import {SystemService} from './system.service'
+import { Injectable } from "@angular/core";
+import { SettingsModel } from "../models/settings-model";
+import { SystemService } from "./system.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class SettingsService {
-  private collectionName = `settings`
+  private collectionName = "settings"
 
-  constructor(private system: SystemService) {
-  }
+  constructor(
+    private system: SystemService
+  ) { }
 
   async read() {
-    const user = await this.system.getCurrentUser()
+    const user = await this.system.getCurrentUser();
     if (!user) {
-      return new SettingsModel()
+      return new SettingsModel();
     }
     const settings = await this.system.store
       .doc<SettingsModel>(`${this.collectionName}/${user.uid}`)
       .get()
-      .toPromise()
+      .toPromise();
     if (settings.exists) {
-      return new SettingsModel(settings.data())
+      return new SettingsModel(settings.data());
     }
-    return new SettingsModel()
+    return new SettingsModel();
   }
 
   async update(data: SettingsModel) {
-    const clone = {...data.prepare()}
+    const clone = { ...data.prepare() };
     if (clone.dateCreated == null) {
-      clone.dateCreated = new Date()
+      clone.dateCreated = new Date();
     } else {
-      clone.dateUpdated = new Date()
+      clone.dateUpdated = new Date();
     }
-    const user = await this.system.getCurrentUser()
-    return this.system.store
-      .doc(`${this.collectionName}/${user.uid}`)
-      .set(clone)
+    const user = await this.system.getCurrentUser();
+    if (user) {
+      return this.system.store
+        .doc(`${this.collectionName}/${user.uid}`)
+        .set(clone);
+    } else {
+      throw new Error("User not available!");
+    }
   }
 
   async exist() {
-    const settings = await this.read()
-    return settings != null && settings.dateCreated != null
+    const settings = await this.read();
+    return settings != null && settings.dateCreated != null;
   }
 }

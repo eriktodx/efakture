@@ -1,20 +1,12 @@
-import {Component, OnInit} from '@angular/core'
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-terms',
-  templateUrl: './terms.component.html',
-  styleUrls: ['./terms.component.css']
+  selector: "app-terms",
+  templateUrl: "./terms.component.html",
+  styleUrls: ["./terms.component.scss"]
 })
-export class TermsComponent implements OnInit {
-
-  website = 'fakture.kralj.dev'
-  company = 'ERIK KRALJ, RAČUNALNIŠKO PROGRAMIRANJE, S.P.'
-  post = 'Jesenicah'
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
-
+export class TermsComponent {
+  website = "fakture.kralj.dev"
+  company = "ERIK KRALJ, RAČUNALNIŠKO PROGRAMIRANJE, S.P."
+  post = "Jesenicah"
 }

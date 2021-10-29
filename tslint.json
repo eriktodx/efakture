@@ -1,7 +1,0 @@
-{
-  "extends": "tslint:recommended",
-  "rules": {
-    "import-blacklist": [true, "rxjs/Rx"]
-  },
-  "rulesDirectory": ["codelyzer"]
-}
