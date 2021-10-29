@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import firebase from "firebase/compat/app";
@@ -10,9 +10,7 @@ import { SystemService } from "src/app/services/system.service";
   styleUrls: ["./sign-in.component.css"]
 })
 export class SignInComponent {
-  @ViewChild("errorDialog") errorDialog!: TemplateRef<any>
-  dialogTitle = ""
-  dialogContent = ""
+  signingIn = false
   signUp = false
   signInText = ""
   signInText2 = ""
@@ -36,13 +34,18 @@ export class SignInComponent {
 
   async signInWithGoogle(): Promise<void> {
     try {
+      this.signingIn = true;
       const provider = new firebase.auth.GoogleAuthProvider();
       await this.systemService.auth.signInWithPopup(provider);
       await this.router.navigateByUrl("/dashboard");
-    } catch (error) {
-      this.snackBar.open(`Sistemska napaka. ${error}`);
-      this.dialogTitle = "Napaka";
-      this.dialogContent = `Med ${this.signInText4} z Google računom je prišlo do napake. Prosimo vas, da posikusite kasneje. Če se napaka ponavlja nas o tem prosimo obvestite.`;
+    } catch (error: any) {
+      if (error.code && error.code === "auth/popup-closed-by-user") {
+        this.snackBar.open("Uporabnik je preklical prijavo.");
+      } else {
+        this.snackBar.open(`Med ${this.signInText4} z Google računom je prišlo do napake. Prosimo vas, da posikusite kasneje. Če se napaka ponavlja nas o tem prosimo obvestite.`);
+      }
+    } finally {
+      this.signingIn = false;
     }
   }
 }
