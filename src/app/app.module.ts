@@ -1,5 +1,6 @@
-import { DatePipe, DecimalPipe } from "@angular/common";
-import { NgModule } from "@angular/core";
+import { DatePipe, DecimalPipe, registerLocaleData } from "@angular/common";
+import localeSl from "@angular/common/locales/sl";
+import { LOCALE_ID, NgModule } from "@angular/core";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
@@ -61,6 +62,8 @@ import { TermsComponent } from "./components/terms/terms.component";
 import { BicValidatorDirective } from "./directives/bic-validator.directive";
 import { IbanValidatorDirective } from "./directives/iban-validator.directive";
 import { SettingsService } from "./services/settings.service";
+
+registerLocaleData(localeSl);
 
 @NgModule({
   declarations: [
@@ -150,6 +153,7 @@ import { SettingsService } from "./services/settings.service";
     },
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
+    { provide: LOCALE_ID, useValue: "sl-SI" }
   ],
   bootstrap: [AppComponent]
 })
