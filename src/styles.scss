@@ -1,5 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
 
+// Imports for Angular Material Theming
+@import "~@angular/material/theming";
+@include mat-core();
+
+// Light theme
+$light-primary: mat-palette($mat-indigo);
+$light-accent: mat-palette($mat-pink, A200, A100, A400);
+$light-theme: mat-light-theme($light-primary, $light-accent);
+
+// Dark theme
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$dark-warn: mat-palette($mat-deep-orange);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+@media (prefers-color-scheme: light) {
+  body {
+    color: black;
+    background-color: white;
+  }
+  .centerbox > .card {
+    background-color: white;
+  }
+  @include angular-material-theme($light-theme);
+}
+
+@media (prefers-color-scheme: dark) {
+  $color: rgb(171, 178, 191);
+  $background: rgb(40, 44, 52);
+  body {
+    color: $color;
+    background-color: $background;
+  }
+  a {
+    color: rgb(97, 175, 239);
+  }
+  .mat-toolbar-row,
+  .mat-toolbar-single-row {
+    height: 64px;
+  }
+  .mat-icon {
+    color: $color;
+  }
+  @include angular-material-theme($dark-theme);
+}
+
 html,
 body {
   height: 100%;
@@ -44,7 +90,7 @@ fieldset.form_fieldset legend {
 
 .no_data_icon {
   font-size: 64px;
-  color: rgba(0, 0, 0, 0.2);
+  // color: rgba(0, 0, 0, 0.2);
 }
 
 .no_data_icon.mat-icon {
@@ -160,7 +206,6 @@ td.mat-footer-cell.col_shrink.center {
 
 .centerbox > .card {
   padding: 15px;
-  background-color: white;
   margin: 50px 0;
 }
 
@@ -180,3 +225,29 @@ td.mat-footer-cell.col_shrink.center {
   flex-direction: column;
   text-align: center;
 }
+
+// mat-sidenav.mat-sidenav.sidenav {
+//   background-color: white;
+// }
+
+// @media screen and (prefers-color-scheme: dark) {
+//   $color: rgb(171, 178, 191);
+//   $background: rgb(40, 44, 52);
+
+//   body {
+//     color: $color;
+//     background-color: $background;
+//   }
+
+//   a {
+//     color: rgb(98, 175, 239);
+//   }
+
+//   .centerbox > .card {
+//     background-color: $background;
+//   }
+
+//   mat-sidenav.mat-sidenav.sidenav {
+//     background-color: $background;
+//   }
+// }
