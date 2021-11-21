@@ -12,7 +12,9 @@ Make sure you run `npm install` to install all required packages.
 
 ### Development
 
-You can start a development server by running command `npm run start` (in-memory) or `npm run watch` (on-disk). After that run `./node_modules/.bin/firebase emulators:start --import=./data --export-on-exit=./data` to start firebase emulators.
+You can start a development server by running command `npm run start` (in-memory) or `npm run watch` (on-disk).
+
+Use `./node_modules/.bin/firebase emulators:start --import=./data --export-on-exit=./data` to start firebase emulators (this command [requires Java version 1.8 or higher](https://firebase.google.com/docs/emulator-suite/install_and_configure)).
 
 ### Deployment
 
