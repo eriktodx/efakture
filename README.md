@@ -4,21 +4,21 @@ Simple invoicing app made in Angular and powered by Firebase. You can see it in 
 
 ## Install
 
-This project uses [node](http://nodejs.org), [npm](https://www.npmjs.com), [Angular](https://angular.io) and [Firebase](https://firebase.google.com). Go check them out if you don't have them locally installed.
+This project uses [node](http://nodejs.org), [yarn](https://yarnpkg.com), [Angular](https://angular.io) and [Firebase](https://firebase.google.com). Go check them out if you don't have them locally installed.
 
 ### Before you can start
 
-Make sure you run `npm install` to install all required packages.
+Make sure you run `yarn install` to install all required packages.
 
 ### Development
 
-You can start a development server by running command `npm run start` (in-memory) or `npm run watch` (on-disk).
+You can start a development server by running command `yarn run start` (in-memory) or `yarn run watch` (on-disk).
 
 Use `./node_modules/.bin/firebase emulators:start --import=./data --export-on-exit=./data` to start firebase emulators (this command [requires Java version 1.8 or higher](https://firebase.google.com/docs/emulator-suite/install_and_configure)).
 
 ### Deployment
 
-Is done by GitHub actions. As soon as there is a push to main branch a build, test and deploy workflow is ran.
+Build and deploy is done entirely by GitHub actions when pushed to main branch.
 
 ## Maintainers
 
