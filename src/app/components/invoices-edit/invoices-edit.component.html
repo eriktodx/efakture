@@ -13,10 +13,289 @@
 
 <div mat-dialog-content>
   <div class="center-contents">
-    <mat-progress-spinner color="primary" mode="indeterminate" *ngIf="!data" diameter="32"></mat-progress-spinner>
+    <mat-progress-spinner
+      color="primary"
+      mode="indeterminate"
+      *ngIf="!data"
+      diameter="32"
+    ></mat-progress-spinner>
   </div>
-  <form *ngIf="data" id="invoiceForm" #form="ngForm" (ngSubmit)="onFormSubmit()">
+  <form
+    *ngIf="data"
+    id="invoiceForm"
+    #form="ngForm"
+    (ngSubmit)="onFormSubmit()"
+  >
     <mat-horizontal-stepper>
+      <mat-step>
+        <ng-template matStepLabel>Izdajatelj</ng-template>
+        <mat-accordion>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onUpdateCompanyClick($event)"
+          >
+            Posodobi podatke izdajatelja iz nastavitev
+          </button>
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Osnovno</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="app-form-row">
+              <mat-form-field>
+                <mat-label>Tip</mat-label>
+                <mat-select
+                  [(ngModel)]="data.company.type"
+                  name="companyType"
+                  #companyType="ngModel"
+                  required
+                >
+                  <mat-option [value]="entityTypes.PERSON_WITH_ACTIVITY">
+                    Fizična oseba z dejavnostjo
+                  </mat-option>
+                  <mat-option [value]="entityTypes.COMPANY">
+                    Pravna oseba
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="companyType.invalid">
+                  <div *ngIf="companyType.errors?.required">
+                    Polje je obvezno.
+                  </div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="app-form-row">
+              <mat-form-field *ngIf="data.company.isCompany">
+                <mat-label>Naziv podjetja</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.name"
+                  name="companyName"
+                  #companyName="ngModel"
+                  required
+                  maxlength="255"
+                />
+                <mat-error *ngIf="companyName.invalid">
+                  <div *ngIf="companyName.errors?.required">
+                    Polje je obvezno.
+                  </div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="app-form-row">
+              <mat-form-field>
+                <mat-label>Naslov</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.address"
+                  name="companyAddress"
+                  #companyAddress="ngModel"
+                  required
+                  maxlength="255"
+                />
+                <mat-error *ngIf="companyAddress.invalid">
+                  <div *ngIf="companyAddress.errors?.required">
+                    Polje je obvezno.
+                  </div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="app-form-row">
+              <mat-form-field style="max-width: 140px">
+                <mat-label>Poštna številka</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.postalCode"
+                  name="companyPostalCode"
+                  #companyPostalCode="ngModel"
+                  required
+                  maxlength="10"
+                />
+                <mat-error *ngIf="companyPostalCode.invalid">
+                  <div *ngIf="companyPostalCode.errors?.required">
+                    Polje je obvezno.
+                  </div>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Pošta</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.postalOffice"
+                  name="companyPostalOffice"
+                  #companyPostalOffice="ngModel"
+                  required
+                  maxlength="255"
+                />
+                <mat-error *ngIf="companyPostalOffice.invalid">
+                  <div *ngIf="companyPostalOffice.errors?.required">
+                    Polje je obvezno.
+                  </div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="app-form-row">
+              <mat-form-field>
+                <mat-label>Država</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.country"
+                  name="companyCountry"
+                  #companyCountry="ngModel"
+                  required
+                  maxlength="60"
+                />
+                <mat-error *ngIf="companyCountry.invalid">
+                  <div *ngIf="companyCountry.errors?.required">
+                    Polje je obvezno.
+                  </div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel *ngIf="data.company.isTaxEligible">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Davčna</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="app-form-row">
+              <mat-checkbox
+                color="primary"
+                class="is-tax-payer"
+                [(ngModel)]="data.company.isTaxPayer"
+                name="companyIsTaxPayer"
+              >
+                Zavezanec za DDV
+              </mat-checkbox>
+            </div>
+            <div class="app-form-row">
+              <mat-form-field>
+                <mat-label>
+                  <span [hidden]="!data.company.isTaxPayer">ID za DDV</span>
+                  <span [hidden]="data.company.isTaxPayer"
+                    >Davčna številka</span
+                  >
+                </mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.taxId"
+                  name="companyTaxId"
+                  #companyTaxId="ngModel"
+                  required
+                  maxlength="20"
+                />
+                <mat-error *ngIf="companyTaxId.invalid">
+                  <div *ngIf="companyTaxId.errors?.required">
+                    Polje je obvezno.
+                  </div>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Matična številka</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.regNo"
+                  name="companyRegNo"
+                  maxlength="50"
+                />
+              </mat-form-field>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Bančni račun</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="app-form-row">
+              <mat-form-field>
+                <mat-label>IBAN</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.bankTRR"
+                  name="companyBankTRR"
+                  #companyBankTRR="ngModel"
+                  appIbanValidator
+                />
+                <mat-error *ngIf="companyBankTRR.invalid">
+                  <div *ngIf="companyBankTRR.errors?.iban">
+                    IBAN ni veljavne oblike.
+                  </div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="app-form-row">
+              <mat-form-field>
+                <mat-label>Naziv banke</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.bankName"
+                  name="companyBankName"
+                  maxlength="255"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>BIC</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.bankBIC"
+                  name="companyBankBIC"
+                  #companyBankBIC="ngModel"
+                  appBicValidator
+                />
+                <mat-error *ngIf="companyBankBIC.invalid">
+                  <div *ngIf="companyBankBIC.errors?.bic">
+                    BIC ni veljavne oblike.
+                  </div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Kontakt</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="app-form-row">
+              <mat-form-field>
+                <mat-label>E-poštni naslov</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.email"
+                  name="companyEmail"
+                  maxlength="320"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Spletna stran</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.website"
+                  name="companyWebsite"
+                  maxlength="512"
+                />
+              </mat-form-field>
+            </div>
+            <div class="app-form-row">
+              <mat-form-field>
+                <mat-label>Telefonska številka</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.phone"
+                  name="companyPhone"
+                  maxlength="20"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Faks</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="data.company.fax"
+                  name="companyFax"
+                  maxlength="20"
+                />
+              </mat-form-field>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-step>
+
       <mat-step>
         <ng-template matStepLabel>Stranka</ng-template>
         <div>
@@ -24,11 +303,20 @@
             <mat-form-field>
               <mat-label>Izbor stranke iz šifranta</mat-label>
               <mat-select #clientSelect="matSelect">
-                <mat-option *ngFor="let client of clientsDataSource" [value]="client"
-                  (onSelectionChange)="onClientSelectionChange($event)">{{ client.fullName }}</mat-option>
+                <mat-option
+                  *ngFor="let client of clientsDataSource"
+                  [value]="client"
+                  (onSelectionChange)="onClientSelectionChange($event)"
+                >
+                  {{ client.fullName }}
+                </mat-option>
               </mat-select>
             </mat-form-field>
-            <button mat-button color="warn" (click)="onClearClientClick($event)">
+            <button
+              mat-button
+              color="warn"
+              (click)="onClearClientClick($event)"
+            >
               Počisti
             </button>
           </div>
@@ -41,10 +329,21 @@
             <div class="app-form-row">
               <mat-form-field>
                 <mat-label>Tip</mat-label>
-                <mat-select [(ngModel)]="data.client.type" name="clientType" #clientType="ngModel" required>
-                  <mat-option [value]="entityTypes.PERSON">Fizična oseba</mat-option>
-                  <mat-option [value]="entityTypes.PERSON_WITH_ACTIVITY">Fizična oseba z dejavnostjo</mat-option>
-                  <mat-option [value]="entityTypes.COMPANY">Pravna oseba</mat-option>
+                <mat-select
+                  [(ngModel)]="data.client.type"
+                  name="clientType"
+                  #clientType="ngModel"
+                  required
+                >
+                  <mat-option [value]="entityTypes.PERSON">
+                    Fizična oseba
+                  </mat-option>
+                  <mat-option [value]="entityTypes.PERSON_WITH_ACTIVITY">
+                    Fizična oseba z dejavnostjo
+                  </mat-option>
+                  <mat-option [value]="entityTypes.COMPANY">
+                    Pravna oseba
+                  </mat-option>
                 </mat-select>
                 <mat-error *ngIf="clientType.invalid">
                   <div *ngIf="clientType.errors?.required">
@@ -56,8 +355,14 @@
             <div class="app-form-row">
               <mat-form-field *ngIf="data.client.isPerson">
                 <mat-label>Ime</mat-label>
-                <input matInput [(ngModel)]="data.client.firstName" name="clientFirstName" #clientFirstName="ngModel"
-                  required maxlength="255" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.firstName"
+                  name="clientFirstName"
+                  #clientFirstName="ngModel"
+                  required
+                  maxlength="255"
+                />
                 <mat-error *ngIf="clientFirstName.invalid">
                   <div *ngIf="clientFirstName.errors?.required">
                     Polje je obvezno.
@@ -66,8 +371,14 @@
               </mat-form-field>
               <mat-form-field *ngIf="data.client.isPerson">
                 <mat-label>Priimek</mat-label>
-                <input matInput [(ngModel)]="data.client.lastName" name="clientLastName" #clientLastName="ngModel"
-                  required maxlength="255" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.lastName"
+                  name="clientLastName"
+                  #clientLastName="ngModel"
+                  required
+                  maxlength="255"
+                />
                 <mat-error *ngIf="clientLastName.invalid">
                   <div *ngIf="clientLastName.errors?.required">
                     Polje je obvezno.
@@ -78,8 +389,14 @@
             <div class="app-form-row">
               <mat-form-field *ngIf="data.client.isCompany">
                 <mat-label>Naziv podjetja</mat-label>
-                <input matInput [(ngModel)]="data.client.name" name="clientName" #clientName="ngModel" required
-                  maxlength="255" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.name"
+                  name="clientName"
+                  #clientName="ngModel"
+                  required
+                  maxlength="255"
+                />
                 <mat-error *ngIf="clientName.invalid">
                   <div *ngIf="clientName.errors?.required">
                     Polje je obvezno.
@@ -90,8 +407,14 @@
             <div class="app-form-row">
               <mat-form-field>
                 <mat-label>Naslov</mat-label>
-                <input matInput [(ngModel)]="data.client.address" name="clientAddress" #clientAddress="ngModel" required
-                  maxlength="255" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.address"
+                  name="clientAddress"
+                  #clientAddress="ngModel"
+                  required
+                  maxlength="255"
+                />
                 <mat-error *ngIf="clientAddress.invalid">
                   <div *ngIf="clientAddress.errors?.required">
                     Polje je obvezno.
@@ -102,8 +425,14 @@
             <div class="app-form-row">
               <mat-form-field style="max-width: 140px">
                 <mat-label>Poštna številka</mat-label>
-                <input matInput [(ngModel)]="data.client.postalCode" name="clientPostalCode" #clientPostalCode="ngModel"
-                  required maxlength="10" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.postalCode"
+                  name="clientPostalCode"
+                  #clientPostalCode="ngModel"
+                  required
+                  maxlength="10"
+                />
                 <mat-error *ngIf="clientPostalCode.invalid">
                   <div *ngIf="clientPostalCode.errors?.required">
                     Polje je obvezno.
@@ -112,8 +441,14 @@
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Pošta</mat-label>
-                <input matInput [(ngModel)]="data.client.postalOffice" name="clientPostalOffice"
-                  #clientPostalOffice="ngModel" required maxlength="255" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.postalOffice"
+                  name="clientPostalOffice"
+                  #clientPostalOffice="ngModel"
+                  required
+                  maxlength="255"
+                />
                 <mat-error *ngIf="clientPostalOffice.invalid">
                   <div *ngIf="clientPostalOffice.errors?.required">
                     Polje je obvezno.
@@ -124,8 +459,14 @@
             <div class="app-form-row">
               <mat-form-field>
                 <mat-label>Država</mat-label>
-                <input matInput [(ngModel)]="data.client.country" name="clientCountry" #clientCountry="ngModel" required
-                  maxlength="60" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.country"
+                  name="clientCountry"
+                  #clientCountry="ngModel"
+                  required
+                  maxlength="60"
+                />
                 <mat-error *ngIf="clientCountry.invalid">
                   <div *ngIf="clientCountry.errors?.required">
                     Polje je obvezno.
@@ -139,8 +480,13 @@
               <mat-panel-title>Davčna</mat-panel-title>
             </mat-expansion-panel-header>
             <div class="app-form-row">
-              <mat-checkbox color="primary" class="is-tax-payer" [(ngModel)]="data.client.isTaxPayer"
-                name="clientIsTaxPayer">Zavezanec za DDV
+              <mat-checkbox
+                color="primary"
+                class="is-tax-payer"
+                [(ngModel)]="data.client.isTaxPayer"
+                name="clientIsTaxPayer"
+              >
+                Zavezanec za DDV
               </mat-checkbox>
             </div>
             <div class="app-form-row">
@@ -149,8 +495,14 @@
                   <span [hidden]="!data.client.isTaxPayer">ID za DDV</span>
                   <span [hidden]="data.client.isTaxPayer">Davčna številka</span>
                 </mat-label>
-                <input matInput [(ngModel)]="data.client.taxId" name="clientTaxId" #clientTaxId="ngModel" required
-                  maxlength="20" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.taxId"
+                  name="clientTaxId"
+                  #clientTaxId="ngModel"
+                  required
+                  maxlength="20"
+                />
                 <mat-error *ngIf="clientTaxId.invalid">
                   <div *ngIf="clientTaxId.errors?.required">
                     Polje je obvezno.
@@ -159,7 +511,12 @@
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Matična številka</mat-label>
-                <input matInput [(ngModel)]="data.client.regNo" name="clientRegNo" maxlength="50" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.regNo"
+                  name="clientRegNo"
+                  maxlength="50"
+                />
               </mat-form-field>
             </div>
           </mat-expansion-panel>
@@ -170,8 +527,13 @@
             <div class="app-form-row">
               <mat-form-field>
                 <mat-label>IBAN</mat-label>
-                <input matInput [(ngModel)]="data.client.bankTRR" name="clientBankTRR" #clientBankTRR="ngModel"
-                  appIbanValidator />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.bankTRR"
+                  name="clientBankTRR"
+                  #clientBankTRR="ngModel"
+                  appIbanValidator
+                />
                 <mat-error *ngIf="clientBankTRR.invalid">
                   <div *ngIf="clientBankTRR.errors?.iban">
                     IBAN ni veljavne oblike.
@@ -182,12 +544,22 @@
             <div class="app-form-row">
               <mat-form-field>
                 <mat-label>Naziv banke</mat-label>
-                <input matInput [(ngModel)]="data.client.bankName" name="clientBankName" maxlength="255" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.bankName"
+                  name="clientBankName"
+                  maxlength="255"
+                />
               </mat-form-field>
               <mat-form-field>
                 <mat-label>BIC</mat-label>
-                <input matInput [(ngModel)]="data.client.bankBIC" name="clientBankBIC" #clientBankBIC="ngModel"
-                  appBicValidator />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.bankBIC"
+                  name="clientBankBIC"
+                  #clientBankBIC="ngModel"
+                  appBicValidator
+                />
                 <mat-error *ngIf="clientBankBIC.invalid">
                   <div *ngIf="clientBankBIC.errors?.bic">
                     BIC ni veljavne oblike.
@@ -203,38 +575,68 @@
             <div class="app-form-row">
               <mat-form-field>
                 <mat-label>E-poštni naslov</mat-label>
-                <input matInput [(ngModel)]="data.client.email" name="clientEmail" maxlength="320" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.email"
+                  name="clientEmail"
+                  maxlength="320"
+                />
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Spletna stran</mat-label>
-                <input matInput [(ngModel)]="data.client.website" name="clientWebsite" maxlength="512" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.website"
+                  name="clientWebsite"
+                  maxlength="512"
+                />
               </mat-form-field>
             </div>
             <div class="app-form-row">
               <mat-form-field>
                 <mat-label>Telefonska številka</mat-label>
-                <input matInput [(ngModel)]="data.client.phone" name="clientPhone" maxlength="20" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.phone"
+                  name="clientPhone"
+                  maxlength="20"
+                />
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Faks</mat-label>
-                <input matInput [(ngModel)]="data.client.fax" name="clientFax" maxlength="20" />
+                <input
+                  matInput
+                  [(ngModel)]="data.client.fax"
+                  name="clientFax"
+                  maxlength="20"
+                />
               </mat-form-field>
             </div>
           </mat-expansion-panel>
         </mat-accordion>
       </mat-step>
+
       <mat-step>
         <ng-template matStepLabel>Postavke</ng-template>
         <mat-toolbar>
           <mat-toolbar-row>
             <h2>Postavke</h2>
             <div class="fill_remaining_space"></div>
-            <button mat-raised-button color="primary" (click)="onAddItemClick($event)">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="onAddItemClick($event)"
+            >
               Dodaj
             </button>
           </mat-toolbar-row>
         </mat-toolbar>
-        <table mat-table [dataSource]="itemsDataSource" class="full-width" *ngIf="itemsDataSource.data.length > 0">
+        <table
+          mat-table
+          [dataSource]="itemsDataSource"
+          class="full-width"
+          *ngIf="itemsDataSource.data.length > 0"
+        >
           <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef class="col_shrink">Tip</th>
             <td mat-cell *matCellDef="let data" class="col_shrink">
@@ -316,57 +718,106 @@
         <div class="no_data" *ngIf="itemsDataSource.data.length === 0">
           <mat-icon class="no_data_icon">help</mat-icon>
           <p>Razvidno je, da še niste vnesli nobene postavke.</p>
-          <button mat-raised-button color="primary" (click)="onAddItemClick($event)">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onAddItemClick($event)"
+          >
             <mat-icon>add</mat-icon>
             <ng-container>Dodaj prvo postavko</ng-container>
           </button>
         </div>
       </mat-step>
+
       <mat-step>
         <ng-template matStepLabel>Sporočila</ng-template>
         <div class="notes">
           <mat-form-field>
             <mat-label>Sporočilo v glavi računa</mat-label>
-            <textarea matInput [(ngModel)]="data.headerMsg" name="headerMsg"></textarea>
-            <button mat-icon-button matSuffix (click)="onSelectMsgClick($event, noteTypes.HEADER)"
-              matTooltip="Izbor sporočila iz šifranta">
+            <textarea
+              matInput
+              [(ngModel)]="data.headerMsg"
+              name="headerMsg"
+            ></textarea>
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="onSelectMsgClick($event, noteTypes.HEADER)"
+              matTooltip="Izbor sporočila iz šifranta"
+            >
               <mat-icon>more_horiz</mat-icon>
             </button>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Sporočilo v vsebini računa</mat-label>
-            <textarea matInput [(ngModel)]="data.contentMsg" name="contentMsg"></textarea>
-            <button mat-icon-button matSuffix (click)="onSelectMsgClick($event, noteTypes.CONTENT)"
-              matTooltip="Izbor sporočila iz šifranta">
+            <textarea
+              matInput
+              [(ngModel)]="data.contentMsg"
+              name="contentMsg"
+            ></textarea>
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="onSelectMsgClick($event, noteTypes.CONTENT)"
+              matTooltip="Izbor sporočila iz šifranta"
+            >
               <mat-icon>more_horiz</mat-icon>
             </button>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Sporočilo v nogi računa</mat-label>
-            <textarea matInput [(ngModel)]="data.footerMsg" name="footerMsg"></textarea>
-            <button mat-icon-button matSuffix (click)="onSelectMsgClick($event, noteTypes.FOOTER)"
-              matTooltip="Izbor sporočila iz šifranta">
+            <textarea
+              matInput
+              [(ngModel)]="data.footerMsg"
+              name="footerMsg"
+            ></textarea>
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="onSelectMsgClick($event, noteTypes.FOOTER)"
+              matTooltip="Izbor sporočila iz šifranta"
+            >
               <mat-icon>more_horiz</mat-icon>
             </button>
           </mat-form-field>
         </div>
       </mat-step>
+
       <mat-step>
         <ng-template matStepLabel>Račun</ng-template>
         <div class="app-form-row">
           <mat-form-field>
             <mat-label>Kraj izdaje</mat-label>
-            <input matInput [(ngModel)]="data.authorLocation" name="authorLocation" #authorLocation="ngModel" required
-              maxlength="255" />
+            <input
+              matInput
+              [(ngModel)]="data.authorLocation"
+              name="authorLocation"
+              #authorLocation="ngModel"
+              required
+              maxlength="255"
+            />
             <mat-error *ngIf="authorLocation.invalid">
-              <div *ngIf="authorLocation.errors?.required">Polje je obvezno</div>
+              <div *ngIf="authorLocation.errors?.required">
+                Polje je obvezno
+              </div>
             </mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Datum izdaje</mat-label>
-            <input matInput [(ngModel)]="data.validFrom" name="validFrom" #validFrom="ngModel" [matDatepicker]="picker"
-              (dateChange)="onValidFromChanged($event)" required maxlength="12" />
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <input
+              matInput
+              [(ngModel)]="data.validFrom"
+              name="validFrom"
+              #validFrom="ngModel"
+              [matDatepicker]="picker"
+              (dateChange)="onValidFromChanged($event)"
+              required
+              maxlength="12"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="validFrom.invalid">
               <div *ngIf="validFrom.errors?.required">Polje je obvezno</div>
@@ -374,9 +825,19 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Rok plačila</mat-label>
-            <input matInput [(ngModel)]="data.validTo" name="validTo" #validTo="ngModel" [matDatepicker]="picker2"
-              required maxlength="12" />
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <input
+              matInput
+              [(ngModel)]="data.validTo"
+              name="validTo"
+              #validTo="ngModel"
+              [matDatepicker]="picker2"
+              required
+              maxlength="12"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker2"
+            ></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
             <mat-error *ngIf="validTo.invalid">
               <div *ngIf="validTo.errors?.required">Polje je obvezno</div>
@@ -384,57 +845,114 @@
           </mat-form-field>
         </div>
         <div class="app-form-row">
-          <mat-checkbox color="primary" class="supply" [(ngModel)]="data.supply" name="supply">
+          <mat-checkbox
+            color="primary"
+            class="supply"
+            [(ngModel)]="data.supply"
+            name="supply"
+          >
             Rok dobave
           </mat-checkbox>
           <mat-form-field>
             <mat-label>OD</mat-label>
-            <input matInput [(ngModel)]="data.supplyFrom" name="supplyFrom" [matDatepicker]="picker3"
-              [disabled]="!data.supply" maxlength="12" />
-            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <input
+              matInput
+              [(ngModel)]="data.supplyFrom"
+              name="supplyFrom"
+              [matDatepicker]="picker3"
+              [disabled]="!data.supply"
+              maxlength="12"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker3"
+            ></mat-datepicker-toggle>
             <mat-datepicker #picker3></mat-datepicker>
           </mat-form-field>
           <mat-form-field>
             <mat-label>DO</mat-label>
-            <input matInput [(ngModel)]="data.supplyTo" name="supplyTo" [matDatepicker]="picker4"
-              [disabled]="!data.supply" maxlength="12" />
-            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+            <input
+              matInput
+              [(ngModel)]="data.supplyTo"
+              name="supplyTo"
+              [matDatepicker]="picker4"
+              [disabled]="!data.supply"
+              maxlength="12"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker4"
+            ></mat-datepicker-toggle>
             <mat-datepicker #picker4></mat-datepicker>
           </mat-form-field>
         </div>
         <div class="app-form-row">
           <mat-form-field>
             <mat-label>Fakturiral/a</mat-label>
-            <input matInput [(ngModel)]="data.authorName" name="authorName" #authorName="ngModel" required
-              maxlength="255" />
+            <input
+              matInput
+              [(ngModel)]="data.authorName"
+              name="authorName"
+              #authorName="ngModel"
+              required
+              maxlength="255"
+            />
             <mat-error *ngIf="authorName.invalid">
               <div *ngIf="authorName.errors?.required">Polje je obvezno</div>
             </mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>
-              <ng-container *ngIf="data.id; else estimated">Številka računa</ng-container>
+              <ng-container *ngIf="data.id; else estimated"
+                >Številka računa</ng-container
+              >
               <ng-template #estimated>Predvidena številka računa</ng-template>
             </mat-label>
-            <input class="accNo" matInput [value]="data.accNo" name="accNo" [disabled]="true" />
+            <input
+              class="accNo"
+              matInput
+              [value]="data.accNo"
+              name="accNo"
+              [disabled]="true"
+            />
           </mat-form-field>
         </div>
         <div class="app-form-row">
           <mat-form-field>
             <mat-label>Skupaj neto v €</mat-label>
-            <input matInput [value]="data.netAmount | number: '1.2-2'" name="netAmount" [disabled]="true" />
+            <input
+              matInput
+              [value]="data.netAmount | number: '1.2-2'"
+              name="netAmount"
+              [disabled]="true"
+            />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Skupaj rabat v €</mat-label>
-            <input matInput [value]="data.discountAmount | number: '1.2-2'" name="discountAmount" [disabled]="true" />
+            <input
+              matInput
+              [value]="data.discountAmount | number: '1.2-2'"
+              name="discountAmount"
+              [disabled]="true"
+            />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Skupaj DDV v €</mat-label>
-            <input matInput [value]="data.taxAmount | number: '1.2-2'" name="taxAmount" [disabled]="true" />
+            <input
+              matInput
+              [value]="data.taxAmount | number: '1.2-2'"
+              name="taxAmount"
+              [disabled]="true"
+            />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Skupaj bruto v €</mat-label>
-            <input matInput [value]="data.grossAmount | number: '1.2-2'" name="grossAmount" [disabled]="true" />
+            <input
+              matInput
+              [value]="data.grossAmount | number: '1.2-2'"
+              name="grossAmount"
+              [disabled]="true"
+            />
           </mat-form-field>
         </div>
       </mat-step>

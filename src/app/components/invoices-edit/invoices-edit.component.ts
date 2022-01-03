@@ -112,6 +112,14 @@ export class InvoicesEditComponent implements OnInit, OnDestroy {
     this.clientsDataSource$?.unsubscribe();
   }
 
+  onUpdateCompanyClick(ev: MouseEvent) {
+    ev.preventDefault();
+    this.settingsService.read().then((settings) => {
+      this.data.company = new EntityModel(settings.company);
+      this.snackBar.open("Podatki izdajatelja uspešno posodobljeni.");
+    });
+  }
+
   onClientSelectionChange(ev: MatOptionSelectionChange) {
     Object.assign(this.data.client, ev.source.value);
   }
