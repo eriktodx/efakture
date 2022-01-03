@@ -1,13 +1,14 @@
 {
   "name": "efakture",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "fire": "./node_modules/.bin/firebase emulators:start --import=./data --export-on-exit=./data"
   },
   "private": true,
   "dependencies": {
@@ -44,7 +45,7 @@
     "@typescript-eslint/eslint-plugin": "4.28.2",
     "@typescript-eslint/parser": "4.28.2",
     "eslint": "^7.26.0",
-    "firebase-tools": "^9.21.0",
+    "firebase-tools": "^9.23.3",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-coverage": "~2.0.3",
