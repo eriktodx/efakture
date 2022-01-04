@@ -79,35 +79,26 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.dataSource$?.unsubscribe();
     this.invoicesService
       .read(InvoiceModel, (ref: any) => {
-        let query = ref.where("type", "==", this.type);
-        query = this.applyFilter(query, filter);
-        return query.orderBy("accNo", "desc");
+        return ref.where("type", "==", this.type).orderBy("accNo", "desc");
       })
       .then((dataSource$) => {
         this.dataSource$ = dataSource$.subscribe((data) => {
           data.forEach((x) => calculateInvoiceTotalPaid(x));
           this.sum = this.calcSums(data);
+          if (filter) {
+            const span = this.determineSpan(filter);
+            if (span) {
+              const past = new Date();
+              past.setMonth(past.getMonth() - span);
+              data = data.filter((invoice) => {
+                return invoice.validFrom >= past;
+              });
+            }
+          }
           this.dataSource.data = data;
           this.loading = false;
         });
       });
-  }
-
-  applyFilter(
-    query: firebase.firestore.Query<firebase.firestore.DocumentData>,
-    filter?: string
-  ) {
-    if (filter) {
-      const span = this.determineSpan(filter);
-      if (span != null) {
-        const past = new Date();
-        past.setMonth(past.getMonth() - span);
-        query = query
-          .where("validFrom", ">=", past)
-          .orderBy("validFrom", "desc");
-      }
-    }
-    return query;
   }
 
   private determineSpan(filter: string): number | null {
