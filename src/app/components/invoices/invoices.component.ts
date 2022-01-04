@@ -98,12 +98,29 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     filter?: string
   ) {
     if (filter) {
-      const span = filter === "3_MONTHS" ? 3 : filter === "6_MONTHS" ? 6 : 12;
-      const past = new Date();
-      past.setMonth(past.getMonth() - span);
-      query = query.where("validFrom", ">=", past).orderBy("validFrom", "desc");
+      const span = this.determineSpan(filter);
+      if (span != null) {
+        const past = new Date();
+        past.setMonth(past.getMonth() - span);
+        query = query
+          .where("validFrom", ">=", past)
+          .orderBy("validFrom", "desc");
+      }
     }
     return query;
+  }
+
+  private determineSpan(filter: string): number | null {
+    switch (filter) {
+      case "3_MONTHS":
+        return 3;
+      case "6_MONTHS":
+        return 6;
+      case "12_MONTHS":
+        return 12;
+      default:
+        return null;
+    }
   }
 
   createEmptySum() {
