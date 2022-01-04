@@ -83,8 +83,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       })
       .then((dataSource$) => {
         this.dataSource$ = dataSource$.subscribe((data) => {
-          data.forEach((x) => calculateInvoiceTotalPaid(x));
-          this.sum = this.calcSums(data);
           if (filter) {
             const span = this.determineSpan(filter);
             if (span) {
@@ -95,6 +93,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
               });
             }
           }
+          data.forEach((x) => calculateInvoiceTotalPaid(x));
+          this.sum = this.calcSums(data);
           this.dataSource.data = data;
           this.loading = false;
         });
