@@ -9,9 +9,16 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from "@angular/material/dialog";
 import { MatExpansionModule } from "@angular/material/expansion";
-import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
+import {
+  MatFormFieldModule,
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+} from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
@@ -20,7 +27,10 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
 import { MatSidenavModule } from "@angular/material/sidenav";
-import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from "@angular/material/snack-bar";
+import {
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+} from "@angular/material/snack-bar";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -59,6 +69,7 @@ import { SignInWithEmailVerifyComponent } from "./components/sign-in-with-email-
 import { SignInWithEmailComponent } from "./components/sign-in-with-email/sign-in-with-email.component";
 import { SignInComponent } from "./components/sign-in/sign-in.component";
 import { TermsComponent } from "./components/terms/terms.component";
+import { YearDiffWarningComponent } from "./components/year-diff-warning/year-diff-warning.component";
 import { BicValidatorDirective } from "./directives/bic-validator.directive";
 import { IbanValidatorDirective } from "./directives/iban-validator.directive";
 import { SettingsService } from "./services/settings.service";
@@ -98,6 +109,7 @@ registerLocaleData(localeSl);
     MissingSettingsComponent,
     PaymentsComponent,
     PaymentsEditComponent,
+    YearDiffWarningComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -129,11 +141,11 @@ registerLocaleData(localeSl);
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: "registerWhenStable:30000"
+      registrationStrategy: "registerWhenStable:30000",
     }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
   ],
   providers: [
     DatePipe,
@@ -153,14 +165,12 @@ registerLocaleData(localeSl);
     },
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
-    { provide: LOCALE_ID, useValue: "sl-SI" }
+    { provide: LOCALE_ID, useValue: "sl-SI" },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(
-    settingsService: SettingsService
-  ) {
+  constructor(settingsService: SettingsService) {
     if (!environment.production) {
       (window as any).createDummyUser = async () => {
         const settings = await settingsService.read();

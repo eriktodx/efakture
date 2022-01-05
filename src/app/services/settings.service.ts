@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 import { SettingsModel } from "../models/settings-model";
 import { SystemService } from "./system.service";
 
@@ -6,11 +8,9 @@ import { SystemService } from "./system.service";
   providedIn: "root",
 })
 export class SettingsService {
-  private collectionName = "settings"
+  private collectionName = "settings";
 
-  constructor(
-    private system: SystemService
-  ) { }
+  constructor(private system: SystemService) {}
 
   async read() {
     const user = await this.system.getCurrentUser();
@@ -42,6 +42,18 @@ export class SettingsService {
     } else {
       throw new Error("User not available!");
     }
+  }
+
+  async observe(): Promise<Observable<SettingsModel>> {
+    const user = await this.system.getCurrentUser();
+    return this.system.store
+      .doc(`${this.collectionName}/${user!.uid}`)
+      .snapshotChanges()
+      .pipe(
+        map((doc) => {
+          return new SettingsModel(doc.payload.data());
+        })
+      );
   }
 
   async exist() {
