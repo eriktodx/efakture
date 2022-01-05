@@ -5,7 +5,6 @@ import { MatRadioChange } from "@angular/material/radio";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute } from "@angular/router";
-import firebase from "firebase/compat/app";
 import { Subscription } from "rxjs";
 import { InvoiceType } from "src/app/enums/invoice-type.enum";
 import { createPdfInvoice } from "src/app/functions/create-pdf-invoice";
