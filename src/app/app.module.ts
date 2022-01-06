@@ -73,6 +73,7 @@ import { YearDiffWarningComponent } from "./components/year-diff-warning/year-di
 import { BicValidatorDirective } from "./directives/bic-validator.directive";
 import { IbanValidatorDirective } from "./directives/iban-validator.directive";
 import { SettingsService } from "./services/settings.service";
+import { MatCardModule } from "@angular/material/card";
 
 registerLocaleData(localeSl);
 
@@ -137,6 +138,7 @@ registerLocaleData(localeSl);
     MatTooltipModule,
     MatListModule,
     MatRadioModule,
+    MatCardModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
