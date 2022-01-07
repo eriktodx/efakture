@@ -5,7 +5,7 @@ import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import {
   MatDialog,
   MatDialogRef,
-  MAT_DIALOG_DATA
+  MAT_DIALOG_DATA,
 } from "@angular/material/dialog";
 import { MatSelect } from "@angular/material/select";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -96,7 +96,9 @@ export class InvoicesEditComponent implements OnInit, OnDestroy {
         this.data = data;
       });
     } else {
+      console.log({ invoice: this.dialogData.invoice });
       this.data = new InvoiceModel(this.dialogData.invoice);
+      this.data.revisions.push(this.createRevision(this.dialogData.invoice));
       this.itemsDataSource.data = this.data.items;
       calculateInvoiceSums(this.data);
     }
@@ -110,6 +112,12 @@ export class InvoicesEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.clientsDataSource$?.unsubscribe();
+  }
+
+  createRevision(invoice: InvoiceModel): InvoiceModel {
+    const revision = new InvoiceModel(invoice);
+    revision.revisions = [];
+    return revision;
   }
 
   onUpdateCompanyClick(ev: MouseEvent) {
