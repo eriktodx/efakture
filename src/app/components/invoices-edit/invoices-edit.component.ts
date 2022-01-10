@@ -96,7 +96,6 @@ export class InvoicesEditComponent implements OnInit, OnDestroy {
         this.data = data;
       });
     } else {
-      console.log({ invoice: this.dialogData.invoice });
       this.data = new InvoiceModel(this.dialogData.invoice);
       this.data.revisions.push(this.createRevision(this.dialogData.invoice));
       this.itemsDataSource.data = this.data.items;

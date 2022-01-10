@@ -56,8 +56,7 @@ export class SettingsComponent implements OnInit {
         }
       }
     } catch (error) {
-      console.log(error);
-      this.snackBar.open("Sistemska napaka");
+      this.snackBar.open(`Sistemska napaka. ${error}`);
     } finally {
       this.saving = false;
     }
