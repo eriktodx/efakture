@@ -8,18 +8,18 @@ import { SettingsModel } from "../models/settings-model";
 declare var pdfMake: any;
 
 interface TaxLevel {
-  tax: number
-  totalNetAmount: number
-  totalTaxAmount: number
+  tax: number;
+  totalNetAmount: number;
+  totalTaxAmount: number;
 }
 
 interface CreateData {
-  settings: SettingsModel
-  invoice: InvoiceModel
-  datePipe: DatePipe
-  dateFormat?: string
-  decimalPipe: DecimalPipe
-  decimalFormat?: string
+  settings: SettingsModel;
+  invoice: InvoiceModel;
+  datePipe: DatePipe;
+  dateFormat?: string;
+  decimalPipe: DecimalPipe;
+  decimalFormat?: string;
 }
 
 export function createPdfInvoice(data: CreateData): PdfMakeInterface {
@@ -34,8 +34,8 @@ export function createPdfInvoice(data: CreateData): PdfMakeInterface {
     data.invoice.type === InvoiceType.OFFER
       ? "Ponudba"
       : data.invoice.type === InvoiceType.PRE
-        ? "Predračun"
-        : "Račun";
+      ? "Predračun"
+      : "Račun";
 
   const itemToPdfDefinition = (item: ItemModel) => [
     { text: item.code, style: "td" },
@@ -130,8 +130,8 @@ export function createPdfInvoice(data: CreateData): PdfMakeInterface {
               data.invoice.client.fullName,
               data.invoice.client.address,
               data.invoice.client.postalCode +
-              " " +
-              data.invoice.client.postalOffice,
+                " " +
+                data.invoice.client.postalOffice,
             ],
             fontSize: 18,
             bold: true,
@@ -145,8 +145,8 @@ export function createPdfInvoice(data: CreateData): PdfMakeInterface {
                   data.invoice.company.fullName,
                   data.invoice.company.address,
                   data.invoice.company.postalCode +
-                  " " +
-                  data.invoice.company.postalOffice,
+                    " " +
+                    data.invoice.company.postalOffice,
                 ],
                 fontSize: 18,
               },
@@ -175,15 +175,17 @@ export function createPdfInvoice(data: CreateData): PdfMakeInterface {
           {
             width: "*",
             stack: [
+              data.invoice.client.isSloveniaBased &&
               data.invoice.client.isTaxEligible
                 ? data.invoice.client.isTaxPayer
                   ? "ID za DDV kupca: SI" + data.invoice.client.taxId
                   : "Davčna številka kupca: " + data.invoice.client.taxId
                 : "",
+              data.invoice.client.isSloveniaBased &&
               data.invoice.client.isTaxEligible
                 ? "Kupec " +
-                (data.invoice.client.isTaxPayer ? "JE" : "NI") +
-                " davčni zavezanec"
+                  (data.invoice.client.isTaxPayer ? "JE" : "NI") +
+                  " davčni zavezanec"
                 : "",
             ],
           },
@@ -225,10 +227,10 @@ export function createPdfInvoice(data: CreateData): PdfMakeInterface {
       {
         text: data.invoice.supply
           ? "Rok dobave oz izvršitve: " +
-          data.datePipe.transform(data.invoice.supplyFrom, data.dateFormat) +
-          "-" +
-          data.datePipe.transform(data.invoice.supplyTo, data.dateFormat) +
-          "\n"
+            data.datePipe.transform(data.invoice.supplyFrom, data.dateFormat) +
+            "-" +
+            data.datePipe.transform(data.invoice.supplyTo, data.dateFormat) +
+            "\n"
           : "",
       },
       {

@@ -4,31 +4,31 @@ import { removePrivateFields } from "../functions/remove-private-fields";
 import { FireDataInterface } from "../interfaces/fire-data-interface";
 
 export class EntityModel implements FireDataInterface<EntityModel> {
-  userId?: string
-  id?: string
-  type = EntityType.PERSON
-  firstName = ""
-  lastName = ""
-  name = ""
-  address = ""
-  postalCode = ""
-  postalOffice = ""
-  country = "Slovenija"
-  isTaxPayer = false
-  taxId = ""
-  regNo = ""
-  bankName = ""
-  bankBIC = ""
-  bankTRR = ""
-  email = ""
-  phone = ""
-  fax = ""
-  website = ""
+  userId?: string;
+  id?: string;
+  type = EntityType.PERSON;
+  firstName = "";
+  lastName = "";
+  name = "";
+  address = "";
+  postalCode = "";
+  postalOffice = "";
+  country = "Slovenija";
+  isTaxPayer = false;
+  taxId = "";
+  regNo = "";
+  bankName = "";
+  bankBIC = "";
+  bankTRR = "";
+  email = "";
+  phone = "";
+  fax = "";
+  website = "";
 
-  deleted = false
-  dateCreated?: Date
-  dateUpdated?: Date
-  dateDeleted?: Date
+  deleted = false;
+  dateCreated?: Date;
+  dateUpdated?: Date;
+  dateDeleted?: Date;
 
   get isPerson(): boolean {
     return (
@@ -54,6 +54,10 @@ export class EntityModel implements FireDataInterface<EntityModel> {
     } else {
       return this.name;
     }
+  }
+
+  get isSloveniaBased() {
+    return ["SLOVENIJA", "SLOVENIA"].includes(this.country.toUpperCase());
   }
 
   constructor(obj?: any) {

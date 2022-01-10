@@ -500,14 +500,8 @@
                   [(ngModel)]="data.client.taxId"
                   name="clientTaxId"
                   #clientTaxId="ngModel"
-                  required
                   maxlength="20"
                 />
-                <mat-error *ngIf="clientTaxId.invalid">
-                  <div *ngIf="clientTaxId.errors?.required">
-                    Polje je obvezno.
-                  </div>
-                </mat-error>
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Matična številka</mat-label>

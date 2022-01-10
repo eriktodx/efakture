@@ -106,10 +106,7 @@
               <span [hidden]="!data.isTaxPayer">ID za DDV</span>
               <span [hidden]="data.isTaxPayer">Davčna številka</span>
             </mat-label>
-            <input matInput [(ngModel)]="data.taxId" name="taxId" #taxId="ngModel" required maxlength="20" />
-            <mat-error *ngIf="taxId.invalid">
-              <div *ngIf="taxId.errors?.required">Polje je obvezno.</div>
-            </mat-error>
+            <input matInput [(ngModel)]="data.taxId" name="taxId" #taxId="ngModel" maxlength="20" />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Matična številka</mat-label>
