@@ -7,12 +7,9 @@ import firebase from "firebase/compat/app";
   providedIn: "root",
 })
 export class SystemService {
-  constructor(
-    public store: AngularFirestore,
-    public auth: AngularFireAuth
-  ) { }
+  constructor(public store: AngularFirestore, public auth: AngularFireAuth) {}
 
-  private userLoaded = false
+  private userLoaded = false;
 
   getCurrentUser(): Promise<firebase.User | null> {
     return new Promise(async (resolve, reject) => {

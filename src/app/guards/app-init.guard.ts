@@ -3,7 +3,11 @@ import { Injectable } from "@angular/core";
 import { FirebaseApp } from "@angular/fire/compat";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from "@angular/router";
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  RouterStateSnapshot,
+} from "@angular/router";
 import { environment } from "../../environments/environment";
 import { globalScope } from "../functions/global-scope";
 

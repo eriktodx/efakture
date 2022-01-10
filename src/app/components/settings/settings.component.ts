@@ -12,11 +12,11 @@ import { SettingsService } from "src/app/services/settings.service";
   styleUrls: ["./settings.component.css"],
 })
 export class SettingsComponent implements OnInit {
-  @ViewChild("form") form!: NgForm
-  data!: SettingsModel
-  loading = true
-  private saving = false
-  @Input() forced = false
+  @ViewChild("form") form!: NgForm;
+  data!: SettingsModel;
+  loading = true;
+  private saving = false;
+  @Input() forced = false;
 
   constructor(
     private settingsService: SettingsService,

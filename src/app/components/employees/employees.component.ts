@@ -24,7 +24,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private confirmDialog: ConfirmDialogService,
     private snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.employees

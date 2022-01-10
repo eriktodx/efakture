@@ -7,18 +7,18 @@ import { ActivatedRoute, Router } from "@angular/router";
 @Component({
   selector: "app-sign-in-with-email",
   templateUrl: "./sign-in-with-email.component.html",
-  styleUrls: ["./sign-in-with-email.component.css"]
+  styleUrls: ["./sign-in-with-email.component.css"],
 })
 export class SignInWithEmailComponent {
-  @ViewChild("form") form!: NgForm
-  emailVal = ""
-  passwordVal = ""
-  passwordRepeatVal = ""
-  errorText = ""
-  errored = false
-  signUp = false
-  saving = false
-  signInText = ""
+  @ViewChild("form") form!: NgForm;
+  emailVal = "";
+  passwordVal = "";
+  passwordRepeatVal = "";
+  errorText = "";
+  errored = false;
+  signUp = false;
+  saving = false;
+  signInText = "";
 
   constructor(
     private snackBar: MatSnackBar,
@@ -44,7 +44,10 @@ export class SignInWithEmailComponent {
       }
 
       if (this.signUp) {
-        const result = await this.auth.createUserWithEmailAndPassword(this.emailVal, this.passwordVal);
+        const result = await this.auth.createUserWithEmailAndPassword(
+          this.emailVal,
+          this.passwordVal
+        );
         if (result.user) {
           await result.user.sendEmailVerification();
           await this.router.navigateByUrl("/sign-up/email/verify");
@@ -52,7 +55,10 @@ export class SignInWithEmailComponent {
           this.snackBar.open("Uporabnik ni prijavljen.");
         }
       } else {
-        const result = await this.auth.signInWithEmailAndPassword(this.emailVal, this.passwordVal);
+        const result = await this.auth.signInWithEmailAndPassword(
+          this.emailVal,
+          this.passwordVal
+        );
         if (result.user) {
           if (!result.user.emailVerified) {
             await this.router.navigateByUrl("/sign-up/email/verify");

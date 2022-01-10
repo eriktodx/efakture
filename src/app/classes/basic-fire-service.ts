@@ -4,7 +4,7 @@ import { FireDataInterface } from "../interfaces/fire-data-interface";
 import { SystemService } from "../services/system.service";
 
 export class BasicFireService<T extends FireDataInterface<T>> {
-  constructor(private system: SystemService, private collectionName: string) { }
+  constructor(private system: SystemService, private collectionName: string) {}
 
   async create(data: T) {
     const user = await this.system.getCurrentUser();

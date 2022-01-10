@@ -4,7 +4,7 @@ import { EntityModel } from "../models/entity-model";
 import { SystemService } from "./system.service";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ClientsService extends BasicFireService<EntityModel> {
   constructor(system: SystemService) {

@@ -3,7 +3,12 @@
     <h2 *ngIf="type === types.ITEM">Izdelki</h2>
     <h2 *ngIf="type === types.SERVICE">Storitve</h2>
     <div class="fill_remaining_space"></div>
-    <button mat-raised-button color="primary" (click)="onItemClick()" matTooltip="Nov zapis">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onItemClick()"
+      matTooltip="Nov zapis"
+    >
       <mat-icon>add</mat-icon>
     </button>
   </mat-toolbar-row>
@@ -15,7 +20,12 @@
 </div>
 
 <ng-container *ngIf="!loading">
-  <table mat-table [dataSource]="dataSource" class="full-width" *ngIf="dataSource.data.length > 0">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="full-width"
+    *ngIf="dataSource.data.length > 0"
+  >
     <ng-container matColumnDef="code">
       <th mat-header-cell *matHeaderCellDef class="col_shrink">Oznaka</th>
       <td mat-cell *matCellDef="let data" class="col_shrink">
@@ -29,7 +39,12 @@
     </ng-container>
 
     <ng-container matColumnDef="unit">
-      <th mat-header-cell *matHeaderCellDef class="col_shrink" matTooltip="Enota merjenja">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="col_shrink"
+        matTooltip="Enota merjenja"
+      >
         EM
       </th>
       <td mat-cell *matCellDef="let data" class="col_shrink">
@@ -49,7 +64,11 @@
     <ng-container matColumnDef="btnConvert">
       <th mat-header-cell *matHeaderCellDef class="col_shrink center"></th>
       <td mat-cell *matCellDef="let data" class="col_shrink center">
-        <button mat-icon-button (click)="onConvertClick(data)" [matTooltip]="convertText">
+        <button
+          mat-icon-button
+          (click)="onConvertClick(data)"
+          [matTooltip]="convertText"
+        >
           <mat-icon>sync_alt</mat-icon>
         </button>
       </td>
@@ -67,7 +86,11 @@
     <ng-container matColumnDef="btnDelete">
       <th mat-header-cell *matHeaderCellDef class="col_shrink center"></th>
       <td mat-cell *matCellDef="let data" class="col_shrink center">
-        <button mat-icon-button (click)="onDeleteClick(data)" matTooltip="Izbriši">
+        <button
+          mat-icon-button
+          (click)="onDeleteClick(data)"
+          matTooltip="Izbriši"
+        >
           <mat-icon>delete</mat-icon>
         </button>
       </td>
@@ -87,8 +110,12 @@
     </p>
     <button mat-raised-button color="primary" (click)="onItemClick()">
       <mat-icon>add</mat-icon>
-      <ng-container *ngIf="type === types.ITEM">Dodaj prvi izdelek</ng-container>
-      <ng-container *ngIf="type === types.SERVICE">Dodaj prvo storitev</ng-container>
+      <ng-container *ngIf="type === types.ITEM">
+        Dodaj prvi izdelek
+      </ng-container>
+      <ng-container *ngIf="type === types.SERVICE">
+        Dodaj prvo storitev
+      </ng-container>
     </button>
   </div>
 </ng-container>

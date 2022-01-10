@@ -15,10 +15,14 @@ export class AppComponent implements OnInit {
         try {
           snackBar.open("Na voljo je posodobitev. Nameščam.");
           await swUpdate.activateUpdate();
-          snackBar.open("Posodobitev nameščena. Aplikacija se bo v kratkem ponovno zagnala.");
+          snackBar.open(
+            "Posodobitev nameščena. Aplikacija se bo v kratkem ponovno zagnala."
+          );
           document.location.reload();
         } catch (error) {
-          snackBar.open(`Med nameščanjem posodobitve je prišlo do napake. ${error}`);
+          snackBar.open(
+            `Med nameščanjem posodobitve je prišlo do napake. ${error}`
+          );
         }
       });
     }

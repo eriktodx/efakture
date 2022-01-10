@@ -4,7 +4,7 @@ import { ItemModel } from "../models/item-model";
 import { SystemService } from "./system.service";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ItemsService extends BasicFireService<ItemModel> {
   constructor(system: SystemService) {

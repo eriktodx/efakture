@@ -8,16 +8,14 @@ import { environment } from "src/environments/environment";
   styleUrls: ["./landing-page.component.css"],
 })
 export class LandingPageComponent implements OnInit {
-  loading = true
-  continueUrl = "/sign-in"
+  loading = true;
+  continueUrl = "/sign-in";
 
   get version() {
     return environment.version;
   }
 
-  constructor(
-    private system: SystemService
-  ) { }
+  constructor(private system: SystemService) {}
 
   async ngOnInit() {
     let user: any = null;
@@ -27,9 +25,7 @@ export class LandingPageComponent implements OnInit {
       console.error(error);
     } finally {
       this.loading = false;
-      this.continueUrl = user != null
-        ? "/dashboard"
-        : "/sign-in";
+      this.continueUrl = user != null ? "/dashboard" : "/sign-in";
     }
   }
 }

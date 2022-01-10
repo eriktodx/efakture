@@ -1,4 +1,4 @@
 export enum ItemType {
   ITEM = 1,
-  SERVICE = 2
+  SERVICE = 2,
 }

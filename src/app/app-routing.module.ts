@@ -42,39 +42,39 @@ const routes: Routes = [
         children: [
           {
             path: "sign-in",
-            component: SignInComponent
+            component: SignInComponent,
           },
           {
             path: "sign-in/email",
-            component: SignInWithEmailComponent
+            component: SignInWithEmailComponent,
           },
           {
             path: "sign-up",
             component: SignInComponent,
-            data: { signUp: true }
+            data: { signUp: true },
           },
           {
             path: "sign-up/email",
             component: SignInWithEmailComponent,
-            data: { signUp: true }
+            data: { signUp: true },
           },
           {
             path: "sign-up/email/verify",
-            component: SignInWithEmailVerifyComponent
+            component: SignInWithEmailVerifyComponent,
           },
           {
             path: "forgot-password",
-            component: ForgotPasswordComponent
+            component: ForgotPasswordComponent,
           },
           {
             path: "terms",
-            component: TermsComponent
-          }
-        ]
+            component: TermsComponent,
+          },
+        ],
       },
       {
         path: "missing-settings",
-        component: MissingSettingsComponent
+        component: MissingSettingsComponent,
       },
       {
         path: "",
@@ -133,14 +133,14 @@ const routes: Routes = [
       },
       {
         path: "**",
-        component: NotFoundComponent
-      }
-    ]
-  }
+        component: NotFoundComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

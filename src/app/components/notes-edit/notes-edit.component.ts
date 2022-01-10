@@ -12,9 +12,9 @@ import { NotesService } from "src/app/services/notes.service";
   styleUrls: ["./notes-edit.component.css"],
 })
 export class NotesEditComponent {
-  @ViewChild("form") from!: NgForm
-  data: NoteModel
-  types = NoteType
+  @ViewChild("form") from!: NgForm;
+  data: NoteModel;
+  types = NoteType;
 
   constructor(
     private notes: NotesService,

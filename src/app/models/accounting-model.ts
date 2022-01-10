@@ -1,10 +1,10 @@
 export class AccountingModel {
-  year = new Date().getFullYear()
-  yearShort = true
-  seq = 1
-  seqLength = 4
-  seqOffer = 1
-  seqPre = 1
+  year = new Date().getFullYear();
+  yearShort = true;
+  seq = 1;
+  seqLength = 4;
+  seqOffer = 1;
+  seqPre = 1;
 
   constructor(o?: any) {
     if (o != null) {

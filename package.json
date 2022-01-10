@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "fire": "./node_modules/.bin/firebase emulators:start --import=./data --export-on-exit=./data"
+    "fire": "./node_modules/.bin/firebase emulators:start --import=./data --export-on-exit=./data",
+    "fmt": "./node_modules/.bin/prettier --write \"src/**/*.{ts,scss,html}\""
   },
   "private": true,
   "dependencies": {
@@ -52,6 +53,7 @@
     "karma-firefox-launcher": "~2.1.1",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "prettier": "^2.5.1",
     "typescript": "~4.3.5"
   }
 }

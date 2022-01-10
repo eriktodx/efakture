@@ -5,4 +5,4 @@ import { Component } from "@angular/core";
   templateUrl: "./employees-edit.component.html",
   styleUrls: ["./employees-edit.component.css"],
 })
-export class EmployeesEditComponent { }
+export class EmployeesEditComponent {}

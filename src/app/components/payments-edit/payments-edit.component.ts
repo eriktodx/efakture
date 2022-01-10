@@ -7,26 +7,26 @@ import { PaymentModel } from "../../models/payment-model";
 import { InvoicesService } from "../../services/invoices.service";
 
 export interface DialogData {
-  invoice: InvoiceModel
-  payment: PaymentModel
+  invoice: InvoiceModel;
+  payment: PaymentModel;
 }
 
 @Component({
   selector: "app-payments-edit",
   templateUrl: "./payments-edit.component.html",
-  styleUrls: ["./payments-edit.component.css"]
+  styleUrls: ["./payments-edit.component.css"],
 })
 export class PaymentsEditComponent implements OnInit {
-  @ViewChild("form") form!: NgForm
-  index!: number
-  data!: PaymentModel
+  @ViewChild("form") form!: NgForm;
+  index!: number;
+  data!: PaymentModel;
 
   constructor(
     private snackBar: MatSnackBar,
     private invoicesService: InvoicesService,
     private dialogRef: MatDialogRef<PaymentsEditComponent>,
-    @Inject(MAT_DIALOG_DATA) private dialogData: DialogData,
-  ) { }
+    @Inject(MAT_DIALOG_DATA) private dialogData: DialogData
+  ) {}
 
   ngOnInit() {
     const { invoice, payment } = this.dialogData;

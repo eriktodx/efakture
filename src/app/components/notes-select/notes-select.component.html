@@ -8,10 +8,18 @@
 <div mat-dialog-content>
   <mat-spinner *ngIf="loading"></mat-spinner>
   <ng-container *ngIf="!loading">
-    <p *ngIf="isEmpty">Nimate shranjenih sporočil. Sporočilo lahko trajno shranite med šifrante pod rubriko "Sporočila".
+    <p *ngIf="isEmpty">
+      Nimate shranjenih sporočil. Sporočilo lahko trajno shranite med šifrante
+      pod rubriko "Sporočila".
     </p>
     <mat-action-list *ngIf="!isEmpty">
-      <button mat-list-item *ngFor="let data of dataSource" (click)="onSelectClick(data)">{{ data.name }}</button>
+      <button
+        mat-list-item
+        *ngFor="let data of dataSource"
+        (click)="onSelectClick(data)"
+      >
+        {{ data.name }}
+      </button>
     </mat-action-list>
   </ng-container>
 </div>

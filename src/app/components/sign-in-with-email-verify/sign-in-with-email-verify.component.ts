@@ -6,19 +6,18 @@ import { SystemService } from "src/app/services/system.service";
 @Component({
   selector: "app-sign-in-with-email-verify",
   templateUrl: "./sign-in-with-email-verify.component.html",
-  styleUrls: ["./sign-in-with-email-verify.component.css"]
+  styleUrls: ["./sign-in-with-email-verify.component.css"],
 })
 export class SignInWithEmailVerifyComponent implements OnInit {
-  loading = true
+  loading = true;
 
   constructor(
     private router: Router,
     private snackBar: MatSnackBar,
     private system: SystemService
-  ) { }
+  ) {}
 
   async ngOnInit(): Promise<void> {
-
     try {
       const user = await this.system.getCurrentUser();
       if (user) {

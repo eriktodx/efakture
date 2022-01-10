@@ -3,14 +3,14 @@ import { removePrivateFields } from "../functions/remove-private-fields";
 import { FireDataInterface } from "../interfaces/fire-data-interface";
 
 export class NoteModel implements FireDataInterface<NoteModel> {
-  userId?: string
-  id?: string
-  name = ""
-  description = ""
-  deleted = false
-  dateCreated?: Date
-  dateUpdated?: Date
-  dateDeleted?: Date
+  userId?: string;
+  id?: string;
+  name = "";
+  description = "";
+  deleted = false;
+  dateCreated?: Date;
+  dateUpdated?: Date;
+  dateDeleted?: Date;
 
   constructor(obj?: any) {
     if (obj != null) {

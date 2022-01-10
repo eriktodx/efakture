@@ -6,16 +6,16 @@ import { AccountingModel } from "./accounting-model";
 import { EntityModel } from "./entity-model";
 
 export class SettingsModel implements FireDataInterface<SettingsModel> {
-  userId?: string
-  id?: string
-  firstName = ""
-  lastName = ""
-  company = new EntityModel()
-  accounting = new AccountingModel()
-  deleted = false
-  dateCreated?: Date
-  dateUpdated?: Date
-  dateDeleted?: Date
+  userId?: string;
+  id?: string;
+  firstName = "";
+  lastName = "";
+  company = new EntityModel();
+  accounting = new AccountingModel();
+  deleted = false;
+  dateCreated?: Date;
+  dateUpdated?: Date;
+  dateDeleted?: Date;
 
   constructor(obj?: any) {
     if (obj != null) {

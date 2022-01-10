@@ -8,18 +8,18 @@ import { SystemService } from "src/app/services/system.service";
 @Component({
   selector: "app-missing-settings",
   templateUrl: "./missing-settings.component.html",
-  styleUrls: ["./missing-settings.component.css"]
+  styleUrls: ["./missing-settings.component.css"],
 })
 export class MissingSettingsComponent implements OnInit {
-  user!: firebase.User
-  ready = false
+  user!: firebase.User;
+  ready = false;
 
   constructor(
     private system: SystemService,
     private settings: SettingsService,
     private router: Router,
     private auth: AngularFireAuth
-  ) { }
+  ) {}
 
   async ngOnInit(): Promise<void> {
     try {

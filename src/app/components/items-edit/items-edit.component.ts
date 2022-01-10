@@ -10,9 +10,9 @@ import { ItemModel } from "src/app/models/item-model";
 import { ItemsService } from "src/app/services/items.service";
 
 export interface DataInterface {
-  select: boolean
-  type: ItemType
-  item: ItemModel
+  select: boolean;
+  type: ItemType;
+  item: ItemModel;
 }
 
 @Component({
@@ -21,10 +21,10 @@ export interface DataInterface {
   styleUrls: ["./items-edit.component.css"],
 })
 export class ItemsEditComponent implements OnInit, OnDestroy {
-  types = ItemType
-  itemsDataSource: ItemModel[] = []
-  itemsDataSource$!: Subscription
-  @ViewChild("form") form!: NgForm
+  types = ItemType;
+  itemsDataSource: ItemModel[] = [];
+  itemsDataSource$!: Subscription;
+  @ViewChild("form") form!: NgForm;
 
   constructor(
     private itemsService: ItemsService,

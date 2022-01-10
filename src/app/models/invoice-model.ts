@@ -8,37 +8,37 @@ import { ItemModel } from "./item-model";
 import { PaymentModel } from "./payment-model";
 
 export class InvoiceModel implements FireDataInterface<InvoiceModel> {
-  userId?: string
-  id?: string
-  status = InvoiceStatus.IN_PREPARATION
-  accNo = ""
-  type = InvoiceType.INVOICE
-  reasonForChange = ""
-  headerMsg = ""
-  contentMsg = ""
-  footerMsg = ""
-  company = new EntityModel()
-  client = new EntityModel()
-  items: ItemModel[] = []
-  validFrom = new Date()
-  validTo = new Date()
-  supply = false
-  supplyFrom = new Date()
-  supplyTo = new Date()
-  authorName = ""
-  authorLocation = ""
-  netAmount = 0
-  discountAmount = 0
-  taxAmount = 0
-  grossAmount = 0
-  payments: PaymentModel[] = []
-  revisions: InvoiceModel[] = []
-  deleted = false
-  dateCreated?: Date
-  dateUpdated?: Date
-  dateDeleted?: Date
-  totalPaid? = 0
-  pdfGenerating?: boolean
+  userId?: string;
+  id?: string;
+  status = InvoiceStatus.IN_PREPARATION;
+  accNo = "";
+  type = InvoiceType.INVOICE;
+  reasonForChange = "";
+  headerMsg = "";
+  contentMsg = "";
+  footerMsg = "";
+  company = new EntityModel();
+  client = new EntityModel();
+  items: ItemModel[] = [];
+  validFrom = new Date();
+  validTo = new Date();
+  supply = false;
+  supplyFrom = new Date();
+  supplyTo = new Date();
+  authorName = "";
+  authorLocation = "";
+  netAmount = 0;
+  discountAmount = 0;
+  taxAmount = 0;
+  grossAmount = 0;
+  payments: PaymentModel[] = [];
+  revisions: InvoiceModel[] = [];
+  deleted = false;
+  dateCreated?: Date;
+  dateUpdated?: Date;
+  dateDeleted?: Date;
+  totalPaid? = 0;
+  pdfGenerating?: boolean;
 
   constructor(obj?: any) {
     if (obj != null) {

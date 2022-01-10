@@ -5,4 +5,4 @@ import { Component } from "@angular/core";
   templateUrl: "./blank.component.html",
   styleUrls: ["./blank.component.css"],
 })
-export class BlankComponent { }
+export class BlankComponent {}

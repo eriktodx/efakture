@@ -10,8 +10,8 @@ export function nextAccountNumber(
     type === InvoiceType.OFFER
       ? settings.accounting.seqOffer
       : type === InvoiceType.PRE
-        ? settings.accounting.seqPre
-        : settings.accounting.seq;
+      ? settings.accounting.seqPre
+      : settings.accounting.seq;
   const yearStr = yearShort ? String(year).substring(2) : String(year);
   const seqStr = String(seq);
   const repeatTimes = Math.max(0, seqLength - seqStr.length);

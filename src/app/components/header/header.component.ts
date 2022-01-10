@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
     private system: SystemService,
     private router: Router,
     private snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   async ngOnInit() {
     this.user = await this.system.getCurrentUser();

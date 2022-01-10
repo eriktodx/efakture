@@ -7,16 +7,16 @@ import { SystemService } from "src/app/services/system.service";
 @Component({
   selector: "app-sign-in",
   templateUrl: "./sign-in.component.html",
-  styleUrls: ["./sign-in.component.css"]
+  styleUrls: ["./sign-in.component.css"],
 })
 export class SignInComponent {
-  signingIn = false
-  signUp = false
-  signInText = ""
-  signInText2 = ""
-  signInText3 = ""
-  signInText4 = ""
-  signInWithEmailUrl = ""
+  signingIn = false;
+  signUp = false;
+  signInText = "";
+  signInText2 = "";
+  signInText3 = "";
+  signInText4 = "";
+  signInWithEmailUrl = "";
 
   constructor(
     private systemService: SystemService,
@@ -42,7 +42,9 @@ export class SignInComponent {
       if (error.code && error.code === "auth/popup-closed-by-user") {
         this.snackBar.open("Uporabnik je preklical prijavo.");
       } else {
-        this.snackBar.open(`Med ${this.signInText4} z Google računom je prišlo do napake. Prosimo vas, da posikusite kasneje. Če se napaka ponavlja nas o tem prosimo obvestite.`);
+        this.snackBar.open(
+          `Med ${this.signInText4} z Google računom je prišlo do napake. Prosimo vas, da posikusite kasneje. Če se napaka ponavlja nas o tem prosimo obvestite.`
+        );
       }
     } finally {
       this.signingIn = false;

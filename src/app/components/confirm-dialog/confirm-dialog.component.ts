@@ -13,7 +13,7 @@ export class ConfirmDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogModel
-  ) { }
+  ) {}
 
   onDismissClick() {
     this.dialogRef.close(false);

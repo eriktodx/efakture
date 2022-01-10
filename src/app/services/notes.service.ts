@@ -4,7 +4,7 @@ import { NoteModel } from "../models/note-model";
 import { SystemService } from "./system.service";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class NotesService extends BasicFireService<NoteModel> {
   constructor(system: SystemService) {

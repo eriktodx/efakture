@@ -1,6 +1,10 @@
 import { DatePipe, DecimalPipe } from "@angular/common";
 import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTableDataSource } from "@angular/material/table";
 import { Subscription } from "rxjs";
@@ -11,27 +15,21 @@ import { InvoicesService } from "../../services/invoices.service";
 import { PaymentsEditComponent } from "../payments-edit/payments-edit.component";
 
 export interface DialogData {
-  invoice: InvoiceModel
+  invoice: InvoiceModel;
 }
 
 @Component({
   selector: "app-payments",
   templateUrl: "./payments.component.html",
-  styleUrls: ["./payments.component.css"]
+  styleUrls: ["./payments.component.css"],
 })
 export class PaymentsComponent implements OnInit, OnDestroy {
-  loading = false
-  dataSource = new MatTableDataSource<PaymentModel>()
-  dataSource$!: Subscription
-  displayedColumns = [
-    "day",
-    "amount",
-    "note",
-    "btnUpdate",
-    "btnDelete"
-  ]
-  sumAmount = 0
-  invoice!: InvoiceModel
+  loading = false;
+  dataSource = new MatTableDataSource<PaymentModel>();
+  dataSource$!: Subscription;
+  displayedColumns = ["day", "amount", "note", "btnUpdate", "btnDelete"];
+  sumAmount = 0;
+  invoice!: InvoiceModel;
 
   constructor(
     private dialog: MatDialog,
@@ -41,8 +39,8 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private invoicesService: InvoicesService,
     private dialogRef: MatDialogRef<PaymentsComponent>,
-    @Inject(MAT_DIALOG_DATA) private dialogData: DialogData,
-  ) { }
+    @Inject(MAT_DIALOG_DATA) private dialogData: DialogData
+  ) {}
 
   ngOnInit() {
     this.refresh();
@@ -61,10 +59,14 @@ export class PaymentsComponent implements OnInit, OnDestroy {
       .then((dataSource$) => {
         this.dataSource$ = dataSource$.subscribe((data) => {
           if (!data || data.length === 0) {
-            this.snackBar.open("Napaka pri nalaganju evidence plačil. Manjkajoč koreninski element.");
+            this.snackBar.open(
+              "Napaka pri nalaganju evidence plačil. Manjkajoč koreninski element."
+            );
             this.dialogRef.close();
           } else if (data.length > 1) {
-            this.snackBar.open("Napaka pri nalaganju evidence plačil. Preveliko število elementov.");
+            this.snackBar.open(
+              "Napaka pri nalaganju evidence plačil. Preveliko število elementov."
+            );
             this.dialogRef.close();
           } else {
             this.invoice = data[0];
@@ -114,5 +116,3 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     }
   }
 }
-
-

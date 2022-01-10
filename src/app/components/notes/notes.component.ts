@@ -15,18 +15,18 @@ import { NotesEditComponent } from "../notes-edit/notes-edit.component";
   styleUrls: ["./notes.component.css"],
 })
 export class NotesComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = ["name", "btnUpdate", "btnDelete"]
-  dataSource = new MatTableDataSource<NoteModel>([])
-  dataSource$!: Subscription
-  loading = true
-  types = NoteType
+  displayedColumns: string[] = ["name", "btnUpdate", "btnDelete"];
+  dataSource = new MatTableDataSource<NoteModel>([]);
+  dataSource$!: Subscription;
+  loading = true;
+  types = NoteType;
 
   constructor(
     private notesService: NotesService,
     private dialog: MatDialog,
     private confirmDialog: ConfirmDialogService,
     private snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.notesService

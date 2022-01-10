@@ -2,35 +2,35 @@ import { parseFirestoreDate } from "../functions/parse-firestore-date";
 import { FireDataInterface } from "../interfaces/fire-data-interface";
 
 export class EmployeeModel implements FireDataInterface<EmployeeModel> {
-  userId?: string
-  id?: string
-  firstName = ""
-  lastName = ""
-  address = ""
-  postalCode = ""
-  postalOffice = ""
-  country = ""
-  dateEmployed = new Date()
-  taxId = ""
-  sso = ""
+  userId?: string;
+  id?: string;
+  firstName = "";
+  lastName = "";
+  address = "";
+  postalCode = "";
+  postalOffice = "";
+  country = "";
+  dateEmployed = new Date();
+  taxId = "";
+  sso = "";
   bank = {
     iban: "",
     bic: "",
-    name: ""
-  }
+    name: "",
+  };
   hourly: {
-    dateValid: Date
-    amount: number
-  }[] = []
+    dateValid: Date;
+    amount: number;
+  }[] = [];
   vacation: {
-    dateFrom: Date
-    dateUntil: Date
-  }[] = []
-  contractFile = ""
-  deleted = false
-  dateCreated?: Date
-  dateUpdated?: Date
-  dateDeleted?: Date
+    dateFrom: Date;
+    dateUntil: Date;
+  }[] = [];
+  contractFile = "";
+  deleted = false;
+  dateCreated?: Date;
+  dateUpdated?: Date;
+  dateDeleted?: Date;
 
   get fullName(): string {
     return `${this.firstName} ${this.lastName}`;

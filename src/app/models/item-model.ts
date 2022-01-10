@@ -5,26 +5,26 @@ import { removePrivateFields } from "../functions/remove-private-fields";
 import { FireDataInterface } from "../interfaces/fire-data-interface";
 
 export class ItemModel implements FireDataInterface<ItemModel> {
-  userId?: string
-  id?: string
-  type = ItemType.ITEM
-  code = ""
-  name = ""
-  description = ""
-  unit = "kos"
-  quantity = 0
-  price = 0
-  tax = 0
-  discount = 0
-  netAmount = 0
-  discountAmount = 0
-  taxAmount = 0
-  grossAmount = 0
-  deleted = false
-  dateCreated?: Date
-  dateUpdated?: Date
-  dateDeleted?: Date
-  combinedNameModel = ""
+  userId?: string;
+  id?: string;
+  type = ItemType.ITEM;
+  code = "";
+  name = "";
+  description = "";
+  unit = "kos";
+  quantity = 0;
+  price = 0;
+  tax = 0;
+  discount = 0;
+  netAmount = 0;
+  discountAmount = 0;
+  taxAmount = 0;
+  grossAmount = 0;
+  deleted = false;
+  dateCreated?: Date;
+  dateUpdated?: Date;
+  dateDeleted?: Date;
+  combinedNameModel = "";
 
   constructor(o?: any) {
     if (o != null) {

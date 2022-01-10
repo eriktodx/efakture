@@ -14,47 +14,76 @@
     <form id="signInWithEmailForm" #form="ngForm" (ngSubmit)="onFormSubmit()">
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput type="email" [(ngModel)]="emailVal" name="email" #email="ngModel" required minlength="5"
-          maxlength="255" [disabled]="saving" />
+        <input
+          matInput
+          type="email"
+          [(ngModel)]="emailVal"
+          name="email"
+          #email="ngModel"
+          required
+          minlength="5"
+          maxlength="255"
+          [disabled]="saving"
+        />
         <mat-error *ngIf="email.invalid">
-          <div *ngIf="email.errors?.required">
-            Polje je obvezno.
-          </div>
+          <div *ngIf="email.errors?.required">Polje je obvezno.</div>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Geslo</mat-label>
-        <input matInput type="password" [(ngModel)]="passwordVal" name="password" #password="ngModel" required
-          minlength="4" maxlength="255" [disabled]="saving" />
+        <input
+          matInput
+          type="password"
+          [(ngModel)]="passwordVal"
+          name="password"
+          #password="ngModel"
+          required
+          minlength="4"
+          maxlength="255"
+          [disabled]="saving"
+        />
         <mat-error *ngIf="password.invalid">
-          <div *ngIf="password.errors?.required">
-            Polje je obvezno.
-          </div>
+          <div *ngIf="password.errors?.required">Polje je obvezno.</div>
         </mat-error>
-        <mat-hint *ngIf="!signUp" align="start"><a routerLink="/forgot-password">Ste pozabili geslo?</a>
+        <mat-hint *ngIf="!signUp" align="start">
+          <a routerLink="/forgot-password">Ste pozabili geslo?</a>
         </mat-hint>
       </mat-form-field>
 
       <mat-form-field *ngIf="signUp">
         <mat-label>Ponovi geslo</mat-label>
-        <input matInput type="password" [(ngModel)]="passwordRepeatVal" name="passwordRepeat" #passwordRepeat="ngModel"
-          required minlength="4" maxlength="255" [disabled]="saving" />
+        <input
+          matInput
+          type="password"
+          [(ngModel)]="passwordRepeatVal"
+          name="passwordRepeat"
+          #passwordRepeat="ngModel"
+          required
+          minlength="4"
+          maxlength="255"
+          [disabled]="saving"
+        />
         <mat-error *ngIf="passwordRepeat.invalid">
-          <div *ngIf="passwordRepeat.errors?.required">
-            Polje je obvezno.
-          </div>
+          <div *ngIf="passwordRepeat.errors?.required">Polje je obvezno.</div>
         </mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" form="signInWithEmailForm" [disabled]="saving">
+      <button
+        mat-raised-button
+        color="primary"
+        form="signInWithEmailForm"
+        [disabled]="saving"
+      >
         Potrdi
       </button>
     </form>
   </div>
 
   <footer>
-    <p *ngIf="!signUp">Še nimaš računa? <a routerLink="/sign-up">Registriraj se</a></p>
+    <p *ngIf="!signUp">
+      Še nimaš računa? <a routerLink="/sign-up">Registriraj se</a>
+    </p>
     <p *ngIf="signUp">Že imaš račun? <a routerLink="/sign-in">Prijavi se</a></p>
   </footer>
 </div>

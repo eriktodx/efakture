@@ -6,18 +6,18 @@ import { NoteModel } from "src/app/models/note-model";
 import { NotesService } from "src/app/services/notes.service";
 
 interface NotesSelectDialogDataInterface {
-  type: NoteType
+  type: NoteType;
 }
 
 @Component({
   selector: "app-notes-select",
   templateUrl: "./notes-select.component.html",
-  styleUrls: ["./notes-select.component.css"]
+  styleUrls: ["./notes-select.component.css"],
 })
 export class NotesSelectComponent implements OnInit, OnDestroy {
-  dataSource$!: Subscription
-  dataSource: NoteModel[] = []
-  loading = true
+  dataSource$!: Subscription;
+  dataSource: NoteModel[] = [];
+  loading = true;
 
   get isEmpty() {
     return this.dataSource == null || this.dataSource.length === 0;
@@ -26,20 +26,18 @@ export class NotesSelectComponent implements OnInit, OnDestroy {
   constructor(
     private notesService: NotesService,
     private dialogRef: MatDialogRef<NotesSelectComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: NotesSelectDialogDataInterface,
-  ) {
-  }
+    @Inject(MAT_DIALOG_DATA) private data: NotesSelectDialogDataInterface
+  ) {}
 
   ngOnInit(): void {
-    this.notesService.read(
-      NoteModel,
-      (ref: any) => ref.orderBy("dateCreated", "asc")
-    ).then((dataSource$) => {
-      this.dataSource$ = dataSource$.subscribe((data) => {
-        this.dataSource = data;
-        this.loading = false;
+    this.notesService
+      .read(NoteModel, (ref: any) => ref.orderBy("dateCreated", "asc"))
+      .then((dataSource$) => {
+        this.dataSource$ = dataSource$.subscribe((data) => {
+          this.dataSource = data;
+          this.loading = false;
+        });
       });
-    });
   }
 
   ngOnDestroy() {

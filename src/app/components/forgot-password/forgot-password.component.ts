@@ -13,10 +13,7 @@ export class ForgotPasswordComponent {
   submitted = false;
   emailVal = "";
 
-  constructor(
-    private snackBar: MatSnackBar,
-    private auth: AngularFireAuth
-  ) { }
+  constructor(private snackBar: MatSnackBar, private auth: AngularFireAuth) {}
 
   async onFormSubmit(): Promise<void> {
     if (this.form.invalid) {

@@ -7,25 +7,40 @@
   </div>
 
   <ng-container *ngIf="!loading">
-    <form *ngIf="data" id="settingsForm" #form="ngForm" (ngSubmit)="onFormSubmit()">
+    <form
+      *ngIf="data"
+      id="settingsForm"
+      #form="ngForm"
+      (ngSubmit)="onFormSubmit()"
+    >
       <h3>Uporabnik</h3>
       <div class="app-form-row">
         <mat-form-field>
           <mat-label>Ime</mat-label>
-          <input matInput [(ngModel)]="data.firstName" name="firstName" #firstName="ngModel" required maxlength="255" />
+          <input
+            matInput
+            [(ngModel)]="data.firstName"
+            name="firstName"
+            #firstName="ngModel"
+            required
+            maxlength="255"
+          />
           <mat-error *ngIf="firstName.invalid">
-            <div *ngIf="firstName.errors?.required">
-              Polje je obvezno.
-            </div>
+            <div *ngIf="firstName.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Priimek</mat-label>
-          <input matInput [(ngModel)]="data.lastName" name="lastName" #lastName="ngModel" required maxlength="255" />
+          <input
+            matInput
+            [(ngModel)]="data.lastName"
+            name="lastName"
+            #lastName="ngModel"
+            required
+            maxlength="255"
+          />
           <mat-error *ngIf="lastName.invalid">
-            <div *ngIf="lastName.errors?.required">
-              Polje je obvezno.
-            </div>
+            <div *ngIf="lastName.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
       </div>
@@ -34,64 +49,90 @@
       <div class="app-form-row">
         <mat-form-field>
           <mat-label>Naziv podjetja</mat-label>
-          <input matInput [(ngModel)]="data.company.name" name="name" #name="ngModel" required maxlength="255" />
+          <input
+            matInput
+            [(ngModel)]="data.company.name"
+            name="name"
+            #name="ngModel"
+            required
+            maxlength="255"
+          />
           <mat-error *ngIf="name.invalid">
-            <div *ngIf="name.errors?.required">
-              Polje je obvezno.
-            </div>
+            <div *ngIf="name.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
       </div>
       <div class="app-form-row">
         <mat-form-field>
           <mat-label>Naslov</mat-label>
-          <input matInput [(ngModel)]="data.company.address" name="address" #address="ngModel" required
-            maxlength="255" />
+          <input
+            matInput
+            [(ngModel)]="data.company.address"
+            name="address"
+            #address="ngModel"
+            required
+            maxlength="255"
+          />
           <mat-error *ngIf="address.invalid">
-            <div *ngIf="address.errors?.required">
-              Polje je obvezno.
-            </div>
+            <div *ngIf="address.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
       </div>
       <div class="app-form-row">
-        <mat-form-field style="max-width: 140px;">
+        <mat-form-field style="max-width: 140px">
           <mat-label>Poštna številka</mat-label>
-          <input matInput [(ngModel)]="data.company.postalCode" name="postalCode" #postalCode="ngModel" required
-            maxlength="10" />
+          <input
+            matInput
+            [(ngModel)]="data.company.postalCode"
+            name="postalCode"
+            #postalCode="ngModel"
+            required
+            maxlength="10"
+          />
           <mat-error *ngIf="postalCode.invalid">
-            <div *ngIf="postalCode.errors?.required">
-              Polje je obvezno.
-            </div>
+            <div *ngIf="postalCode.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Pošta</mat-label>
-          <input matInput [(ngModel)]="data.company.postalOffice" name="postalOffice" #postalOffice="ngModel" required
-            maxlength="255" />
+          <input
+            matInput
+            [(ngModel)]="data.company.postalOffice"
+            name="postalOffice"
+            #postalOffice="ngModel"
+            required
+            maxlength="255"
+          />
           <mat-error *ngIf="postalOffice.invalid">
-            <div *ngIf="postalOffice.errors?.required">
-              Polje je obvezno.
-            </div>
+            <div *ngIf="postalOffice.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
       </div>
       <div class="app-form-row">
         <mat-form-field>
           <mat-label>Država</mat-label>
-          <input matInput [(ngModel)]="data.company.country" name="country" #country="ngModel" required
-            maxlength="60" />
+          <input
+            matInput
+            [(ngModel)]="data.company.country"
+            name="country"
+            #country="ngModel"
+            required
+            maxlength="60"
+          />
           <mat-error *ngIf="country.invalid">
-            <div *ngIf="country.errors?.required">
-              Polje je obvezno.
-            </div>
+            <div *ngIf="country.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
       </div>
 
       <h3>Davčna</h3>
       <div class="app-form-row">
-        <mat-checkbox color="primary" class="is-tax-payer" [(ngModel)]="data.company.isTaxPayer" name="isTaxPayer">
+        <mat-checkbox
+          color="primary"
+          class="is-tax-payer"
+          [(ngModel)]="data.company.isTaxPayer"
+          name="isTaxPayer"
+        >
           Zavezanec za DDV
         </mat-checkbox>
       </div>
@@ -101,16 +142,26 @@
             <span [hidden]="!data.company.isTaxPayer">ID za DDV</span>
             <span [hidden]="data.company.isTaxPayer">Davčna številka</span>
           </mat-label>
-          <input matInput [(ngModel)]="data.company.taxId" name="taxId" #taxId="ngModel" required maxlength="20" />
+          <input
+            matInput
+            [(ngModel)]="data.company.taxId"
+            name="taxId"
+            #taxId="ngModel"
+            required
+            maxlength="20"
+          />
           <mat-error *ngIf="taxId.invalid">
-            <div *ngIf="taxId.errors?.required">
-              Polje je obvezno.
-            </div>
+            <div *ngIf="taxId.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Matična številka</mat-label>
-          <input matInput [(ngModel)]="data.company.regNo" name="regNo" maxlength="50" />
+          <input
+            matInput
+            [(ngModel)]="data.company.regNo"
+            name="regNo"
+            maxlength="50"
+          />
         </mat-form-field>
       </div>
 
@@ -118,7 +169,14 @@
       <div class="app-form-row">
         <mat-form-field>
           <mat-label>IBAN</mat-label>
-          <input matInput [(ngModel)]="data.company.bankTRR" name="bankTRR" #iban="ngModel" required appIbanValidator />
+          <input
+            matInput
+            [(ngModel)]="data.company.bankTRR"
+            name="bankTRR"
+            #iban="ngModel"
+            required
+            appIbanValidator
+          />
           <mat-error *ngIf="iban.invalid">
             <div *ngIf="iban.errors?.required; else ibanError2">
               Polje je obvezno.
@@ -132,17 +190,28 @@
       <div class="app-form-row">
         <mat-form-field>
           <mat-label>Naziv banke</mat-label>
-          <input matInput [(ngModel)]="data.company.bankName" name="bankName" #bankName="ngModel" required
-            maxlength="255" />
+          <input
+            matInput
+            [(ngModel)]="data.company.bankName"
+            name="bankName"
+            #bankName="ngModel"
+            required
+            maxlength="255"
+          />
           <mat-error *ngIf="bankName.invalid">
-            <div *ngIf="bankName.errors?.required">
-              Polje je obvezno.
-            </div>
+            <div *ngIf="bankName.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>BIC</mat-label>
-          <input matInput [(ngModel)]="data.company.bankBIC" name="bankBIC" #bic="ngModel" required appBicValidator />
+          <input
+            matInput
+            [(ngModel)]="data.company.bankBIC"
+            name="bankBIC"
+            #bic="ngModel"
+            required
+            appBicValidator
+          />
           <mat-error *ngIf="bic.invalid">
             <div *ngIf="bic.errors?.required; else bicError2">
               Polje je obvezno.
@@ -158,64 +227,108 @@
       <div class="app-form-row">
         <mat-form-field>
           <mat-label>E-poštni naslov</mat-label>
-          <input matInput [(ngModel)]="data.company.email" name="email" maxlength="320" />
+          <input
+            matInput
+            [(ngModel)]="data.company.email"
+            name="email"
+            maxlength="320"
+          />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Spletna stran</mat-label>
-          <input matInput [(ngModel)]="data.company.website" name="website" maxlength="512" />
+          <input
+            matInput
+            [(ngModel)]="data.company.website"
+            name="website"
+            maxlength="512"
+          />
         </mat-form-field>
       </div>
       <div class="app-form-row">
         <mat-form-field>
           <mat-label>Telefonska številka</mat-label>
-          <input matInput [(ngModel)]="data.company.phone" name="phone" maxlength="20" />
+          <input
+            matInput
+            [(ngModel)]="data.company.phone"
+            name="phone"
+            maxlength="20"
+          />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Faks</mat-label>
-          <input matInput [(ngModel)]="data.company.fax" name="fax" maxlength="20" />
+          <input
+            matInput
+            [(ngModel)]="data.company.fax"
+            name="fax"
+            maxlength="20"
+          />
         </mat-form-field>
       </div>
 
       <h3>Oblikovanje računov</h3>
       <div class="app-form-row">
-        <mat-checkbox color="primary" style="padding-bottom: 15px;" [(ngModel)]="data.accounting.yearShort"
-          name="accountingTwoDigitYear">
+        <mat-checkbox
+          color="primary"
+          style="padding-bottom: 15px"
+          [(ngModel)]="data.accounting.yearShort"
+          name="accountingTwoDigitYear"
+        >
           Dvomestna letnica
         </mat-checkbox>
       </div>
       <div class="app-form-row">
         <mat-form-field>
           <mat-label>Obračunsko leto</mat-label>
-          <input matInput type="number" step="1" [(ngModel)]="data.accounting.year" name="accountingYear"
-            #accountingYear="ngModel" required />
+          <input
+            matInput
+            type="number"
+            step="1"
+            [(ngModel)]="data.accounting.year"
+            name="accountingYear"
+            #accountingYear="ngModel"
+            required
+          />
           <mat-error *ngIf="accountingYear.invalid">
-            <div *ngIf="accountingYear.errors?.required">
-              Polje je obvezno.
-            </div>
+            <div *ngIf="accountingYear.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Dolžina številke računa</mat-label>
-          <input matInput type="number" step="1" [(ngModel)]="data.accounting.seqLength" name="accountingLen"
-            #accountingLen="ngModel" required />
+          <input
+            matInput
+            type="number"
+            step="1"
+            [(ngModel)]="data.accounting.seqLength"
+            name="accountingLen"
+            #accountingLen="ngModel"
+            required
+          />
           <mat-error *ngIf="accountingLen.invalid">
-            <div *ngIf="accountingLen.errors?.required">
-              Polje je obvezno.
-            </div>
+            <div *ngIf="accountingLen.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Naslednja številka računa</mat-label>
-          <input matInput type="number" step="1" [(ngModel)]="data.accounting.seq" name="seq" required />
+          <input
+            matInput
+            type="number"
+            step="1"
+            [(ngModel)]="data.accounting.seq"
+            name="seq"
+            required
+          />
           <mat-error *ngIf="accountingLen.invalid">
-            <div *ngIf="accountingLen.errors?.required">
-              Polje je obvezno.
-            </div>
+            <div *ngIf="accountingLen.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
       </div>
       <p></p>
-      <button mat-raised-button color="primary" form="settingsForm" style="width:100%">
+      <button
+        mat-raised-button
+        color="primary"
+        form="settingsForm"
+        style="width: 100%"
+      >
         <mat-icon>save</mat-icon>
         Potrdi
       </button>

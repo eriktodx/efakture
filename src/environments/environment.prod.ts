@@ -13,5 +13,5 @@ export const environment = {
     measurementId: "G-TE28KEF6WN",
   },
   production: true,
-  version: packageInfo.version
+  version: packageInfo.version,
 };

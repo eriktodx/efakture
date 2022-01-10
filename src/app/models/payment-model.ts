@@ -1,9 +1,9 @@
 import { parseFirestoreDate } from "../functions/parse-firestore-date";
 
 export class PaymentModel {
-  amount = 0
-  day?: Date
-  note = ""
+  amount = 0;
+  day?: Date;
+  note = "";
 
   constructor(o?: any) {
     if (o != null) {
