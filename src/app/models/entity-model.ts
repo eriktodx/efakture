@@ -60,6 +60,19 @@ export class EntityModel implements FireDataInterface<EntityModel> {
     return ["SLOVENIJA", "SLOVENIA"].includes(this.country.toUpperCase());
   }
 
+  get taxIdNeedsSiPrefix() {
+    return (
+      this.isSloveniaBased &&
+      this.isTaxEligible &&
+      this.isTaxPayer &&
+      !this.taxId.toUpperCase().startsWith("SI")
+    );
+  }
+
+  get hasTax() {
+    return this.isTaxEligible && this.taxId;
+  }
+
   constructor(obj?: any) {
     if (obj != null) {
       if (typeof obj === "object") {
