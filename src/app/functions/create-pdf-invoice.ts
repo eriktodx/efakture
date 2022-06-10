@@ -155,7 +155,8 @@ export function createPdfInvoice(data: CreateData): PdfMakeInterface {
                 ? "Matična številka: " + data.invoice.company.regNo
                 : "",
               (data.invoice.company.isTaxPayer
-                ? "ID za DDV: SI"
+                ? "ID za DDV: " +
+                  (data.invoice.company.taxIdNeedsSiPrefix ? "SI" : "")
                 : "Davčna številka: ") + data.invoice.company.taxId,
               "\n",
               "TRR: " + data.invoice.company.bankTRR,
@@ -175,14 +176,14 @@ export function createPdfInvoice(data: CreateData): PdfMakeInterface {
           {
             width: "*",
             stack: [
-              data.invoice.client.isSloveniaBased &&
-              data.invoice.client.isTaxEligible
+              data.invoice.client.hasTax
                 ? data.invoice.client.isTaxPayer
-                  ? "ID za DDV kupca: SI" + data.invoice.client.taxId
+                  ? "ID za DDV kupca: " +
+                    (data.invoice.client.taxIdNeedsSiPrefix ? "SI" : "") +
+                    data.invoice.client.taxId
                   : "Davčna številka kupca: " + data.invoice.client.taxId
                 : "",
-              data.invoice.client.isSloveniaBased &&
-              data.invoice.client.isTaxEligible
+              data.invoice.client.hasTax
                 ? "Kupec " +
                   (data.invoice.client.isTaxPayer ? "JE" : "NI") +
                   " davčni zavezanec"
