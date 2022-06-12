@@ -166,7 +166,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       }
       invoice.pdfGenerating = true;
       this.snackBar.open("Generiram PDF datoteko");
-      const pdf = createPdfInvoice({
+      const pdf = await createPdfInvoice({
         settings: await this.settingsService.read(),
         invoice,
         datePipe: this.datePipe,

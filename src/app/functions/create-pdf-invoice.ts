@@ -4,6 +4,7 @@ import { PdfMakeInterface } from "../interfaces/pdf-make-interface";
 import { InvoiceModel } from "../models/invoice-model";
 import { ItemModel } from "../models/item-model";
 import { SettingsModel } from "../models/settings-model";
+import { qrencode } from "./qrcode";
 
 declare var pdfMake: any;
 
@@ -13,7 +14,7 @@ interface TaxLevel {
   totalTaxAmount: number;
 }
 
-interface CreateData {
+export interface CreateData {
   settings: SettingsModel;
   invoice: InvoiceModel;
   datePipe: DatePipe;
@@ -22,7 +23,9 @@ interface CreateData {
   decimalFormat?: string;
 }
 
-export function createPdfInvoice(data: CreateData): PdfMakeInterface {
+export async function createPdfInvoice(
+  data: CreateData
+): Promise<PdfMakeInterface> {
   if (data.dateFormat == null) {
     data.dateFormat = "dd.MM.yyyy";
   }
@@ -108,6 +111,13 @@ export function createPdfInvoice(data: CreateData): PdfMakeInterface {
   }
 
   const taxPdfDefinitions = taxLevels.map(taxPdfDefinition);
+
+  let qrencoded = "";
+  try {
+    qrencoded = qrencode(data);
+  } catch (error) {
+    console.error(error);
+  }
 
   const dd = {
     // header: {
@@ -325,7 +335,24 @@ export function createPdfInvoice(data: CreateData): PdfMakeInterface {
       {
         columns: [
           {
-            text: "",
+            ...(qrencoded && {
+              layout: "noBorders",
+              table: {
+                widths: ["auto"],
+                body: [
+                  [
+                    {
+                      qr: qrencoded,
+                      fit: 100,
+                    },
+                  ],
+                  ["QR koda za plačilo"],
+                ],
+              },
+            }),
+            ...(!qrencoded && {
+              text: "",
+            }),
             width: "*",
           },
           {
