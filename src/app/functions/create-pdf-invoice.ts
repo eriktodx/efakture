@@ -343,7 +343,7 @@ export async function createPdfInvoice(
                   [
                     {
                       qr: qrencoded,
-                      fit: 200,
+                      fit: 150,
                     },
                   ],
                   ["QR koda za plačilo"],
