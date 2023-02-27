@@ -315,10 +315,11 @@
             step="1"
             [(ngModel)]="data.accounting.seq"
             name="seq"
+            #seq="ngModel"
             required
           />
-          <mat-error *ngIf="accountingLen.invalid">
-            <div *ngIf="accountingLen.errors?.required">Polje je obvezno.</div>
+          <mat-error *ngIf="seq.invalid">
+            <div *ngIf="seq.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
       </div>
