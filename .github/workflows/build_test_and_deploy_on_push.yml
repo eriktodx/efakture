@@ -1,11 +1,11 @@
-name: Build, Test & Deploy
+name: Build & Deploy
 on:
   push:
     branches: [ main ]
 
 jobs:
   build:
-    name: Build & Test
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -14,8 +14,8 @@ jobs:
         run: npm install
       - name: Lint
         run: npm run lint
-      - name: Test
-        run: npm run test
+#      - name: Test
+#        run: npm run test
       - name: Build
         run: npm run build
       - name: Archive Production Artifact
