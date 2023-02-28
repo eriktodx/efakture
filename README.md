@@ -16,9 +16,13 @@ You can start a development server by running command `yarn run start` (in-memor
 
 Use `./node_modules/.bin/firebase emulators:start --import=./data --export-on-exit=./data` to start firebase emulators (this command [requires Java version 1.8 or higher](https://firebase.google.com/docs/emulator-suite/install_and_configure)).
 
+Running tests requires `firefox-headless` to be installed on the system and binary named `firefox` to be in PATH. On Ubuntu you can just install the `firefox` or `firefox-esr` package via `apt`.
+
 ### Deployment
 
-Build and deploy is done entirely by GitHub actions when pushed to main branch.
+- Login to firebase, eg. `firebase login --no-localhost`
+- Prepare build with `npm run deploy`
+- Deploy build to firebase `firebase deploy`
 
 ## Maintainers
 
