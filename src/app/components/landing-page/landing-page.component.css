@@ -2,18 +2,18 @@
   text-align: center;
 }
 
-.cookie-law,
+.eat-them-cookies,
 footer {
   position: fixed;
   left: 0;
   right: 0;
-  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 10px 20px;
 }
 
-.cookie-law {
+.eat-them-cookies {
   background-color: #3f51b5;
   color: white;
   top: 0;
