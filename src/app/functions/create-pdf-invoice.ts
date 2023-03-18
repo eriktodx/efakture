@@ -311,7 +311,8 @@ export async function createPdfInvoice(
                   "\n",
                   {
                     text:
-                      "Pri plačilu se sklicujte na številko 00 " +
+                      "Pri plačilu se sklicujte na številko " +
+                      data.settings.accounting.refPrefix +
                       data.invoice.accNo,
                     bold: true,
                   },

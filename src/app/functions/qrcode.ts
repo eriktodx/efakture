@@ -22,7 +22,7 @@ export function qrencode(data: CreateData): string {
     "Invoice payment",
     data.datePipe.transform(data.invoice.validTo, data.dateFormat) || "",
     data.invoice.company.bankTRR.replace(/\s+/gi, "").trim(),
-    "00 " + data.invoice.accNo,
+    data.settings.accounting.refPrefix + data.invoice.accNo,
     data.invoice.company.fullName,
     data.invoice.company.address,
     data.invoice.company.postalCode + " " + data.invoice.company.postalOffice,

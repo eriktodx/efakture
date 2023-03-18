@@ -339,6 +339,8 @@
             <div *ngIf="seqOffer.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
+      </div>
+      <div class="app-form-row">
         <mat-form-field>
           <mat-label>Naslednja številka predračuna</mat-label>
           <input
@@ -352,6 +354,20 @@
           />
           <mat-error *ngIf="seqPre.invalid">
             <div *ngIf="seqPre.errors?.required">Polje je obvezno.</div>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Predpona sklica</mat-label>
+          <input
+            matInput
+            [(ngModel)]="data.accounting.refPrefix"
+            name="refPrefix"
+            #refPrefix="ngModel"
+            maxlength="10"
+            required
+          />
+          <mat-error *ngIf="refPrefix.invalid">
+            <div *ngIf="refPrefix.errors?.required">Polje je obvezno.</div>
           </mat-error>
         </mat-form-field>
       </div>

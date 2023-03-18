@@ -5,6 +5,7 @@ export class AccountingModel {
   seqLength = 4;
   seqOffer = 1;
   seqPre = 1;
+  refPrefix = "SI00";
 
   constructor(o?: any) {
     if (o != null) {
@@ -26,6 +27,9 @@ export class AccountingModel {
         }
         if (o.seqPre != null) {
           this.seqPre = o.seqPre;
+        }
+        if (o.refPrefix != null) {
+          this.refPrefix = o.refPrefix;
         }
       }
     }
