@@ -11,7 +11,7 @@ import { SystemService } from "src/app/services/system.service";
   styleUrls: ["./missing-settings.component.css"],
 })
 export class MissingSettingsComponent implements OnInit {
-  user!: firebase.User;
+  user!: firebase.User | null;
   ready = false;
 
   constructor(
@@ -23,9 +23,8 @@ export class MissingSettingsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      const user = await this.system.getCurrentUser();
-      if (user) {
-        this.user = user;
+      this.user = await this.system.getCurrentUser();
+      if (this.user) {
         const settingsExist = await this.settings.exist();
         if (!settingsExist) {
           this.ready = true;

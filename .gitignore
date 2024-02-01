@@ -58,3 +58,5 @@ firebase-debug.log
 data/
 firestore_export/
 firebase-export*.json
+
+.angular

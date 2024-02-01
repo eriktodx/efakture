@@ -74,21 +74,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "efakture:build:production"
-            },
-            "development": {
-              "browserTarget": "efakture:build:development"
-            }
-          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "efakture:build"
-          }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -132,11 +121,11 @@
       }
     }
   },
-  "defaultProject": "efakture",
   "cli": {
     "schematicCollections": [
       "@angular-eslint/schematics"
-    ]
+    ],
+    "analytics": false
   },
   "schematics": {
     "@angular-eslint/schematics:application": {
