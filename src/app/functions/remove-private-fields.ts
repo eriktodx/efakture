@@ -1,4 +1,4 @@
-export function removePrivateFields<T extends {}>(obj: T): T {
+export function removePrivateFields<T>(obj: T): T {
   const keys = Object.keys(obj);
   for (const key of keys) {
     if (key[0] === "_") {

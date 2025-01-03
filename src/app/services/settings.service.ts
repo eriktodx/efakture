@@ -21,7 +21,7 @@ export class SettingsService {
       .doc<SettingsModel>(`${this.collectionName}/${user.uid}`)
       .get()
       .toPromise();
-    if (settings && settings.exists) {
+    if (settings.exists) {
       return new SettingsModel(settings.data());
     }
     return new SettingsModel();
